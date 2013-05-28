@@ -1,0 +1,1 @@
+<span><input type="image" name="defaultsel" alt="Reset to default gallery list table settings" style="vertical-align: middle;" onclick="return confirm(&#039;Are you sure you want to reset the default gallery list table settings?&#039;);" title="Reset to default gallery list table settings" class="icon" src="img/icons/arrow_refresh.png" /></span>

@@ -1,0 +1,1 @@
+<span><input type="image" name="delsel" alt="Delete" style="vertical-align: middle;" onclick="return confirm(&#039;Are you sure you want to delete the selected files?&#039;);" title="Delete" class="icon" src="img/icons/cross.png" /></span>

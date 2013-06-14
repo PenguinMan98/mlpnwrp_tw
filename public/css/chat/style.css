@@ -1,0 +1,15 @@
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+* {             margin: 0; padding: 0; }
+body {          font: 14px Georgia, serif; }
+#page-wrap {    margin: 2px auto; color: white; }
+#page-wrap > div { border: 1px solid #999; padding: 10px; margin-bottom: 5px; color: black; }
+#top_menu {     background: #eee; }
+#chat {         background: #eee; overflow: auto; }
+#form {         background: #eee;  }
+body #menu_trigger { background: #eee; padding: 0px;}
+#room_list {    background: #eee;  }

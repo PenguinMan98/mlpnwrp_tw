@@ -1,0 +1,32 @@
+body { background: #999; }
+#page-wrap { width: 100%; height: 100%; position: relative; }
+/*#page-wrap:after { content: "Wide Layout"; }*/
+
+#chat {
+	position:fixed !important;
+	position: absolute;
+	top: 42px; 
+	bottom: 36px;
+	left: 2px;
+	right: 120px;
+}
+#form { 
+    position:fixed !important;
+    position: absolute;
+    height: 12px; 
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+}
+#room_list { 
+    position:fixed !important;
+    position: absolute;
+    top: 42px; 
+    width: 100px; 
+    bottom: 36px;
+    right: 2px;
+}
+
+#menu_trigger{
+	visibility: hidden;
+}

@@ -1,0 +1,56 @@
+body { background: #333; }
+#page-wrap { width: 548px; }
+/*#page-wrap:after { content: "Narrow Layout"; }*/
+
+#chat {
+	visibility: visible;
+    position:fixed !important;
+    position: absolute;
+    top: 2px; 
+    bottom: 88px;
+    left: 0px;
+    right: 2px;
+}
+#form { 
+    position:fixed !important;
+    position: absolute;
+    height: 12px; 
+    bottom: 54px;
+    left: 0px;
+    right: 0px;
+}
+
+#top_menu{
+    visibility: hidden;
+    position:fixed !important;
+    position: absolute;
+    top: 2px; 
+    bottom: 88px;
+    left: 0px;
+    right: 0px;
+}
+#room_list { 
+    visibility: hidden;
+    position:fixed !important;
+    position: absolute;
+    width: 100%;
+    top: 2px; 
+    bottom: 88px;
+    left: 0px;
+    right: 0px;
+}
+
+#menu_trigger {
+	visibility: visible;
+    position:fixed !important;
+    position: absolute;
+    height: 50px; 
+    bottom: 2px;
+    left: 0px;
+    right: 0px;
+}
+
+#menu_trigger button{
+    margin: 0px;
+    font-size: 26px;
+}

@@ -1,0 +1,37 @@
+<?php 
+$character = $_controller->vars->character;
+/*echo "<pre>";
+print_r($character);
+echo "</pre>";*/
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile: <?=$character['name']?></title>
+    <link rel="stylesheet" href="<?=SITE_ROOT?>/css/characterStyle.css">
+    <!-- <script src="js/script.js"></script> -->
+  </head>
+  <body>
+    <div id="siteContainer">
+      <div id="site">
+        <div id="menuContainer">
+        </div>
+        <div id="contentContainer" style="width: 100%;">
+        	<div id="char_name" style="font-size: 40px; font-weight: bold; width 100%; text-align: center; zindex: 1;"><?=$character['name']?></div>
+        	<?php if($character['image']): ?>
+        	<div id="char_img"><img src="<?=SITE_ROOT . $character['image']?>" /></div>
+        	<?php endif; ?>
+        	<p>Race: <?=$character['race']?> <?php if($character['character_race_note']) echo "( ". $character['character_race_note'] ." )";?><br>
+        	Gender: <?=($character['born_female']? "Female" : "Male")?> <?php if($character['born_female'] != $character['currently_female']) echo "( Currently " . ($character['currently_female']? "Female" : "Male") . " )" ; ?><br>
+        	Age: <?=$character['age']?></p>
+        	<p>Status: <?=$character['status']?></p>
+        	<p>Biography: <?=$character['bio']?></p>
+        	<p>Notes: <?=$character['player_notes']?></p>
+        </div>
+        <div id="footerContainer">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

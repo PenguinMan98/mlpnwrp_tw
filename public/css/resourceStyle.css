@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+body{
+    background-color: black;
+    color: white;
+}
+
+#siteContainer{
+	width: 100%;
+	height: 100%;
+}
+
+#site{
+	margin: 0 auto;
+	width: 800px;
+	height: 100%;
+}
+
+#headingContainer{
+	height: 160px;
+	width: 100%;
+	background-image: url(../img/Zompony_Banner.png);
+}

@@ -1,0 +1,47 @@
+body { background: #666; }
+#page-wrap { width: 100%; }
+/*#page-wrap:after { content: "Medium Layout"; }*/
+#chat {
+    position:fixed !important;
+    position: absolute;
+    top: 2px; 
+    bottom: 88px;
+    left: 2px;
+    right: 2px;
+}
+#form { 
+    position:fixed !important;
+    position: absolute;
+    height: 12px; 
+    bottom: 54px;
+    left: 2px;
+    right: 2px;
+}
+#top_menu{
+    visibility: hidden;
+    position:fixed !important;
+    position: absolute;
+    top: 2px; 
+    bottom: 88px;
+    left: 2px;
+    right: 2px;
+}
+#room_list { 
+    visibility: visible;
+    position:fixed !important;
+    position: absolute;
+    top: 2px; 
+    bottom: 88px;
+    left: 2px;
+    right: 2px;
+}
+
+#menu_trigger {
+	visibility: visible;
+    position:fixed !important;
+    position: absolute;
+    height: 50px; 
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+}

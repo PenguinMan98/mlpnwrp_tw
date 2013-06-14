@@ -1,0 +1,8 @@
+<?php
+$htProvider = new Model_Data_Phpbb_TopicsProvider();
+$hotTopics = $htProvider->getHotTopics(7);
+?>
+				<h2>Hot Forum Threads!</h2>
+				<?php foreach($hotTopics as $ht): ?>
+                <p class="hot_topic"><a href="<?=SITE_ROOT . "/forum/viewtopic.php?f=" . $ht->getForumId() . "&t=" . $ht->getTopicId()?>"><?=$ht->getTopicTitle()?></a></p>
+                <?php endforeach; ?>

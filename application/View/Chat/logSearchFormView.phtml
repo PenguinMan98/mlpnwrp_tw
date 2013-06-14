@@ -1,0 +1,103 @@
+<?php 
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Little Pony: Friendship is Adventure!</title>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="description" content="A roleplaying community set in the My Little Pony Universe" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index, follow" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link href='http://fonts.googleapis.com/css?family=Linden+Hill:400,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="<?=SITE_ROOT?>/css/main.css" type="text/css" /> 
+	<link rel="stylesheet" href="<?=SITE_ROOT?>/js/datepicker/jquery.datepick.css" type="text/css" /> 
+	<!--[if lt IE 7]>
+    <style media="screen" type="text/css">
+    .col1 {
+        width:100%;
+    }
+    </style>
+    <![endif]-->
+	<script type="text/javascript" src="<?=SITE_ROOT?>/js/main.js" > </script>
+	<script type="text/javascript" src="<?=SITE_ROOT?>/js/jquery.js" > </script>
+	<script type="text/javascript" src="<?=SITE_ROOT?>/js/datepicker/jquery.datepick.js" > </script>
+</head>
+<body>
+
+<div id="header">
+	<div id="banner">
+		<a href="">
+			<img src="<?=SITE_ROOT?>/img/Newworlds.png" alt="Friendship is Adventure!"/>
+		</a>
+	</div>
+    <h2>A roleplaying community focused on the players and set in the My Little Pony: Friendship is Magic Universe!</h2>
+    <?php include(VIEW_ROOT . "subViews/mainmenu.phtml"); ?>
+</div>
+<div class="colmask holygrail">
+    <div class="colmid">
+        <div class="colleft">
+            <div class="col1wrap">
+                <div class="col1">
+					<!-- Column 1 start -->
+					<form name="searchChatLog" method="POST">
+						<div id="searchChatLogForm">
+							Date: <input type="text" name="startDate" id="startDate" />
+							Character:
+							<select name="character">
+							<?php foreach($_controller->vars->characters as $char):?>
+								<option value="<?=$char['handle']?>"><?=$char['handle']?></option>
+							<?php endforeach; ?>
+							</select>
+							Room: 
+							<select name="room">
+								<option value=""></option>
+							<?php foreach($_controller->vars->roomList as $id=>$name):?>
+								<option value="<?=$id?>"><?=$name?></option>
+							<?php endforeach; ?>
+							</select>
+							Text: <input type="text" name="text" />
+							&nbsp;&nbsp;<input type="submit" name="searchForm" value="Search!" />
+						</div>
+						<div id="searchChatLogResults">
+						<?php foreach ($_controller->vars->results as $post):?>
+							<p><?="[" . $post->getTimestamp() . "] " . $post->getHandle() . ": " . $post->getText()?></p>
+						<?php endforeach; ?>
+						</div> 
+					</form>
+				<!-- Column 1 end -->
+                </div>
+            </div>
+            <div class="col2">
+				<!-- Column 2 start -->
+				<?php include(VIEW_ROOT . "subViews/hotTopics.phtml"); ?>
+            	<?php include(VIEW_ROOT . "subViews/newCharacters.phtml"); ?>
+                <h2>Calendar?</h2>
+                <p>Calendar</p>
+                <!-- Column 2 end -->
+            </div>
+            <div class="col3">
+				<!-- Column 3 start -->
+                <h2>Possible Ads to pay the bills</h2>
+				<p>stuff</p>
+
+				<h2>Newest Gallery Images</h2>
+				<p>Image!</p>
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+    <p>Some footer stuff.  Legalese and Disclaimers.</p>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#startDate").datepick({dateFormat: 'yyyy-mm-dd'});
+	});
+</script>
+
+</body>
+</html>
+					

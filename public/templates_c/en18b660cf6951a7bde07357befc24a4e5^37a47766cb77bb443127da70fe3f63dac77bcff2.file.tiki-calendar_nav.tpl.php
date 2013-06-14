@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-28 05:09:09
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 08:02:40
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-calendar_nav.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1346651a43bf513aa65-89118961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:896851a9aaa0657b74-35740290%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1346651a43bf513aa65-89118961',
+  'nocache_hash' => '896851a9aaa0657b74-35740290',
   'function' => 
   array (
   ),
@@ -33,9 +33,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a43bf5594721_75866153',
+  'unifunc' => 'content_51a9aaa0af56c2_06624818',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a43bf5594721_75866153')) {function content_51a43bf5594721_75866153($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
+<?php if ($_valid && !is_callable('content_51a9aaa0af56c2_06624818')) {function content_51a9aaa0af56c2_06624818($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_modifier_tiki_date_format')) include 'lib/smarty_tiki\\modifier.tiki_date_format.php';
 ?><?php if (!isset($_smarty_tpl->tpl_vars['ajax']->value)){?><?php $_smarty_tpl->tpl_vars['ajax'] = new Smarty_variable('y', null, 0);?><?php }?><?php if (!isset($_smarty_tpl->tpl_vars['module']->value)){?><?php $_smarty_tpl->tpl_vars['module'] = new Smarty_variable('n', null, 0);?><?php }?><?php if (empty($_smarty_tpl->tpl_vars['module_params']->value['viewnavbar'])||$_smarty_tpl->tpl_vars['module_params']->value['viewnavbar']=='y'){?><div class="clearfix tabrow" <?php if ($_smarty_tpl->tpl_vars['module']->value=='y'){?>style="padding: 0pt"<?php }?>><?php if ($_smarty_tpl->tpl_vars['module']->value!='y'){?><div class="tabrowRight"></div><div class="tabrowLeft"></div><?php }?><div class="viewmode"><?php if (!isset($_smarty_tpl->tpl_vars['calendar_type']->value)||$_smarty_tpl->tpl_vars['calendar_type']->value!="tiki_actions"){?><?php if ($_smarty_tpl->tpl_vars['module']->value!='y'){?><?php echo smarty_function_button(array('_auto_args'=>"viewmode,focus",'_title'=>"Today",'_text'=>"Today",'_class'=>"calbuttonoff",'viewmode'=>'day','focus'=>$_smarty_tpl->tpl_vars['now']->value,'todate'=>$_smarty_tpl->tpl_vars['now']->value),$_smarty_tpl);?>

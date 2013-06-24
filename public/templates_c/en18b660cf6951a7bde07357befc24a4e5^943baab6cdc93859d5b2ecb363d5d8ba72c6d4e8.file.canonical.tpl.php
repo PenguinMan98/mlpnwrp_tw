@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:34
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:29
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\canonical.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2994651a6ea12b33829-68394096%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1857051c46b416af961-99930048%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2994651a6ea12b33829-68394096',
+  'nocache_hash' => '1857051c46b416af961-99930048',
   'function' => 
   array (
   ),
@@ -31,10 +31,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea12bd2255_91081892',
+  'unifunc' => 'content_51c46b417505c7_01994406',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea12bd2255_91081892')) {function content_51a6ea12bd2255_91081892($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_sefurl')) include 'lib/smarty_tiki\\modifier.sefurl.php';
-?>
+<?php if ($_valid && !is_callable('content_51c46b417505c7_01994406')) {function content_51c46b417505c7_01994406($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_sefurl')) include 'lib/smarty_tiki\\modifier.sefurl.php';
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\canonical.tpl -->
 <?php if ($_smarty_tpl->tpl_vars['prefs']->value['feature_canonical_url']=='y'&&isset($_smarty_tpl->tpl_vars['mid']->value)){?>
 	<?php if ($_smarty_tpl->tpl_vars['mid']->value=='tiki-show_page.tpl'||$_smarty_tpl->tpl_vars['mid']->value=='tiki-index_p.tpl'||$_smarty_tpl->tpl_vars['mid']->value=='tiki-show_page_raw.tpl'||$_smarty_tpl->tpl_vars['mid']->value=='tiki-all_languages.tpl'){?>
 		<link rel="canonical" href="<?php echo $_smarty_tpl->tpl_vars['base_url_http']->value;?>
@@ -70,4 +70,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " />
 	<?php }?>
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\canonical.tpl --><?php }} ?>

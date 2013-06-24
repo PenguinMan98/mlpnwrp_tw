@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:40
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:34
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-flaggedrev_approval_header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2592851a6ea182fde72-90576864%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1065751c46b46b88903-72938875%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2592851a6ea182fde72-90576864',
+  'nocache_hash' => '1065751c46b46b88903-72938875',
   'function' => 
   array (
   ),
@@ -28,12 +28,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea183c0095_59447384',
+  'unifunc' => 'content_51c46b46c3f904_17952460',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea183c0095_59447384')) {function content_51a6ea183c0095_59447384($_smarty_tpl) {?><?php if (!is_callable('smarty_block_remarksbox')) include 'lib/smarty_tiki\\block.remarksbox.php';
+<?php if ($_valid && !is_callable('content_51c46b46c3f904_17952460')) {function content_51c46b46c3f904_17952460($_smarty_tpl) {?><?php if (!is_callable('smarty_block_remarksbox')) include 'lib/smarty_tiki\\block.remarksbox.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_modifier_sefurl')) include 'lib/smarty_tiki\\modifier.sefurl.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-flaggedrev_approval_header.tpl -->
 <?php if ($_smarty_tpl->tpl_vars['prefs']->value['flaggedrev_approval']=='y'&&$_smarty_tpl->tpl_vars['revision_approval']->value){?>
 	<?php if (($_smarty_tpl->tpl_vars['revision_approved']->value||$_smarty_tpl->tpl_vars['revision_displayed']->value)&&$_smarty_tpl->tpl_vars['revision_approved']->value!=$_smarty_tpl->tpl_vars['lastVersion']->value&&$_smarty_tpl->tpl_vars['tiki_p_wiki_view_latest']->value=='y'){?>
 		<?php if ($_smarty_tpl->tpl_vars['lastVersion']->value==$_smarty_tpl->tpl_vars['revision_displayed']->value){?>
@@ -96,4 +96,4 @@ latest version<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo
 
 	<?php }?>
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-flaggedrev_approval_header.tpl --><?php }} ?>

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 15:37:00
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:25
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\prefs\flag.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:473251a7721cb98dc3-09605239%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:967251c46b79b41cd1-63381632%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '473251a7721cb98dc3-09605239',
+  'nocache_hash' => '967251c46b79b41cd1-63381632',
   'function' => 
   array (
   ),
@@ -22,11 +22,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7721cc4de27_99546694',
+  'unifunc' => 'content_51c46b79c008e2_84187768',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7721cc4de27_99546694')) {function content_51a7721cc4de27_99546694($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
+<?php if ($_valid && !is_callable('content_51c46b79c008e2_84187768')) {function content_51c46b79c008e2_84187768($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
-?><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\flag.tpl --><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
 <?php if (isset($_REQUEST['highlight'])&&$_REQUEST['highlight']==$_smarty_tpl->tpl_vars['p']->value['preference']){?> highlight<?php }?>">
 	<div class="adminoption">
 		<input id="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
@@ -74,4 +74,4 @@ _childcontainer';
 <?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_jq(array(), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
 </div>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\flag.tpl --><?php }} ?>

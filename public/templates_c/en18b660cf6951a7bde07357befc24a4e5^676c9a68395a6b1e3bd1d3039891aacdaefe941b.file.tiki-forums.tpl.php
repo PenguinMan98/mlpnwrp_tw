@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 01:48:58
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:59:05
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-forums.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2686051a9530a3afa22-19548799%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1471751c47849721a86-88349952%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2686051a9530a3afa22-19548799',
+  'nocache_hash' => '1471751c47849721a86-88349952',
   'function' => 
   array (
   ),
@@ -31,9 +31,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a9530a6a7ab0_68002989',
+  'unifunc' => 'content_51c478499b3f34_55176582',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a9530a6a7ab0_68002989')) {function content_51a9530a6a7ab0_68002989($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
+<?php if ($_valid && !is_callable('content_51c478499b3f34_55176582')) {function content_51c478499b3f34_55176582($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
 if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_function_cycle')) include 'D:\\wamp\\www\\mlpnwrp_tw\\public\\lib\\smarty\\libs\\plugins\\function.cycle.php';
@@ -44,7 +44,7 @@ if (!is_callable('smarty_modifier_username')) include 'lib/smarty_tiki\\modifier
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_function_norecords')) include 'lib/smarty_tiki\\function.norecords.php';
 if (!is_callable('smarty_block_pagination_links')) include 'lib/smarty_tiki\\block.pagination_links.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-forums.tpl -->
 
 <?php $_smarty_tpl->smarty->_tag_stack[] = array('title', array('help'=>"forums",'admpage'=>"forums")); $_block_repeat=true; echo smarty_block_title(array('help'=>"forums",'admpage'=>"forums"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 Forums<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_title(array('help'=>"forums",'admpage'=>"forums"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
@@ -259,4 +259,4 @@ if (!empty($_capture_buffer)) {
 <?php $_smarty_tpl->smarty->_tag_stack[] = array('pagination_links', array('cant'=>$_smarty_tpl->tpl_vars['cant']->value,'step'=>$_smarty_tpl->tpl_vars['prefs']->value['maxRecords'],'offset'=>$_smarty_tpl->tpl_vars['offset']->value)); $_block_repeat=true; echo smarty_block_pagination_links(array('cant'=>$_smarty_tpl->tpl_vars['cant']->value,'step'=>$_smarty_tpl->tpl_vars['prefs']->value['maxRecords'],'offset'=>$_smarty_tpl->tpl_vars['offset']->value), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 <?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_pagination_links(array('cant'=>$_smarty_tpl->tpl_vars['cant']->value,'step'=>$_smarty_tpl->tpl_vars['prefs']->value['maxRecords'],'offset'=>$_smarty_tpl->tpl_vars['offset']->value), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-forums.tpl --><?php }} ?>

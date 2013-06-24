@@ -9,10 +9,10 @@ class Model_Data_Phpbb_UsersProvider extends Model_Data_Phpbb_UsersProviderBase
 	
 public function getUsersByCharacterId($characterId){
 		$strSql = '
-SELECT user.user_id, user.username
+SELECT user.userId as `user_id`, user.login as `username`
 FROM `character_user` cu
-JOIN `phpbb_users` user
-        ON user.user_id = cu.user_id
+JOIN `users_users` user
+        ON user.userId = cu.user_id
 WHERE cu.character_id = ?';
 		$arrParams = array($characterId);
 		$arrResults = array();

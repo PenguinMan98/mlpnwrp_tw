@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 22:00:28
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:26
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\prefs\password.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2439751a7cbfc0e9da0-29642586%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2242951c46b7a055c21-96377309%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2439751a7cbfc0e9da0-29642586',
+  'nocache_hash' => '2242951c46b7a055c21-96377309',
   'function' => 
   array (
   ),
@@ -21,10 +21,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7cbfc15fbd2_45603430',
+  'unifunc' => 'content_51c46b7a0c81a4_19474034',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7cbfc15fbd2_45603430')) {function content_51a7cbfc15fbd2_45603430($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
-?><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
+<?php if ($_valid && !is_callable('content_51c46b7a0c81a4_19474034')) {function content_51c46b7a0c81a4_19474034($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\password.tpl --><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
 <?php if (isset($_REQUEST['highlight'])&&$_REQUEST['highlight']==$_smarty_tpl->tpl_vars['p']->value['preference']){?> highlight<?php }?>">
 	<label for="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
 "><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['name'], ENT_QUOTES, 'UTF-8', true);?>
@@ -50,4 +50,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<?php echo $_smarty_tpl->getSubTemplate ("prefs/shared-dependencies.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
 </div>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\password.tpl --><?php }} ?>

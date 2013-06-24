@@ -149,7 +149,7 @@ if ($rand > 0 &&
     	$flood = false;
     	$ipPosts = array();
     	$FLOODCUTOFFTIME = 5; // can't post more than 3 times in a 5 second period.
-    	$FLOODCUTOFFPOSTS = 3; // can't post more than 3 times in a 5 second period.
+    	$FLOODCUTOFFPOSTS = 5; // can't post more than 3 times in a 5 second period.
     	
     	// duplicate check
     	$chatLogHelper = new Model_Data_ChatLogProvider();

@@ -5,7 +5,6 @@
  * cause complications later for having multiple windows open.
  * */
 
-
 require_once '../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
@@ -76,6 +75,8 @@ if(!empty($arrErrors)){
 <meta name="description" content="" />
 <meta name="keywords"    content="" />
 
+<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
 <link rel="stylesheet" type="text/css" href="<?=SITE_ROOT?>/chat/ajax-chat/style/style.css" />
 
 <script type="text/javascript" src="<?=SITE_ROOT?>/js/jquery.js" > </script>
@@ -100,6 +101,8 @@ var dingOnNew    = false;
 var chat_addr    = "<?= $_SERVER['REMOTE_ADDR'] ?>";
 var SITE_ROOT	 = "<?=SITE_ROOT?>";
 var chat_path	 = "<?=SITE_ROOT?>/chat/ajax-chat/";
+var chatColorOverride = true;
+var chatColorOverrideColor = '#ddd';
 
 </script>
 
@@ -114,8 +117,8 @@ var chat_path	 = "<?=SITE_ROOT?>/chat/ajax-chat/";
 		<div id="top_menu">&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>">Home</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/rules">Site Rules</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a href="#">Chat Commands</a>&nbsp;&nbsp;
-			|&nbsp;&nbsp;<a href="#">Preferences</a>&nbsp;&nbsp;
-			<?php if(is_object($character)):?>|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/character/edit/<?=$handle?>">Profile</a>&nbsp;&nbsp;<?php endif;?>
+			|&nbsp;&nbsp;<a href="#" onClick="togglePreferences(this);">Preferences</a>&nbsp;&nbsp;
+			<?php if(is_object($character)):?>|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/chat/character/edit.php?c=<?=$handle?>">Profile</a>&nbsp;&nbsp;<?php endif;?>
 			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/chat/ajax-chat/php/logout.php?handle=<?=$handle?><?php if($characterId) echo "&character_id=$characterId"?>">Logout</a>&nbsp;&nbsp;
 		</div>
 		
@@ -140,15 +143,15 @@ $chatRoomList = $chatRoomHelper->getChatList();
 				</div>
 		    
 		    </div>
-			<div id="header_messages"><?=$current_room->getRoomName()?></div>
+			<div id="header_messages"><img src="../img/room1.png"></div>
         	<div id="messages"></div>
-            <div id="header_users">Users</div>
+            <!-- <div id="header_users">Users</div> -->
 		    <div id="users">
-		      <b class="first">Private msgs</b><br>
+		      <div class="first"></div>
 		      <div id="users_private"></div>
-		      <b class="other">This room</b><br>
+		      <div class="other"></div>
 		      <div id="users_this_room"></div>
-		      <b id="other_rooms" class="other">Other rooms</b><br>
+		      <div id="other_rooms"></div>
 		      <div id="users_other"></div>
 		    </div>
         </div>
@@ -158,11 +161,20 @@ $chatRoomList = $chatRoomHelper->getChatList();
 	        	<span id="character_name"><?=$handle?></span>:
 	        	<input id="send" type="text" size="100" autocomplete="off" />
 	    		<input id="submit_send" class="submit" type="submit" value="Send" />
-	    		&nbsp;&nbsp;Autofocus&nbsp;<input id="autofocus" checked=true class="input" type="checkbox" onclick="autofocus = this.checked;" />
-	    		&nbsp;&nbsp;Ping On New&nbsp;<input id="pingOnNew" class="input" type="checkbox" onclick="pingOnNew = this.checked;" />
 	    	</form>
     	</div>
 	</div>
+	<div id="preferences_container">
+		<div id="preferences_box">
+			<h3><u>Preferences</u></h3>
+			<label>Chat Text Color Override:</label><br>
+			&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="chatColorOverride = this.checked;"/><br>
+			<label>Autofocus</label><input id="autofocus" checked=true class="input" type="checkbox" onclick="autofocus = this.checked;" /><br>
+			<label>Ping On New</label><input id="pingOnNew" class="input" type="checkbox" onclick="pingOnNew = this.checked;" />
+		</div>
+	</div>
+			
+	
 	
 <?php include_once PUBLIC_ROOT . '/chat/ajax-chat/ajax-chat.php'; /*the main HTML include file*/?>
 
@@ -229,7 +241,7 @@ $chatRoomList = $chatRoomHelper->getChatList();
 				$('#character_info_base').css('display','block');
 				$('#character_info_base').css('left', linkRect.left-250 );
 
-				$('#hud_character_name').html('<a href="http://www.mlpnwrp.org/character/view/'+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
+				$('#hud_character_name').html('<a href="<?=SITE_ROOT?>/chat/character/view.php?c='+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
 				
 				$('#hud_player_name').html(response.characterInfo.username);
 
@@ -244,7 +256,7 @@ $chatRoomList = $chatRoomHelper->getChatList();
 				
 				$('#hud_room').html(roomList[response.characterInfo.chat_room_id]);
 				$('#hud_room').off('click');
-				$('#hud_room').on('click',function(){chat_api_onload(response.characterInfo.chat_room_id, !guest_char, chat_user);});
+				$('#hud_room').on('click',function(){room_change(response.characterInfo.chat_room_id, !guest_char, chat_user);});
 				$('#hud_room').css('cursor','pointer');
 
 				$('#hud_chat_status').html('A status');

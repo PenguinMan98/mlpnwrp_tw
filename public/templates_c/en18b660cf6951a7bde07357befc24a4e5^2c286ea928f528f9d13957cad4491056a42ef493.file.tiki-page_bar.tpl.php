@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:40
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:35
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-page_bar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:915951a6ea187e5e33-45404601%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2117251c46b470feed3-36776135%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '915951a6ea187e5e33-45404601',
+  'nocache_hash' => '2117251c46b470feed3-36776135',
   'function' => 
   array (
   ),
@@ -69,9 +69,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea18c17498_33009474',
+  'unifunc' => 'content_51c46b4751c7b3_22487021',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea18c17498_33009474')) {function content_51a6ea18c17498_33009474($_smarty_tpl) {?><?php if (!is_callable('smarty_function_favorite')) include 'lib/smarty_tiki\\function.favorite.php';
+<?php if ($_valid && !is_callable('content_51c46b4751c7b3_22487021')) {function content_51c46b4751c7b3_22487021($_smarty_tpl) {?><?php if (!is_callable('smarty_function_favorite')) include 'lib/smarty_tiki\\function.favorite.php';
 if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
@@ -79,7 +79,7 @@ if (!is_callable('smarty_function_service')) include 'lib/smarty_tiki\\function.
 if (!is_callable('smarty_block_tr')) include 'lib/smarty_tiki\\block.tr.php';
 if (!is_callable('smarty_modifier_sefurl')) include 'lib/smarty_tiki\\modifier.sefurl.php';
 if (!is_callable('smarty_function_attachments')) include 'lib/smarty_tiki\\function.attachments.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-page_bar.tpl -->
 <?php if (!isset($_smarty_tpl->tpl_vars['versioned']->value)||!$_smarty_tpl->tpl_vars['versioned']->value){?>
 	<?php $_smarty_tpl->_capture_stack[0][] = array('default', 'page_bar', null); ob_start(); ?><?php echo smarty_function_favorite(array('type'=>"wiki page",'object'=>$_smarty_tpl->tpl_vars['page']->value),$_smarty_tpl);?>
 <?php if ($_smarty_tpl->tpl_vars['edit_page']->value!='y'){?><?php if (((isset($_smarty_tpl->tpl_vars['editable']->value)&&$_smarty_tpl->tpl_vars['editable']->value)&&($_smarty_tpl->tpl_vars['tiki_p_edit']->value=='y'||mb_strtolower($_smarty_tpl->tpl_vars['page']->value, 'UTF-8')=='sandbox')||(!$_smarty_tpl->tpl_vars['user']->value&&$_smarty_tpl->tpl_vars['prefs']->value['wiki_encourage_contribution']=='y'))||$_smarty_tpl->tpl_vars['tiki_p_admin_wiki']->value=='y'){?><?php if (isset($_smarty_tpl->tpl_vars['beingEdited']->value)&&$_smarty_tpl->tpl_vars['beingEdited']->value=='y'){?><?php $_smarty_tpl->tpl_vars['thisPageClass'] = new Smarty_variable('+highlight', null, 0);?><?php }else{ ?><?php $_smarty_tpl->tpl_vars['thisPageClass'] = new Smarty_variable('', null, 0);?><?php }?><?php if ($_smarty_tpl->tpl_vars['prefs']->value['flaggedrev_approval']!='y'||!$_smarty_tpl->tpl_vars['revision_approval']->value||$_smarty_tpl->tpl_vars['lastVersion']->value==$_smarty_tpl->tpl_vars['revision_displayed']->value){?><?php if (isset($_smarty_tpl->tpl_vars['page_ref_id']->value)){?><?php echo smarty_function_button(array('_keepall'=>'y','href'=>"tiki-editpage.php",'page'=>$_smarty_tpl->tpl_vars['page']->value,'page_ref_id'=>$_smarty_tpl->tpl_vars['page_ref_id']->value,'_class'=>$_smarty_tpl->tpl_vars['thisPageClass']->value,'_text'=>"Edit this page"),$_smarty_tpl);?>
@@ -183,4 +183,4 @@ if (!empty($_capture_buffer)) {
 
 	
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-page_bar.tpl --><?php }} ?>

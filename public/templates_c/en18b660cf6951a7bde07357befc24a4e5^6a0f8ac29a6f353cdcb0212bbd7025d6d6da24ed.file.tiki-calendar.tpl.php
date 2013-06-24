@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 08:02:40
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-23 19:28:13
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-calendar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2065151a9aaa02be3b2-27044764%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1633151c74c4d5eaee5-10130258%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2065151a9aaa02be3b2-27044764',
+  'nocache_hash' => '1633151c74c4d5eaee5-10130258',
   'function' => 
   array (
   ),
@@ -53,15 +53,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a9aaa0637003_34631419',
+  'unifunc' => 'content_51c74c4d93b8d6_19722275',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a9aaa0637003_34631419')) {function content_51a9aaa0637003_34631419($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
+<?php if ($_valid && !is_callable('content_51c74c4d93b8d6_19722275')) {function content_51c74c4d93b8d6_19722275($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_function_jscalendar')) include 'lib/smarty_tiki\\function.jscalendar.php';
 if (!is_callable('smarty_function_select_all')) include 'lib/smarty_tiki\\function.select_all.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-calendar.tpl -->
 
 <?php $_smarty_tpl->smarty->_tag_stack[] = array('title', array('admpage'=>"calendar")); $_block_repeat=true; echo smarty_block_title(array('admpage'=>"calendar"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
@@ -404,4 +404,4 @@ $('#calendar').fullCalendar({
 <?php }?>
 <p>&nbsp;</p>
 </div>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-calendar.tpl --><?php }} ?>

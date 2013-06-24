@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 08:05:07
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-23 21:18:28
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1225351a9ab33deb0c3-98740066%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:217451c766243e8a43-42617408%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1225351a9ab33deb0c3-98740066',
+  'nocache_hash' => '217451c766243e8a43-42617408',
   'function' => 
   array (
   ),
@@ -51,13 +51,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a9ab341e7489_21836629',
+  'unifunc' => 'content_51c7662473bf15_88372179',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a9ab341e7489_21836629')) {function content_51a9ab341e7489_21836629($_smarty_tpl) {?><?php if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
+<?php if ($_valid && !is_callable('content_51c7662473bf15_88372179')) {function content_51c7662473bf15_88372179($_smarty_tpl) {?><?php if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_block_pagination_links')) include 'lib/smarty_tiki\\block.pagination_links.php';
 if (!is_callable('smarty_function_reindex_file_pixel')) include 'lib/smarty_tiki\\function.reindex_file_pixel.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery.tpl -->
 
 <?php if ((isset($_smarty_tpl->tpl_vars['tree']->value)&&count($_smarty_tpl->tpl_vars['tree']->value)>0&&$_smarty_tpl->tpl_vars['tiki_p_list_file_galleries']->value!='n'&&$_smarty_tpl->tpl_vars['fgal_options']->value['show_explorer']['value']=='y'&&$_smarty_tpl->tpl_vars['tiki_p_view_fgal_explorer']->value=='y')||(!empty($_smarty_tpl->tpl_vars['gallery_path']->value)&&$_smarty_tpl->tpl_vars['fgal_options']->value['show_path']['value']=='y'&&$_smarty_tpl->tpl_vars['tiki_p_view_fgal_path']->value=='y')){?>
 
@@ -309,4 +309,4 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['grp']['last']       = ($_sma
 		</td>
 	</tr>
 </table>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery.tpl --><?php }} ?>

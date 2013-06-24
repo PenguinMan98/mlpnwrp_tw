@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 15:36:50
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:20
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-admin.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:330251a772127b5987-03013931%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:590851c46b74b56016-59611206%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '330251a772127b5987-03013931',
+  'nocache_hash' => '590851c46b74b56016-59611206',
   'function' => 
   array (
   ),
@@ -38,9 +38,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a77212a1b9d8_33554956',
+  'unifunc' => 'content_51c46b74dc87a4_51237067',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a77212a1b9d8_33554956')) {function content_51a77212a1b9d8_33554956($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
+<?php if ($_valid && !is_callable('content_51c46b74dc87a4_51237067')) {function content_51c46b74dc87a4_51237067($_smarty_tpl) {?><?php if (!is_callable('smarty_block_title')) include 'lib/smarty_tiki\\block.title.php';
 if (!is_callable('smarty_block_tr')) include 'lib/smarty_tiki\\block.tr.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
 if (!is_callable('smarty_block_remarksbox')) include 'lib/smarty_tiki\\block.remarksbox.php';
@@ -48,7 +48,7 @@ if (!is_callable('smarty_function_preference')) include 'lib/smarty_tiki\\functi
 if (!is_callable('smarty_function_cycle')) include 'D:\\wamp\\www\\mlpnwrp_tw\\public\\lib\\smarty\\libs\\plugins\\function.cycle.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_modifier_stringfix')) include 'lib/smarty_tiki\\modifier.stringfix.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-admin.tpl -->
 
 <?php $_smarty_tpl->smarty->_tag_stack[] = array('title', array('help'=>((string)$_smarty_tpl->tpl_vars['helpUrl']->value))); $_block_repeat=true; echo smarty_block_title(array('help'=>((string)$_smarty_tpl->tpl_vars['helpUrl']->value)), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 <?php echo $_smarty_tpl->tpl_vars['admintitle']->value;?>
@@ -313,4 +313,4 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['n']['last']       = ($_smart
 
 <?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_remarksbox(array('type'=>"tip",'title'=>"Crosslinks to other features and settings"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-admin.tpl --><?php }} ?>

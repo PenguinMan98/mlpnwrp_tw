@@ -24,7 +24,7 @@ ORDER BY `handle` ASC';
 	
 	public function getDetailsByCharacterName( $charName ) {
 		$strSql = '
-SELECT c.*, ca.name as \'age\' , cr.name as \'race\', pu.username
+SELECT c.*, ca.name as \'age\' , cr.name as \'race\', uu.login as `username`, uu.`userId` as `user_id`
 FROM `character` c 
 JOIN `character_age` ca
 	ON c.character_age_id = ca.character_age_id
@@ -32,14 +32,16 @@ JOIN `character_race` cr
 	ON c.character_race_id = cr.character_race_id
 JOIN `character_user` cu 
 	ON c.character_id = cu.character_id
-JOIN `phpbb_users` pu 
-	ON pu.`user_id` = cu.`user_id`
+JOIN `users_users` uu 
+	ON uu.`userId` = cu.`user_id`
 WHERE c.name=?';
 		$arrParams = array($charName);
 		$arrErrors = array();
 		$arrResults = array();
 		dao::getAssoc($strSql, $arrParams, $arrResults, $arrErrors);
-		return $arrResults[0];
+		if(!empty($arrResults))
+			return $arrResults[0];
+		return array();
 	}
 	
 	public function getAllByUserId( $userId ) {

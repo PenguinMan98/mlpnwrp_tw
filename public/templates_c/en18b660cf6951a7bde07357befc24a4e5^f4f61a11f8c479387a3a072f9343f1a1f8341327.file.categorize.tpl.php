@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 20:14:17
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:43:38
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\categorize.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:356451a7b31987ff75-95304824%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2676351c474aa1c9092-44569924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '356451a7b31987ff75-95304824',
+  'nocache_hash' => '2676351c474aa1c9092-44569924',
   'function' => 
   array (
   ),
@@ -28,12 +28,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7b319960395_85241446',
+  'unifunc' => 'content_51c474aa278cf1_74269915',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7b319960395_85241446')) {function content_51a7b319960395_85241446($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
+<?php if ($_valid && !is_callable('content_51c474aa278cf1_74269915')) {function content_51c474aa278cf1_74269915($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_function_select_all')) include 'lib/smarty_tiki\\function.select_all.php';
-?><?php if ($_smarty_tpl->tpl_vars['prefs']->value['feature_categories']=='y'&&(count($_smarty_tpl->tpl_vars['categories']->value)>0||$_smarty_tpl->tpl_vars['tiki_p_admin_categories']->value=='y')){?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\categorize.tpl --><?php if ($_smarty_tpl->tpl_vars['prefs']->value['feature_categories']=='y'&&(count($_smarty_tpl->tpl_vars['categories']->value)>0||$_smarty_tpl->tpl_vars['tiki_p_admin_categories']->value=='y')){?>
 <?php if (!isset($_smarty_tpl->tpl_vars['notable']->value)||$_smarty_tpl->tpl_vars['notable']->value!='y'){?>
 <tr>
  <td>Categorize</td>
@@ -78,4 +78,4 @@ if (!is_callable('smarty_function_select_all')) include 'lib/smarty_tiki\\functi
   <?php }?>
 <?php }?>
 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\categorize.tpl --><?php }} ?>

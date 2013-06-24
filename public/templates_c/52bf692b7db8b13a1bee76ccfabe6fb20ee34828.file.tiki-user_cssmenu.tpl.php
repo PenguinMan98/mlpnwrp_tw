@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:33
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:27
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-user_cssmenu.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:612851a6ea11c277f3-01180543%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2771251c46b3f137230-23325001%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '612851a6ea11c277f3-01180543',
+  'nocache_hash' => '2771251c46b3f137230-23325001',
   'function' => 
   array (
   ),
@@ -37,12 +37,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea11eb8f05_37921512',
+  'unifunc' => 'content_51c46b3f402f48_61401343',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea11eb8f05_37921512')) {function content_51a6ea11eb8f05_37921512($_smarty_tpl) {?><?php if (!is_callable('smarty_block_repeat')) include 'lib/smarty_tiki\\block.repeat.php';
+<?php if ($_valid && !is_callable('content_51c46b3f402f48_61401343')) {function content_51c46b3f402f48_61401343($_smarty_tpl) {?><?php if (!is_callable('smarty_block_repeat')) include 'lib/smarty_tiki\\block.repeat.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_block_tr')) include 'lib/smarty_tiki\\block.tr.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-user_cssmenu.tpl -->
 <?php if (count($_smarty_tpl->tpl_vars['menu_channels']->value)>0){?>
 	<?php $_smarty_tpl->tpl_vars['opensec'] = new Smarty_variable('0', null, 0);?>
 	<?php $_smarty_tpl->tpl_vars['sep'] = new Smarty_variable('', null, 0);?>
@@ -88,4 +88,4 @@ $_smarty_tpl->tpl_vars['chdata']->_loop = true;
 </ul></li><?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_repeat(array('count'=>$_smarty_tpl->tpl_vars['opensec']->value), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 <?php $_smarty_tpl->tpl_vars['opensec'] = new Smarty_variable(0, null, 0);?><?php }?></ul>
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-user_cssmenu.tpl --><?php }} ?>

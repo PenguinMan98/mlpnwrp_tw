@@ -1,7 +1,10 @@
+<!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-poweredby.tpl -->
+<!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
 
 		<div id="module_6" style="" class="module box-poweredby clearfix">
 			<div id="mod-poweredbyb2" class="clearfix">
-<div class="power">Powered by <a href="http://tiki.org" title="&#169; 2002&#8211;2013 The Tiki Community">Tiki Wiki CMS Groupware</a><span id="credits">&nbsp;| Theme: Fivealive</span></div>
+<div class="power">Powered by <a href="http://tiki.org" title="&#169; 2002&#8211;2013 The Tiki Community">Tiki Wiki CMS Groupware</a><span id="credits">&nbsp;| <!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\credits.tpl -->Theme: Nwrp<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\credits.tpl --></span></div>
 
 		</div>
 	</div>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl --><!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-poweredby.tpl -->

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:40
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:34
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\tiki-wiki_topline.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1635351a6ea183cbf81-97144287%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3066251c46b46c4b816-90760975%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1635351a6ea183cbf81-97144287',
+  'nocache_hash' => '3066251c46b46c4b816-90760975',
   'function' => 
   array (
   ),
@@ -57,15 +57,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea18783ed0_87292424',
+  'unifunc' => 'content_51c46b470a20e5_26901474',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea18783ed0_87292424')) {function content_51a6ea18783ed0_87292424($_smarty_tpl) {?><?php if (!is_callable('smarty_function_breadcrumbs')) include 'lib/smarty_tiki\\function.breadcrumbs.php';
+<?php if ($_valid && !is_callable('content_51c46b470a20e5_26901474')) {function content_51c46b470a20e5_26901474($_smarty_tpl) {?><?php if (!is_callable('smarty_function_breadcrumbs')) include 'lib/smarty_tiki\\function.breadcrumbs.php';
 if (!is_callable('smarty_function_query')) include 'lib/smarty_tiki\\function.query.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_block_ajax_href')) include 'lib/smarty_tiki\\block.ajax_href.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
 if (!is_callable('smarty_modifier_truncate')) include 'lib/smarty_tiki\\modifier.truncate.php';
-?><div class="wikitopline clearfix" style="clear: both;">
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-wiki_topline.tpl --><div class="wikitopline clearfix" style="clear: both;">
 	<div class="content">
 		<?php if (!isset($_smarty_tpl->tpl_vars['hide_page_header']->value)||!$_smarty_tpl->tpl_vars['hide_page_header']->value){?>
 			<div class="wikiinfo" style="float: left">
@@ -328,4 +328,4 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['struct']['last']       = ($_
 		<?php }?> 
 	</div> 
 </div> 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\tiki-wiki_topline.tpl --><?php }} ?>

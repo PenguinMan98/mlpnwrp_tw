@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 22:00:27
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:25
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\admin\include_general.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2838851a7cbfbc8da25-71496561%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:983551c46b79880d31-48809766%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2838851a7cbfbc8da25-71496561',
+  'nocache_hash' => '983551c46b79880d31-48809766',
   'function' => 
   array (
   ),
@@ -28,9 +28,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7cbfc0004c6_61367730',
+  'unifunc' => 'content_51c46b79af7348_48698326',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7cbfc0004c6_61367730')) {function content_51a7cbfc0004c6_61367730($_smarty_tpl) {?><?php if (!is_callable('smarty_block_remarksbox')) include 'lib/smarty_tiki\\block.remarksbox.php';
+<?php if ($_valid && !is_callable('content_51c46b79af7348_48698326')) {function content_51c46b79af7348_48698326($_smarty_tpl) {?><?php if (!is_callable('smarty_block_remarksbox')) include 'lib/smarty_tiki\\block.remarksbox.php';
 if (!is_callable('smarty_block_tabset')) include 'lib/smarty_tiki\\block.tabset.php';
 if (!is_callable('smarty_block_tab')) include 'lib/smarty_tiki\\block.tab.php';
 if (!is_callable('smarty_modifier_tiki_long_datetime')) include 'lib/smarty_tiki\\modifier.tiki_long_datetime.php';
@@ -42,7 +42,7 @@ if (!is_callable('smarty_modifier_tiki_long_date')) include 'lib/smarty_tiki\\mo
 if (!is_callable('smarty_modifier_tiki_short_date')) include 'lib/smarty_tiki\\modifier.tiki_short_date.php';
 if (!is_callable('smarty_modifier_tiki_long_time')) include 'lib/smarty_tiki\\modifier.tiki_long_time.php';
 if (!is_callable('smarty_modifier_tiki_short_time')) include 'lib/smarty_tiki\\modifier.tiki_short_time.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\admin\include_general.tpl -->
 
 <form action="tiki-admin.php?page=general" class="admin" method="post">
 	<input type="hidden" name="new_prefs" />
@@ -546,4 +546,4 @@ if (!is_callable('smarty_modifier_tiki_short_time')) include 'lib/smarty_tiki\\m
 		<input type="submit" value="Change preferences" />
 	</div>
 </form>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\admin\include_general.tpl --><?php }} ?>

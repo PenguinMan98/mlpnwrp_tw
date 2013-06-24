@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 15:37:00
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:25
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\prefs\shared-flags.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2227751a7721cc59fd1-69238904%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1392151c46b79c0bd61-38272616%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2227751a7721cc59fd1-69238904',
+  'nocache_hash' => '1392151c46b79c0bd61-38272616',
   'function' => 
   array (
   ),
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7721cd1cff7_51381763',
+  'unifunc' => 'content_51c46b79cdb894_69098730',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7721cd1cff7_51381763')) {function content_51a7721cd1cff7_51381763($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
+<?php if ($_valid && !is_callable('content_51c46b79cdb894_69098730')) {function content_51c46b79cdb894_69098730($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_function_popup')) include 'lib/smarty_tiki\\function.popup.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
-?><?php if ($_smarty_tpl->tpl_vars['p']->value['helpurl']){?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\shared-flags.tpl --><?php if ($_smarty_tpl->tpl_vars['p']->value['helpurl']){?>
 	<a href="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['helpurl'], ENT_QUOTES, 'UTF-8', true);?>
 " target="tikihelp" class="tikihelp" title="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['name'], ENT_QUOTES, 'UTF-8', true);?>
 : <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['description'], ENT_QUOTES, 'UTF-8', true);?>
@@ -121,4 +121,4 @@ $('.pref-reset')
 
 <?php echo $_smarty_tpl->tpl_vars['p']->value['pages'];?>
 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\shared-flags.tpl --><?php }} ?>

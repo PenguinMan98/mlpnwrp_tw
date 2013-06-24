@@ -25,14 +25,14 @@ if (isset($_GET['room']) &&
   include_once 'init.php';
 
   // log all calls to this file
-  $logProvider = new Model_Data_LogProvider();
+  /*$logProvider = new Model_Data_LogProvider();
   $log = new Model_Structure_Log(array(
   		'file'=>__FILE__,
   		'log_entry'=>serialize($_REQUEST),
   		'severity'=>'notice'
   ));
   $arrErrors = array();
-  $logProvider->insertOne($log, $arrErrors);
+  $logProvider->insertOne($log, $arrErrors);*/
   
   $modified = unlog_users();// refresh the current character list
 

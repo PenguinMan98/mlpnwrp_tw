@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:33
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:26
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:192451a6ea1133bd51-13385096%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:702651c46b3ed9e522-47584932%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '192451a6ea1133bd51-13385096',
+  'nocache_hash' => '702651c46b3ed9e522-47584932',
   'function' => 
   array (
   ),
@@ -39,11 +39,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea115acd23_67510194',
+  'unifunc' => 'content_51c46b3f0ba626_99362886',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea115acd23_67510194')) {function content_51a6ea115acd23_67510194($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'D:\\wamp\\www\\mlpnwrp_tw\\public\\lib\\smarty\\libs\\plugins\\modifier.replace.php';
+<?php if ($_valid && !is_callable('content_51c46b3f0ba626_99362886')) {function content_51c46b3f0ba626_99362886($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'D:\\wamp\\www\\mlpnwrp_tw\\public\\lib\\smarty\\libs\\plugins\\modifier.replace.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
 
 <?php if (!isset($_smarty_tpl->tpl_vars['module_position']->value)){?><?php $_smarty_tpl->tpl_vars['module_position'] = new Smarty_variable('', null, 0);?><?php }?>
 <?php if (!isset($_smarty_tpl->tpl_vars['module_ord']->value)){?><?php $_smarty_tpl->tpl_vars['module_ord'] = new Smarty_variable('', null, 0);?><?php }?>
@@ -199,4 +199,4 @@ if (!empty($_capture_buffer)) {
 	</div>
 <?php }?>
 <?php if (!empty($_smarty_tpl->tpl_vars['module_params']->value['topclass'])){?></div><?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl --><?php }} ?>

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:34
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:29
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2996051a6ea12bf7690-39020630%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2332051c46b4177b797-81532364%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2996051a6ea12bf7690-39020630',
+  'nocache_hash' => '2332051c46b4177b797-81532364',
   'function' => 
   array (
   ),
@@ -25,12 +25,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea12c69222_37108130',
+  'unifunc' => 'content_51c46b417efee9_96142457',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea12c69222_37108130')) {function content_51a6ea12c69222_37108130($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
+<?php if ($_valid && !is_callable('content_51c46b417efee9_96142457')) {function content_51c46b417efee9_96142457($_smarty_tpl) {?><?php if (!is_callable('smarty_function_button')) include 'lib/smarty_tiki\\function.button.php';
 if (!is_callable('smarty_function_listfilter')) include 'lib/smarty_tiki\\function.listfilter.php';
 if (!is_callable('smarty_function_debugger')) include 'lib/smarty_tiki\\function.debugger.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\footer.tpl -->
 
 <?php if ((!isset($_smarty_tpl->tpl_vars['display']->value)||$_smarty_tpl->tpl_vars['display']->value=='')){?>
 	<?php if (count($_smarty_tpl->tpl_vars['phpErrors']->value)){?>
@@ -59,4 +59,4 @@ $_smarty_tpl->tpl_vars['err']->_loop = true;
 	<?php }?>
 
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\footer.tpl --><?php }} ?>

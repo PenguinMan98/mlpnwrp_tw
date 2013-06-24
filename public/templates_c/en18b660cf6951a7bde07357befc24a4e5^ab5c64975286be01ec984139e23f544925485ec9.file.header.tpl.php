@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:34
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:29
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1923751a6ea12612b65-41883726%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2942951c46b41187573-55208238%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1923751a6ea12612b65-41883726',
+  'nocache_hash' => '2942951c46b41187573-55208238',
   'function' => 
   array (
   ),
@@ -64,14 +64,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea12b23477_07405990',
+  'unifunc' => 'content_51c46b4169ff67_90570659',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea12b23477_07405990')) {function content_51a6ea12b23477_07405990($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_tr_if')) include 'lib/smarty_tiki\\modifier.tr_if.php';
+<?php if ($_valid && !is_callable('content_51c46b4169ff67_90570659')) {function content_51c46b4169ff67_90570659($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_tr_if')) include 'lib/smarty_tiki\\modifier.tr_if.php';
 if (!is_callable('smarty_function_breadcrumbs')) include 'lib/smarty_tiki\\function.breadcrumbs.php';
 if (!is_callable('smarty_modifier_truncate')) include 'lib/smarty_tiki\\modifier.truncate.php';
 if (!is_callable('smarty_modifier_username')) include 'lib/smarty_tiki\\modifier.username.php';
 if (!is_callable('smarty_modifier_stringfix')) include 'lib/smarty_tiki\\modifier.stringfix.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\header.tpl -->
 <?php if ($_smarty_tpl->tpl_vars['base_uri']->value&&($_smarty_tpl->tpl_vars['dir_level']->value>0||$_smarty_tpl->tpl_vars['prefs']->value['feature_html_head_base_tag']=='y')){?>
 	<base href="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['base_uri']->value, ENT_QUOTES, 'UTF-8', true);?>
 " />
@@ -317,4 +317,4 @@ $_smarty_tpl->tpl_vars["tracker"]->_loop = true;
 	<?php $_template = new Smarty_Internal_Template('eval:'.$_smarty_tpl->tpl_vars['prefs']->value['feature_custom_html_head_content'], $_smarty_tpl->smarty, $_smarty_tpl);echo $_template->fetch(); ?>
 <?php }?>
 
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\header.tpl --><?php }} ?>

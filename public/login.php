@@ -67,7 +67,7 @@ input[type="button"]{
 						<input type="hidden" id="handle" name="handle" value="">
 					</div>
 					<br>
-					<input type="button" id="forum_login" name="forum_login" value="Login" onClick="logMeIn();">
+					<input type="button" id="forum_login" name="forum_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;" onClick="logMeIn();">
 				</form>
 			</div>
 			<div id="tabs-2">
@@ -75,7 +75,7 @@ input[type="button"]{
 					<div class="form_error" id="guest_login_form_error"></div>
 					<label>Guest Handle: </label><input type="text" id="guest_username" name="handle" placeholder="Handle" /><br>
 					<br>
-					<input type="button" id="guest_login" name="guest_login" value="Login" onClick="logGuestIn();">
+					<input type="button" id="guest_login" name="guest_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;" onClick="logGuestIn();">
 				</form>
 			</div>
 		
@@ -83,6 +83,8 @@ input[type="button"]{
 	</div>
 	<script>
 $(function() {
+	/*window.location = "http://www.mlpnwrp.org/chat";*/
+	
 	$('#login').tabs();
 
 	<?php if($loggedIn): ?>
@@ -105,10 +107,10 @@ $(function() {
 					$('#handle').val(response.characterList[i].name);
 				}
 			}
-			$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/character/create">Create a new character!</a>');
+			$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/chat/character/create.php">Create a new character!</a>');
 		}else if(response.success){ // no characters!
 			$('#login_form_error').css('display','none');
-			$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/character/create">Make a character!</a>');
+			$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/chat/character/create.php">Make a character!</a>');
 			$('#character_selection').css('display','block');
 		}
 	});
@@ -147,10 +149,10 @@ function logMeIn(){
 				for(var i = 0; i < response.characterList.length; i++){ 
 					select.append('<option value="'+response.characterList[i].character_id+'">'+response.characterList[i].name+'</option>');
 				}
-				$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/character/create">Create a new character!</a>');
+				$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/chat/character/create.php">Create a new character!</a>');
 			}else if(response.success){ // no characters!
 				$('#login_form_error').css('display','none');
-				$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/character/create">Make a character!</a>');
+				$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/chat/character/create.php">Make a character!</a>');
 				$('#character_selection').css('display','block');
 			}else{
 				$('#login_form_error').css('display','block');

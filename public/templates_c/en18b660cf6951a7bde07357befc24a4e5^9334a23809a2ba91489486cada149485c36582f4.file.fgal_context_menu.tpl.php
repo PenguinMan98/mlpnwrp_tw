@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 08:05:08
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-23 21:18:29
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\fgal_context_menu.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1078751a9ab34caab76-80508693%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2410851c7662525eb95-55244713%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1078751a9ab34caab76-80508693',
+  'nocache_hash' => '2410851c7662525eb95-55244713',
   'function' => 
   array (
   ),
@@ -35,14 +35,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a9ab354c31f8_88966535',
+  'unifunc' => 'content_51c7662599ca54_25012722',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a9ab354c31f8_88966535')) {function content_51a9ab354c31f8_88966535($_smarty_tpl) {?><?php if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
+<?php if ($_valid && !is_callable('content_51c7662599ca54_25012722')) {function content_51c7662599ca54_25012722($_smarty_tpl) {?><?php if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_modifier_virtual_path')) include 'lib/smarty_tiki\\modifier.virtual_path.php';
 if (!is_callable('smarty_modifier_truncate')) include 'lib/smarty_tiki\\modifier.truncate.php';
 if (!is_callable('smarty_modifier_sefurl')) include 'lib/smarty_tiki\\modifier.sefurl.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\fgal_context_menu.tpl -->
 <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['isgal']==1){?><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['perms']['tiki_p_view_file_gallery']=='y'){?><?php $_smarty_tpl->smarty->_tag_stack[] = array('self_link', array('_icon'=>'folder_go','_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'galleryId'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['id'])); $_block_repeat=true; echo smarty_block_self_link(array('_icon'=>'folder_go','_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'galleryId'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['id']), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 Go to<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_self_link(array('_icon'=>'folder_go','_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'galleryId'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['id']), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 <?php }?><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['perms']['tiki_p_create_file_galleries']=='y'){?><?php $_smarty_tpl->smarty->_tag_stack[] = array('self_link', array('_icon'=>'page_edit','_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'edit_mode'=>1,'galleryId'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['id'])); $_block_repeat=true; echo smarty_block_self_link(array('_icon'=>'page_edit','_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'edit_mode'=>1,'galleryId'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['id']), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
@@ -134,4 +134,4 @@ Open in WebDAV<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo
 </a><?php }?><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['perms']['tiki_p_admin_file_galleries']=='y'||(!$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['lockedby']&&(($_smarty_tpl->tpl_vars['user']->value&&$_smarty_tpl->tpl_vars['user']->value==$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['user'])||($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['perms']['tiki_p_edit_gallery_file']=='y'&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['perms']['tiki_p_remove_files']=='y')))){?><a href="tiki-list_file_gallery.php?remove=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['fileId'];?>
 &galleryId=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->tpl_vars['changes']->value]['galleryId'];?>
 "><?php echo smarty_function_icon(array('_menu_text'=>$_smarty_tpl->tpl_vars['menu_text']->value,'_menu_icon'=>$_smarty_tpl->tpl_vars['menu_icon']->value,'_id'=>'cross','alt'=>"Delete"),$_smarty_tpl);?>
-</a><?php }?><?php if ($_smarty_tpl->tpl_vars['prefs']->value['javascript_enabled']=='y'){?><?php if ($_smarty_tpl->tpl_vars['menu_text']->value=='y'||$_smarty_tpl->tpl_vars['menu_icon']->value=='y'){?></form><?php }?><?php }?><?php }?><?php }} ?>
+</a><?php }?><?php if ($_smarty_tpl->tpl_vars['prefs']->value['javascript_enabled']=='y'){?><?php if ($_smarty_tpl->tpl_vars['menu_text']->value=='y'||$_smarty_tpl->tpl_vars['menu_icon']->value=='y'){?></form><?php }?><?php }?><?php }?><!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\fgal_context_menu.tpl --><?php }} ?>

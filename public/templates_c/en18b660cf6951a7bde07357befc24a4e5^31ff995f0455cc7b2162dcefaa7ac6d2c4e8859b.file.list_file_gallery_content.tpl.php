@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-01 08:05:08
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-23 21:18:28
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery_content.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2645051a9ab342002a0-17184211%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1276751c76624755ac3-61824383%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2645051a9ab342002a0-17184211',
+  'nocache_hash' => '1276751c76624755ac3-61824383',
   'function' => 
   array (
   ),
@@ -65,9 +65,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a9ab34c829d7_02228978',
+  'unifunc' => 'content_51c76625233e50_45073042',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a9ab34c829d7_02228978')) {function content_51a9ab34c829d7_02228978($_smarty_tpl) {?><?php if (!is_callable('smarty_function_select_all')) include 'lib/smarty_tiki\\function.select_all.php';
+<?php if ($_valid && !is_callable('content_51c76625233e50_45073042')) {function content_51c76625233e50_45073042($_smarty_tpl) {?><?php if (!is_callable('smarty_function_select_all')) include 'lib/smarty_tiki\\function.select_all.php';
 if (!is_callable('smarty_block_self_link')) include 'lib/smarty_tiki\\block.self_link.php';
 if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_function_popup')) include 'lib/smarty_tiki\\function.popup.php';
@@ -83,7 +83,7 @@ if (!is_callable('smarty_modifier_iconify')) include 'lib/smarty_tiki\\modifier.
 if (!is_callable('smarty_modifier_tiki_remaining_days_from_now')) include 'lib/smarty_tiki\\modifier.tiki_remaining_days_from_now.php';
 if (!is_callable('smarty_function_norecords')) include 'lib/smarty_tiki\\function.norecords.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
-?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery_content.tpl -->
 <?php if (empty($_smarty_tpl->tpl_vars['sort_arg']->value)){?>
 	<?php $_smarty_tpl->tpl_vars['sort_arg'] = new Smarty_variable('sort_mode', null, 0);?>
 <?php }?>
@@ -612,4 +612,4 @@ if (!empty($_capture_buffer)) {
 $('a.fgalbacklink').cluetip({showTitle:false, sticky:true});<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_jq(array(), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
 <?php }?>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\list_file_gallery_content.tpl --><?php }} ?>

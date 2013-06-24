@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 15:37:01
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:04:26
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\prefs\radio.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2419351a7721d409565-01571600%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3069151c46b7a427370-13946107%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2419351a7721d409565-01571600',
+  'nocache_hash' => '3069151c46b7a427370-13946107',
   'function' => 
   array (
   ),
@@ -23,11 +23,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a7721d4fc4f2_55239843',
+  'unifunc' => 'content_51c46b7a52cf07_73298273',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7721d4fc4f2_55239843')) {function content_51a7721d4fc4f2_55239843($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
+<?php if ($_valid && !is_callable('content_51c46b7a52cf07_73298273')) {function content_51c46b7a52cf07_73298273($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_simplewiki')) include 'lib/smarty_tiki\\modifier.simplewiki.php';
 if (!is_callable('smarty_block_jq')) include 'lib/smarty_tiki\\block.jq.php';
-?><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\radio.tpl --><div class="adminoptionbox preference clearfix <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['tagstring'], ENT_QUOTES, 'UTF-8', true);?>
 <?php if (isset($_REQUEST['highlight'])&&$_REQUEST['highlight']==$_smarty_tpl->tpl_vars['p']->value['preference']){?> highlight<?php }?>">
 	<?php if ($_smarty_tpl->tpl_vars['p']->value['name']){?>
 		<label for="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
@@ -99,4 +99,4 @@ _childcontainer_<?php echo $_smarty_tpl->getVariable('smarty')->value['foreach']
 
 <?php } ?>
 </div>
-<?php }} ?>
+<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\prefs\radio.tpl --><?php }} ?>

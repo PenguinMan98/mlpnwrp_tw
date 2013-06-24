@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1-DEV, created on 2013-05-30 05:56:33
+<?php /* Smarty version Smarty-3.1-DEV, created on 2013-06-21 15:03:26
          compiled from "D:\wamp\www\mlpnwrp_tw\public\templates\remarksbox.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1947851a6ea1120c9d7-74651833%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1403651c46b3ec61a72-00762372%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1947851a6ea1120c9d7-74651833',
+  'nocache_hash' => '1403651c46b3ec61a72-00762372',
   'function' => 
   array (
   ),
@@ -27,11 +27,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1-DEV',
-  'unifunc' => 'content_51a6ea1126e739_04925134',
+  'unifunc' => 'content_51c46b3ecc2085_40622535',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a6ea1126e739_04925134')) {function content_51a6ea1126e739_04925134($_smarty_tpl) {?><?php if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
+<?php if ($_valid && !is_callable('content_51c46b3ecc2085_40622535')) {function content_51c46b3ecc2085_40622535($_smarty_tpl) {?><?php if (!is_callable('smarty_function_icon')) include 'lib/smarty_tiki\\function.icon.php';
 if (!is_callable('smarty_block_tr')) include 'lib/smarty_tiki\\block.tr.php';
-?><div class="clearfix rbox <?php echo $_smarty_tpl->tpl_vars['remarksbox_type']->value;?>
+?><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\remarksbox.tpl --><div class="clearfix rbox <?php echo $_smarty_tpl->tpl_vars['remarksbox_type']->value;?>
 "><?php if ($_smarty_tpl->tpl_vars['remarksbox_close']->value=='y'&&$_smarty_tpl->tpl_vars['remarksbox_type']->value!='errors'&&$_smarty_tpl->tpl_vars['remarksbox_type']->value!='confirm'){?><?php echo smarty_function_icon(array('_id'=>'close','class'=>'rbox-close','onclick'=>'$(this).parent().fadeOut();'),$_smarty_tpl);?>
 <?php }?><?php if ($_smarty_tpl->tpl_vars['remarksbox_title']->value!=''){?><div class="rbox-title"><?php if ($_smarty_tpl->tpl_vars['remarksbox_icon']->value!='none'){?><?php $_smarty_tpl->_capture_stack[0][] = array('alt', null, null); ob_start(); ?><?php $_smarty_tpl->smarty->_tag_stack[] = array('tr', array()); $_block_repeat=true; echo smarty_block_tr(array(), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 <?php echo $_smarty_tpl->tpl_vars['remarksbox_type']->value;?>
@@ -46,4 +46,4 @@ if (!empty($_capture_buffer)) {
 </span></div><?php }?><div class="rbox-data<?php echo $_smarty_tpl->tpl_vars['remarksbox_highlight']->value;?>
 "<?php if (!empty($_smarty_tpl->tpl_vars['remarksbox_width']->value)){?> style="width:<?php echo $_smarty_tpl->tpl_vars['remarksbox_width']->value;?>
 "<?php }?>><?php echo $_smarty_tpl->tpl_vars['remarksbox_content']->value;?>
-</div></div><?php }} ?>
+</div></div><!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\remarksbox.tpl --><?php }} ?>

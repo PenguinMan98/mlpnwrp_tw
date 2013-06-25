@@ -95,11 +95,11 @@ $(function() {
 	})
 	.done(function(response) {
 		if(response.success){
-			$('#login_fields').css('display','none');
+			$('#login_fields').hide();
 		}
 		if(response.success && response.characterList.length > 0){ // I have characters
-			$('#login_form_error').css('display','none');
-			$('#character_selection').css('display','block');
+			$('#login_form_error').hide();
+			$('#character_selection').show();
 			var select = $('#chat_character');
 			for(var i = 0; i < response.characterList.length; i++){ 
 				select.append('<option value="'+response.characterList[i].character_id+'">'+response.characterList[i].name+'</option>');
@@ -109,9 +109,9 @@ $(function() {
 			}
 			$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/chat/character/create.php">Create a new character!</a>');
 		}else if(response.success){ // no characters!
-			$('#login_form_error').css('display','none');
+			$('#login_form_error').hide();
 			$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/chat/character/create.php">Make a character!</a>');
-			$('#character_selection').css('display','block');
+			$('#character_selection').show();
 		}
 	});
 	
@@ -121,13 +121,13 @@ $(function() {
 function logMeIn(){
 	var username = $('#forum_username').val();
 	if(typeof username == 'undefined' || username == ''){
-		$('#login_form_error').css('display','block');
+		$('#login_form_error').show();
 		$('#login_form_error').html('**Enter a Username!<br>');
 		return false;
 	}
 	var pattern = /^[\w_\-\s]*$/i; // accept all alpha characters, underscore, hyphen, and space
 	if( !pattern.test( username ) ){
-		$('#login_form_error').css('display','block');
+		$('#login_form_error').show();
 		$('#login_form_error').html('**Usernames may only contain letters, numbers, _ , - and space!<br>');
 		return false;
 	}
@@ -140,22 +140,22 @@ function logMeIn(){
 		})
 		.done(function(response) {
 			if(response.success){
-				$('#login_fields').css('display','none');
+				$('#login_fields').hide();
 			}
 			if(response.success && response.characterList.length > 0){ // if this succeeds, we found a reserved character name
-				$('#login_form_error').css('display','none');
-				$('#character_selection').css('display','block');
+				$('#login_form_error').hide();
+				$('#character_selection').show();
 				var select = $('#chat_character');
 				for(var i = 0; i < response.characterList.length; i++){ 
 					select.append('<option value="'+response.characterList[i].character_id+'">'+response.characterList[i].name+'</option>');
 				}
 				$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/chat/character/create.php">Create a new character!</a>');
 			}else if(response.success){ // no characters!
-				$('#login_form_error').css('display','none');
+				$('#login_form_error').hide();
 				$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/chat/character/create.php">Make a character!</a>');
-				$('#character_selection').css('display','block');
+				$('#character_selection').show();
 			}else{
-				$('#login_form_error').css('display','block');
+				$('#login_form_error').show();
 				$('#login_form_error').html('**' + response.error + '<br>');
 			}
 		});
@@ -167,13 +167,13 @@ function logMeIn(){
 function logGuestIn(){
 	var guestUsername = $('#guest_username').val();
 	if(typeof guestUsername == 'undefined' || guestUsername == ''){
-		$('#guest_login_form_error').css('display','block');
+		$('#guest_login_form_error').show();
 		$('#guest_login_form_error').html('**Enter a Username!<br>');
 		return false;
 	}
 	var pattern = /^[\w_-]*$/i; // accept all alpha characters, underscore and hyphen
 	if( !pattern.test( guestUsername ) ){
-		$('#guest_login_form_error').css('display','block');
+		$('#guest_login_form_error').show();
 		$('#guest_login_form_error').html('**Usernames may only contain letters, numbers, _ and -!<br>');
 		return false;
 	}
@@ -187,7 +187,7 @@ function logGuestIn(){
 		if(response.success){ // if this succeeds, we found a reserved character name
 			$('#guest_login_form').submit();
 		}else{
-			$('#guest_login_form_error').css('display','block');
+			$('#guest_login_form_error').show();
 			$('#guest_login_form_error').html('**' + response.message + '<br>');
 		}
 	});

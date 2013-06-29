@@ -17,6 +17,7 @@ $editing = ($_REQUEST['edit']) ? true : false;
 $character_name = str_replace(' ','_',str_replace('  ',' ',trim(filter_var($_REQUEST['character_name'], FILTER_SANITIZE_STRING))));
 $birth_gender = filter_var($_REQUEST['birth_gender'], FILTER_SANITIZE_STRING);
 $current_gender = filter_var($_REQUEST['current_gender'], FILTER_SANITIZE_STRING);
+if(!$editing) $current_gender = $birth_gender;
 $race = filter_var($_REQUEST['race'], FILTER_SANITIZE_NUMBER_INT);
 $age = filter_var($_REQUEST['age'], FILTER_SANITIZE_NUMBER_INT);
 $chat_name_color = filter_var($_REQUEST['chat_name_color'], FILTER_SANITIZE_STRING);

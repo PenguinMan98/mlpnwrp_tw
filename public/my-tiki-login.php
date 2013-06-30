@@ -229,18 +229,26 @@ if ($isvalid) {
 		}
 	}
 	
-	// get the user info and set up the session
-	$userInfo = $userlib->get_user_info($user);
-	/*$_SESSION['u_info']['login'] = $userInfo['login'];
-	$_SESSION['u_info']['id'] = $userInfo['userId'];
-	echo "<pre>";
+	if(empty($_SESSION['u_info']['login'])){
+		// get the user info and set up the session
+		$userInfo = $userlib->get_user_info($user);
+		$_SESSION['u_info']['login'] = $userInfo['login'];
+		$_SESSION['u_info']['id'] = $userInfo['userId'];
+		$_SESSION['u_info']['group'] = $userInfo['default_group'];
+		/*echo "before bootstrap<pre>";
+		print_r($userInfo);
+		print_r($_SESSION);
+		echo "</pre>";*/
+	}
+	// then bootstrap
+	require_once '../application/Core/Bootstrap.php';
+	$_bootstrap = Bootstrap::getInstance();
+	
+	/*echo "after bootstrap<pre>";
 	print_r($userInfo);
 	print_r($_SESSION);
 	echo "</pre>";*/
 	//die("My die");
-	// then bootstrap
-	require_once '../application/Core/Bootstrap.php';
-	$_bootstrap = Bootstrap::getInstance();
 	
 	// then get the characters
 	$characterHelper = new Model_Data_CharacterProvider();
@@ -368,6 +376,12 @@ if ($stay_in_ssl_mode == 'y' && $https_mode) {
 }
 if (defined('SID') && SID != '')
 $url.= ((strpos($url, '?') === false) ? '?' : '&') . SID;
+
+/*echo "end<pre>";
+print_r($userInfo);
+print_r($_SESSION);
+echo "</pre>";
+die("My die");*/
 
 //header('Location: ' . $url);
 echo json_encode($response);

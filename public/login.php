@@ -1,6 +1,12 @@
 <?php 
+
 require_once '../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
+
+/*echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";*/
+
 
 ?><!DOCTYPE HTML>
 <html>

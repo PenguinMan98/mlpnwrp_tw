@@ -21,7 +21,7 @@ if(!preg_match("/^[\w_-]*$/", $_POST['handle'])){
 	header("Location: ../login.php");// reject a bad username.
 }
 $handle = $_POST['handle'];
-$characterId = $_POST['character_id'];
+$characterId = isset($_POST['character_id'])? $_POST['character_id'] : null;
 
 include_once PUBLIC_ROOT . '/chat/ajax-chat/php/init.php'; /*the main php include file*/
 

@@ -9,6 +9,7 @@ $response = new stdClass();
 
 // verify login
 $handle = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['user']), ENT_QUOTES);
+$character = null;
 if($userId) { // logged in + registered char
 	$characterHelper = new Model_Data_CharacterProvider();
 	$character = $characterHelper->getOneByCharacterName($handle);

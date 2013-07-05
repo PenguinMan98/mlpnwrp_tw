@@ -51,6 +51,16 @@ class Cachelib
 		$data = $this->getCached($key, $type, $lastModif);
 
 		if ( $data ) {
+			//HACK BY PenguinMan98 to counter the unserialization errors that pop up on WAMPServer
+			$resultCount = preg_match_all('/(s:(\d*):"[^"'.PHP_EOL.']*)'.PHP_EOL.'[^"]*"/', $data, $searchResult);
+			foreach($searchResult[0] as $i => $elem){
+				$eolCount = preg_match_all('/'.PHP_EOL.'/', $elem);
+				$length = $searchResult[2][$i];
+				$fixedElem = str_replace("s:".$length.":","s:".($length+$eolCount).":",$elem);
+				$data = str_replace($elem,$fixedElem,$data);
+			}
+			//END HACK
+			
 			return unserialize($data);
 		}
 	}

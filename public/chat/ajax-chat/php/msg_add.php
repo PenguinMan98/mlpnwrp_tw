@@ -87,8 +87,8 @@ if ($rand > 0 &&
   //$data = preg_replace("/good/i", "g00d", $data);// this and its companion allows the word 'good' past the filter
   //$data = preg_replace("/g+o+d+s+/i", "Princesses", $data);
   //$data = preg_replace("/g+o+d+/i", "Princess", $data);
-  $data = preg_replace("/j+e+s+u+s+\s+c+h+r+i+s+t+/i", "Princess Celestia", $data);
-  $data = preg_replace("/j+e+s+u+s+/i", "Princess Celestia", $data);
+  //$data = preg_replace("/j+e+s+u+s+\s+c+h+r+i+s+t+/i", "Princess Celestia", $data);
+  //$data = preg_replace("/j+e+s+u+s+/i", "Princess Celestia", $data);
   //$data = preg_replace("/g00d/i", "good", $data);
 
   // Joe added Operations

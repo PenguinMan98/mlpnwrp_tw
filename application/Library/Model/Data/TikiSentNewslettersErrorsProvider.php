@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiSentNewslettersErrorsProvider extends Model_Data_TikiSentNewslettersErrorsProviderBase
+{
+}

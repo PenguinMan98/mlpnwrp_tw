@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiThemeControlCategsProvider extends Model_Data_TikiThemeControlCategsProviderBase
+{
+}

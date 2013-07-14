@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiRelatedCategoriesProvider extends Model_Data_TikiRelatedCategoriesProviderBase
+{
+}

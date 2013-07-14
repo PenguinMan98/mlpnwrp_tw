@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiTrackerItemAttachmentsProvider extends Model_Data_TikiTrackerItemAttachmentsProviderBase
+{
+}

@@ -52,7 +52,7 @@ a:hover, a:active{
 	/*background: #222;*/
     position:fixed !important;
     position: absolute;
-    top: 42px; 
+    top: 47px; 
     bottom: 36px;
     left: 2px;
     right: 200px;
@@ -88,7 +88,7 @@ a:hover, a:active{
     background-color: #000;
 	position:fixed !important;
     position: absolute;
-    top: 42px; 
+    top: 47px; 
     width: 180px; 
     bottom: 36px;
     right: 2px;

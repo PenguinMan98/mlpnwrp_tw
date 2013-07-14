@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiQuizQuestionOptionsProvider extends Model_Data_TikiQuizQuestionOptionsProviderBase
+{
+}

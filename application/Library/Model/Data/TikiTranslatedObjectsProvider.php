@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiTranslatedObjectsProvider extends Model_Data_TikiTranslatedObjectsProviderBase
+{
+}

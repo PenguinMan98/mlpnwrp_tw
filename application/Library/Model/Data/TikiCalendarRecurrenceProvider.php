@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiCalendarRecurrenceProvider extends Model_Data_TikiCalendarRecurrenceProviderBase
+{
+}

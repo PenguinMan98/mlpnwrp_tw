@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiUserAnswersUploadsProvider extends Model_Data_TikiUserAnswersUploadsProviderBase
+{
+}

@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiLiveSupportMessageCommentsProvider extends Model_Data_TikiLiveSupportMessageCommentsProviderBase
+{
+}

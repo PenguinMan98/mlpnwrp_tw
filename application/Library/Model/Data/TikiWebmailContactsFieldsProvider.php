@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiWebmailContactsFieldsProvider extends Model_Data_TikiWebmailContactsFieldsProviderBase
+{
+}

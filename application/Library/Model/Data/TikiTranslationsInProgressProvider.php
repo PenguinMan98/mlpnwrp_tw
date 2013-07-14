@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiTranslationsInProgressProvider extends Model_Data_TikiTranslationsInProgressProviderBase
+{
+}

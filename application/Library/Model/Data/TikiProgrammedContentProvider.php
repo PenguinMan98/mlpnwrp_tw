@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiProgrammedContentProvider extends Model_Data_TikiProgrammedContentProviderBase
+{
+}

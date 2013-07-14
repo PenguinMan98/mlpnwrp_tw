@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiFriendshipRequestsProvider extends Model_Data_TikiFriendshipRequestsProviderBase
+{
+}

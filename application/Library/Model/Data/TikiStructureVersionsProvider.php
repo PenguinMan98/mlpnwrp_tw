@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiStructureVersionsProvider extends Model_Data_TikiStructureVersionsProviderBase
+{
+}

@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiWebmailContactsGroupsProvider extends Model_Data_TikiWebmailContactsGroupsProviderBase
+{
+}

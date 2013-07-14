@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiCalendarLocationsProvider extends Model_Data_TikiCalendarLocationsProviderBase
+{
+}

@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiTrackerItemFieldLogsProvider extends Model_Data_TikiTrackerItemFieldLogsProviderBase
+{
+}

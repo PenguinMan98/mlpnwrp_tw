@@ -1,0 +1,4 @@
+<?php
+class Model_Data_UsersObjectpermissionsProvider extends Model_Data_UsersObjectpermissionsProviderBase
+{
+}

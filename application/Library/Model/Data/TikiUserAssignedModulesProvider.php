@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiUserAssignedModulesProvider extends Model_Data_TikiUserAssignedModulesProviderBase
+{
+}

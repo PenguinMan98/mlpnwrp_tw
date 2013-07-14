@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiThemeControlSectionsProvider extends Model_Data_TikiThemeControlSectionsProviderBase
+{
+}

@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiHtmlPagesDynamicZonesProvider extends Model_Data_TikiHtmlPagesDynamicZonesProviderBase
+{
+}

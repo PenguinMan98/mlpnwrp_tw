@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiLiveSupportOperatorsProvider extends Model_Data_TikiLiveSupportOperatorsProviderBase
+{
+}

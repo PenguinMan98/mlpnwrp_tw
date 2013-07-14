@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiWebserviceTemplateProvider extends Model_Data_TikiWebserviceTemplateProviderBase
+{
+}

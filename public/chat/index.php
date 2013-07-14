@@ -114,9 +114,9 @@ var chatColorOverrideColor = '#ddd';
 	</audio>
 	<div id="page-wrap">
 
-		<div id="top_menu">&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>">Home</a>&nbsp;&nbsp;
-			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/rules">Site Rules</a>&nbsp;&nbsp;
-			|&nbsp;&nbsp;<a href="#">Chat Commands</a>&nbsp;&nbsp;
+		<div id="top_menu">&nbsp;&nbsp;<a target="_blank" href="/">Home</a>&nbsp;&nbsp;
+			|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/Site+Rules">Site Rules</a>&nbsp;&nbsp;
+			|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/Chat+Commands">Chat Commands</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a href="#" onClick="togglePreferences(this);">Preferences</a>&nbsp;&nbsp;
 			<?php if(is_object($character)):?>|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/chat/character/edit.php?c=<?=$handle?>">Profile</a>&nbsp;&nbsp;<?php endif;?>
 			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/chat/ajax-chat/php/logout.php?handle=<?=$handle?><?php if($characterId) echo "&character_id=$characterId"?>">Logout</a>&nbsp;&nbsp;

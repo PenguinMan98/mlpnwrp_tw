@@ -1,0 +1,4 @@
+<?php
+class Model_Data_TikiUserBookmarksFoldersProvider extends Model_Data_TikiUserBookmarksFoldersProviderBase
+{
+}

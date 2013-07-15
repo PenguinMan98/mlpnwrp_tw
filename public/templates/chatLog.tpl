@@ -4,6 +4,7 @@
         Date: <input type="text" name="startDate" id="startDate" {if isset($startDate)}value="{$startDate}"{/if} />
         Character:
         <select name="character">
+            <option value="">All</option>
             {html_options values=$characters output=$characters selected=$character}
         </select>
         Room: 

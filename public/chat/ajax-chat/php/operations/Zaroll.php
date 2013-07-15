@@ -1,6 +1,6 @@
 <?php
-
-class Operation_Zaroll{
+include_once 'OperationBase.php';
+class Operation_Zaroll extends OperationBase{
 	public $operator;
 	public $data;
 	public static $args = 1;
@@ -14,41 +14,35 @@ class Operation_Zaroll{
 		$this->data = $args;
 	}
 
-	public function __toString(){
-		return $this->roll();
+	public function getValue(){
+		try{
+			return $this->roll();
+		} catch (Exception $e){
+			throw $e;
+		}
 	}
-
-	// this chat can't do /me here.
-	/*private function me(){
-		return " " . $this->data;
-	}*/
 
 	private function roll(){
 		$matches = array();
-		$test = preg_match("/^(\d*)d(\d*)(\s?(\+|-)(\d*))?\s?(.*)/i", $this->data[0], $matches);
+		$test = preg_match("/^(\d*)\s?(.*)/i", $this->data[0], $matches);
 		$result = "";
 		
 		if( $test === false){
 			throw new Exception("An error occurred parsing the string.");
 		}elseif( $test === 0 ){
-			$result = "<<Error>> " . $this->data;
+			$this->messages[] = "Usage: '/zaroll X' where X is an integer number of d10's.";
 		}else{
-			//print_r($matches);
 			$howMany = $matches[1];
-			$howBig = $matches[2];
-			$modifierOp = $matches[4];
-			$modifier = $matches[5];
+			$howBig = 10; //$matches[2];
 			
-			$result = "<< {$howMany}d{$howBig}";
-			if($modifier && $modifierOp == "+") $result .= "+$modifier";
-			elseif($modifier) $result .= "-$modifier";
-			$result .= ": ";
+			$result = "{{ {$howMany}d{$howBig}: ";
 			$successCount = 0;
 			$tenCount = 0;
 			$sum = 0;
+			$silly = false;
 			
-			if($howMany > 50 || $howBig > 100 || $howMany < 1 || $howBig < 2 ){
-				$result .= "Don't be silly.";
+			if($howMany > 50 || $howMany < 1 ){
+				$silly = true;
 			}else{
 				for($i = 0; $i < $howMany+$tenCount; $i++){
 					if($i > 0) $result .= " ";
@@ -60,19 +54,17 @@ class Operation_Zaroll{
 					if($rand == 10){
 						$tenCount++;
 					}
-					if($i >= $howMany) $result .= "{";
+					if($i >= $howMany) $result .= "*";
 					$result .= $rand;
-					if($i >= $howMany) $result .= "}";
+					if($i >= $howMany) $result .= "*";
 					
 					$sum += $rand;
 				}
 			}
-			
-			if($modifier && $modifierOp == "+") $result .= " +$modifier";
-			elseif($modifier) $result .= " -$modifier";
-			if($howMany > 1 || $modifier > 0)
-				$result .= " = " . $successCount . " Successes";
-			$result .= " >> ". $matches[6]; // then add the rest
+			if($silly)
+				$result .= "Don't be silly. }} ". $matches[2];
+			else
+				$result .= " = [u]_{$successCount}_[/u] Successes }} ". $matches[2]; // then add the rest
 		}
 		
 		return $result;

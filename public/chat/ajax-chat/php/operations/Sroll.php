@@ -1,6 +1,6 @@
 <?php
-
-class Operation_Sroll{
+include_once("OperationBase.php");
+class Operation_Sroll extends OperationBase{
 	public $operator;
 	public $data;
 	public static $args = 1;
@@ -14,8 +14,12 @@ class Operation_Sroll{
 		$this->data = $args;
 	}
 
-	public function __toString(){
-		return $this->roll();
+	public function getValue(){
+		try{
+			return $this->roll();
+		} catch (Exception $e){
+			throw $e;
+		}
 	}
 
 	private function roll(){
@@ -26,9 +30,8 @@ class Operation_Sroll{
 		if( $test === false){
 			throw new Exception("An error occurred parsing the string.");
 		}elseif( $test === 0 ){
-			$result = "&lt;&lt; Error &gt;&gt; " . $this->data;
+			$this->messages[] = "Usage: '/sroll XdY+Z' or '/sroll XdY-Z' where X,Y, and Z are any integer number. Z is optional."; 
 		}else{
-			//print_r($matches);
 			$howMany = $matches[1];
 			$howBig = $matches[2];
 			
@@ -40,7 +43,7 @@ class Operation_Sroll{
 				$modifier = false;
 			}
 			
-			$result = "&lt;&lt; {$howMany}d{$howBig}";
+			$result = "{{ {$howMany}d{$howBig}";
 			if($modifier && $modifierOp == "+") $result .= "+$modifier";
 			elseif($modifier) $result .= "-$modifier";
 			$result .= ": ";
@@ -57,15 +60,20 @@ class Operation_Sroll{
 				}
 			}
 				
-			if($modifier && $modifierOp == "+") $result .= " +$modifier";
-			elseif($modifier) $result .= " -$modifier";
-			if($howMany > 1 || $modifier > 0)
-				$result .= " = " . (($modifierOp == "+")? $sum + $modifier : $sum - $modifier );
-			$result .= " &gt;&gt; ". $matches[6];
+			if($modifier && $modifierOp == "+"){
+				$result .= " +$modifier";
+				$sum = $sum + $modifier;
+			}
+			elseif($modifier){ // assume -
+				$result .= " -$modifier";
+				$sum = max($sum - $modifier, 1);
+			}
+			
+			$result .= " = <u>_{$sum}_</u> }} ". $matches[6];
 		}
 		
 		$this->messages[] = $result;
 
-		return "&lt;&lt; Rolls Dice Privately &gt;&gt;";
+		return "{{ Rolls Dice Privately }}";
 	}
 }

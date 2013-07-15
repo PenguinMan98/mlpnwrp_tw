@@ -1,6 +1,6 @@
 <?php
-
-class Operation_Roll{
+include_once('OperationBase.php');
+class Operation_Roll extends OperationBase{
 	public $operator;
 	public $data;
 	public static $args = 1;
@@ -14,8 +14,12 @@ class Operation_Roll{
 		$this->data = $args;
 	}
 
-	public function __toString(){
-		return $this->roll();
+	public function getValue(){
+		try{
+			return $this->roll();
+		} catch (Exception $e){
+			throw $e;
+		}
 	}
 
 	private function roll(){
@@ -26,9 +30,8 @@ class Operation_Roll{
 		if( $test === false){
 			throw new Exception("An error occurred parsing the string.");
 		}elseif( $test === 0 ){
-			$result = "&lt;&lt; Error &gt;&gt; " . $this->data;
+			throw new Exception("Usage: '/sroll XdY+Z' or '/sroll XdY-Z' where X,Y, and Z are any integer number. Z is optional.");
 		}else{
-			//print_r($matches);
 			$howMany = $matches[1];
 			$howBig = $matches[2];
 			
@@ -40,14 +43,14 @@ class Operation_Roll{
 				$modifier = false;
 			}
 			
-			$result = "&lt;&lt; {$howMany}d{$howBig}";
+			$result = "{{ {$howMany}d{$howBig}";
 			if($modifier && $modifierOp == "+") $result .= "+$modifier";
 			elseif($modifier) $result .= "-$modifier";
 			$result .= ": ";
 			$sum = 0;
 				
 			if($howMany > 50 || $howBig > 100 || $howMany < 1 || $howBig < 2 ){
-				$result .= "Don't be silly.";
+				return $result .= " Don't be silly. }}". $matches[6];
 			}else{
 				for($i = 0; $i < $howMany; $i++){
 					if($i > 0) $result .= " ";
@@ -57,11 +60,16 @@ class Operation_Roll{
 				}
 			}
 				
-			if($modifier && $modifierOp == "+") $result .= " +$modifier";
-			elseif($modifier) $result .= " -$modifier";
-			if($howMany > 1 || $modifier > 0)
-				$result .= " = " . (($modifierOp == "+")? $sum + $modifier : $sum - $modifier );
-			$result .= " &gt;&gt; ". $matches[6];
+			if($modifier && $modifierOp == "+"){
+				$result .= " +$modifier";
+				$sum = $sum + $modifier;
+			}
+			elseif($modifier){ // assume -
+				$result .= " -$modifier";
+				$sum = max($sum - $modifier, 1);
+			}
+			
+			$result .= " = &nbsp;&nbsp;&nbsp;&nbsp;{$sum}&nbsp;&nbsp;&nbsp;&nbsp; }} ". $matches[6];
 		}
 
 		return $result;

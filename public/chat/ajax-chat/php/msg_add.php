@@ -26,9 +26,9 @@ if((!is_object($character) && !is_object($guestUser)) || // no character match o
 }
 include("TokenOperation.php");
 
-//$response->messages = array(); // do not initialize this
 $response->success = true;
 $response->text = "";
+$errorDetected = false;
 
 // declare the variables and grab the input that we need.  First pass validation
 $time = time(); 
@@ -77,20 +77,10 @@ if ($rand > 0 &&
   	$data = preg_replace($regex, '****', $data);
   }
 
-  	// this strips all < characters out of the chat.  It's to prevent cheating on the dice rolls.
-  	// I should find a better solution because I can't give <3 this way.
-  $data = str_replace("<", "(", $data);
-  $data = str_replace("&lt;", "(", $data);
-  $data = str_replace(">", ")", $data);
-  $data = str_replace("&gt;", ")", $data);
+  	// this strips all {} characters out of the chat.  It's to prevent cheating on the dice rolls.
+  $data = str_replace("{", "[", $data);
+  $data = str_replace("}", "]", $data);
   
-  //$data = preg_replace("/good/i", "g00d", $data);// this and its companion allows the word 'good' past the filter
-  //$data = preg_replace("/g+o+d+s+/i", "Princesses", $data);
-  //$data = preg_replace("/g+o+d+/i", "Princess", $data);
-  //$data = preg_replace("/j+e+s+u+s+\s+c+h+r+i+s+t+/i", "Princess Celestia", $data);
-  //$data = preg_replace("/j+e+s+u+s+/i", "Princess Celestia", $data);
-  //$data = preg_replace("/g00d/i", "good", $data);
-
   // Joe added Operations
   $input = $data; // save the original input
   try{
@@ -98,8 +88,9 @@ if ($rand > 0 &&
   	new TokenOperation($data, $messages);// data goes in and gets changed by reference, messages come out.
   	$response->messages = $messages;
   }catch(Exception $e){
-  	$response->error = $e->getMessage(); // if the parser fails, 
+  	$response->text = $e->getMessage(); // if the parser fails, 
   	$data = $input; // just store the original input
+  	$errorDetected = true;
   }
   
 	// The following commented code is the remains of the old kick/ban system. I left it here because I may borrow
@@ -164,7 +155,7 @@ if ($rand > 0 &&
     		$flood = $timeDiff < $FLOODCUTOFFTIME;
     	}
     	 
-    	if(!$duplicate && !$flood){ // if it's no duplicate, and it's not flood,
+    	if(!$duplicate && !$flood && !$errorDetected){ // if it's no duplicate, and it's not flood, nor did it fail previously,
     		
    		  $response->text = $data;
    		  

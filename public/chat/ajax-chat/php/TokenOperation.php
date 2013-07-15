@@ -14,7 +14,7 @@ class TokenOperation{
 			$matches = array();
 			$test = preg_match("/^[\/!](\/?\w*)/i", $word, $matches); // test for a token.  Must start with / or !
 
-			if( $test === false){// failure
+			if( $test === false ){// failure
 				throw new Exception("An error occurred parsing the string.");
 			}elseif( $test === 0 ){// no match, move along.
 				$parsed[] = $word;
@@ -43,30 +43,33 @@ class TokenOperation{
 					continue;
 				}
 				
-					// check for the class file
+					// Checks to make sure that operation exsits. Otherwise, we'll be throwing an error.
 				if(!file_exists($filePath)){
-					//throw new Exception("The operation " . $operator . " has not been defined.");
-					$parsed[] = "&lt;&lt; '" . $operator . "' operation not found &gt;&gt; ";
-					continue;
+					throw new Exception("'" . $operator . "' is not a valid command.");
+				}else{
+						// include the class
+					require_once($filePath);
+				
+					if(($i + $className::$args) >= count($raw) ){ // not enough arguments
+						$parsed[] = "Not enough arguments for '" . $operator . "'";
+						continue;
+					}
+					$args = array_slice($raw, $i + 1, $className::$args);
+					
+					// Create class and run its getValue function 
+					try{
+						$opClass = new $className($args);
+						if( is_subclass_of($opClass, "OperationBase") ){
+							$parsed[] = $opClass->getValue(); // perform the operation
+							$messages = $opClass->messages; // get any system messages
+						}else{
+							throw new exception("Something went very wrong!");
+						}
+					} catch (Exception $e) {
+						throw $e;
+					}
+					$i += $className::$args;
 				}
-					// include the class
-				require_once($filePath);
-				
-				if(($i + $className::$args) >= count($raw) ){ // not enough arguments
-					$parsed[] = "&lt;&lt; not enough arguments &gt;&gt;";
-					continue;
-				}
-				$args = array_slice($raw, $i + 1, $className::$args);
-				
-					// create the class
-				$opClass = new $className($args);
-				
-				$parsed[] = (string)$opClass; // perform the operation
-				
-				$messages = $opClass->messages;  // get any messages
-				
-				$i += $className::$args;
-				
 			}
 			if($i >= count($raw) - 1 && $this->oocFlag){
 				$parsed[] = "))";

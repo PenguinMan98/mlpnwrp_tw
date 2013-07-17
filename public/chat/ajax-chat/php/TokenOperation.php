@@ -12,7 +12,7 @@ class TokenOperation{
 			$word = $raw[$i];
 			//echo "i=$i rawcount=".count($raw)." word=$word<br>";
 			$matches = array();
-			$test = preg_match("/^[\/!](\/?\w*)/i", $word, $matches); // test for a token.  Must start with / or !
+			$test = preg_match("/^[\/!](\/?\w*)([^\s]*)/i", $word, $matches); // test for a token.  Must start with / or !
 
 			if( $test === false ){// failure
 				throw new Exception("An error occurred parsing the string.");
@@ -27,7 +27,7 @@ class TokenOperation{
 				
 					// /me
 				if($operator == "me" && $i == 0){
-					$parsed[] = "/" . $operator;
+					$parsed[] = "/" . $operator . $matches[2];
 					continue;
 				}
 					// //
@@ -45,7 +45,9 @@ class TokenOperation{
 				
 					// Checks to make sure that operation exsits. Otherwise, we'll be throwing an error.
 				if(!file_exists($filePath)){
-					throw new Exception("'" . $operator . "' is not a valid command.");
+					//throw new Exception("'" . $operator . "' is not a valid command.");
+					$parsed[] = $word;
+					continue; // skip it instead
 				}else{
 						// include the class
 					require_once($filePath);

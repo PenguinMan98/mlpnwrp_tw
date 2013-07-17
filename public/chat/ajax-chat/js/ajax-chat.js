@@ -442,21 +442,21 @@ function chat_msgs_get()
 		          // parse emoticons
 		          //message = message.replace(/%%(\w+)%%/g, '<img src="'+chat_path+'smileys/$1.gif" alt="" />');// unneeded
 		          
-		          // check for operators
-		          var delimPos = message.indexOf(" ");
-		          delimPos = (message.indexOf(",") != -1 && message.indexOf(",") < delimPos ? message.indexOf(",") : delimPos );
-		          delimPos = (message.indexOf("'") != -1 && message.indexOf("'") < delimPos ? message.indexOf("'") : delimPos );
-		          if( delimPos > 0){
-		        	  operator = message.substr(0,delimPos);// operator is whatever comes before the space, comma, or apostrophy, or blank if none of those exist.
-		        	  if(operator == "/me"){
-		        		  message = "<span style=\"color: "+line.chat_name_color+";\">"+message.substr(delimPos)+"</span>";
-		        	  }else{
-		        		  message = ":  <span style=\"color: "+line.chat_text_color+";\">"+message+"</span>";
-		        	  }
+		          //message = message.replace(/&#039;/g, "'");
+		          // check for operators.  Currently, only /me goes here.
+		          var operatorParsed = message.match(/^\/(\w+)(.*)/); // pull out the operator
+		          var operator = "";
+		          if(operatorParsed){ // if an operator was found
+			          operator = operatorParsed[1];
+			          if(operator == 'me'){ // if it's /me
+			        	  message = "<span style=\"color: "+line.chat_name_color+";\">"+operatorParsed[2]+"</span>";
+			          }else{ // anything else, ignore it
+			        	  message = ":  <span style=\"color: "+line.chat_text_color+";\">"+message+"</span>";
+			          }
 		          }else{
 		        	  message = ":  <span style=\"color: "+line.chat_text_color+";\">"+message+"</span>";
 		          }
-
+		          
 		          // parse pseudo-html
 		          message = replaceAndBalanceTag(message, /\[i\]/gi, '<i>', /\[\/i\]/gi,'</i>' );
 		          message = replaceAndBalanceTag(message, /\[b\]/gi, '<b>', /\[\/b\]/gi,'</b>' );

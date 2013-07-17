@@ -26,6 +26,12 @@ $characterAgeProvider = new Model_Data_CharacterAgeProvider();
 $raceList = $characterRaceProvider->getRaceList();
 $ageList = $characterAgeProvider->getAgeList();
 
+$basic_race = false;
+foreach($raceList as $rl){
+	if($rl->getName() == $character['race']){
+		$basic_race = true;
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +91,9 @@ $ageList = $characterAgeProvider->getAgeList();
 												
 						<label>Race</label>
 						<select name="race">
+							<?php if(!$basic_race): ?>
+								<option value="<?=$character['character_race_id']?>"><?=$character['race']?></option>
+							<?php endif; ?>
 							<?php foreach ($raceList as $race): ?>
 							<option 
 								title="<?=$race->getDescription()?>" 

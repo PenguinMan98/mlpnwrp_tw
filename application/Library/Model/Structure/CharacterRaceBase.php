@@ -8,6 +8,7 @@ class Model_Structure_CharacterRaceBase
     protected $m_character_race_id;
     protected $m_name;
     protected $m_description;
+    protected $m_restricted;
     protected $m_character_race_id_Orig;
 
     public function __construct($arrData = null)
@@ -16,6 +17,7 @@ class Model_Structure_CharacterRaceBase
             $this->loadFromArray($arrData);
         }
         else {
+            $this->setRestricted(1);
         }
         return;
     }
@@ -56,6 +58,16 @@ class Model_Structure_CharacterRaceBase
         return;
     }
 
+    public function getRestricted()
+    {
+        return $this->m_restricted;
+    }
+    public function setRestricted($value)
+    {
+        $this->m_restricted = $value;
+        return;
+    }
+
     public function getOrigCharacterRaceId()
     {
         return $this->m_character_race_id_Orig;
@@ -72,6 +84,7 @@ class Model_Structure_CharacterRaceBase
         $this->setCharacterRaceId($arrValues['character_race_id']);
         $this->setName($arrValues['name']);
         $this->setDescription($arrValues['description']);
+        $this->setRestricted($arrValues['restricted']);
         return;
     }
 
@@ -88,6 +101,9 @@ class Model_Structure_CharacterRaceBase
                 case 'description':
                     $this->setDescription($val);
                     break;
+                case 'restricted':
+                    $this->setRestricted($val);
+                    break;
                 default:
                     break;
             }
@@ -101,6 +117,7 @@ class Model_Structure_CharacterRaceBase
         $arrValues['character_race_id'] = $this->getCharacterRaceId();
         $arrValues['name'] = $this->getName();
         $arrValues['description'] = $this->getDescription();
+        $arrValues['restricted'] = $this->getRestricted();
         return $arrValues;
     }
 

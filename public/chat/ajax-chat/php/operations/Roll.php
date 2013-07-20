@@ -30,7 +30,7 @@ class Operation_Roll extends OperationBase{
 		if( $test === false){
 			throw new Exception("An error occurred parsing the string.");
 		}elseif( $test === 0 ){
-			throw new Exception("Usage: '/sroll XdY+Z' or '/sroll XdY-Z' where X,Y, and Z are any integer number. Z is optional.");
+			throw new Exception("Usage: '/roll XdY+Z' or '/roll XdY-Z' where X,Y, and Z are any integer number. Z is optional.");
 		}else{
 			$howMany = $matches[1];
 			$howBig = $matches[2];

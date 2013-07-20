@@ -6,10 +6,40 @@ class TokenOperation{
 	
 	function __construct( &$string, &$messages ){
 		$raw = explode(" ", $string);
+		$grouped = array(); // grouped will group tokens together that are separated by " or ' delimiters
+		$tempToken = "";
+		$findingApostrophe = $findingQuote = false;
+		for($i = 0; $i < count($raw); $i++){ // for each token
+			$word = $raw[$i]; // call it word
+				
+			if($word[0] == '\'' && !$findingQuote){ // if it starts with apostrophe,
+				$findingApostrophe = true; // start finding a close apostrophe
+			}elseif($word[0] == '"' && !$findingApostrophe){ // if it starts with quote
+				$findingQuote = true; // start looking for a close quote
+			}
+							
+			if($findingQuote || $findingApostrophe){ // if I'm searching,
+				if(!empty($tempToken)) $tempToken .= " ";
+				$tempToken .= $word; // add the word to the tempToken
+			}else{
+				$grouped[] = $word; // otherwise, put the token in the grouped array
+			}
+						
+			if(( $word[strlen($word)-1] == '\'' && $findingApostrophe ) || // if I find a closing
+				( $word[strlen($word)-1] == '"' && $findingQuote )){
+				$findingApostrophe = $findingQuote = false; // stop searching
+				$grouped[] = substr($tempToken,1,strlen($tempToken)-2); // add the new grouped token to the grouped array
+				$tempToken = ""; // reset the tempToken
+			}
+				
+			if( $i+1 == count($raw) && !empty($tempToken)){ //if I've gotten to the end with leftovers,
+				$grouped[] = substr($tempToken,1); // just add the temp Token to the grouped array
+			}
+		}
 		$parsed = array();
 		
-		for($i = 0; $i < count($raw); $i++){ // go through each word
-			$word = $raw[$i];
+		for($i = 0; $i < count($grouped); $i++){ // go through each word
+			$word = $grouped[$i];
 			//echo "i=$i rawcount=".count($raw)." word=$word<br>";
 			$matches = array();
 			$test = preg_match("/^[\/!](\/?\w*)([^\s]*)/i", $word, $matches); // test for a token.  Must start with / or !
@@ -23,7 +53,7 @@ class TokenOperation{
 				$args = array();
 					// get the classname
 				$className = "Operation_" . ucfirst($operator);
-				$filePath = "operations/" . ucfirst($operator) . ".php";
+				$filePath = "operations/" . ucfirst($operator) . ".php"; // ajax-chat/php/
 				
 					// /me
 				if($operator == "me" && $i == 0){
@@ -34,12 +64,12 @@ class TokenOperation{
 				if($operator == "/" && $i == 0){
 					$this->oocFlag = true;
 					$parsed[] = "(( ";
-					if(count($raw) == 1) $parsed[] = "))";
+					if(count($grouped) == 1) $parsed[] = "))";
 					continue;
 				}elseif($operator[0] == "/" && $i == 0){
 					$this->oocFlag = true;
 					$parsed[] = "(( " . str_replace("/", "", $operator);
-					if(count($raw) == 1) $parsed[] = "))";
+					if(count($grouped) == 1) $parsed[] = "))";
 					continue;
 				}
 				
@@ -49,14 +79,15 @@ class TokenOperation{
 					$parsed[] = $word;
 					continue; // skip it instead
 				}else{
+					/****Perform an Operation****/
 						// include the class
 					require_once($filePath);
 				
-					if(($i + $className::$args) >= count($raw) ){ // not enough arguments
+					if(($i + $className::$args) >= count($grouped) ){ // not enough arguments
 						$parsed[] = "Not enough arguments for '" . $operator . "'";
 						continue;
 					}
-					$args = array_slice($raw, $i + 1, $className::$args);
+					$args = array_slice($grouped, $i + 1, $className::$args);
 					
 					// Create class and run its getValue function 
 					try{
@@ -73,7 +104,8 @@ class TokenOperation{
 					$i += $className::$args;
 				}
 			}
-			if($i >= count($raw) - 1 && $this->oocFlag){
+				// tack )) on the end if it's an ooc
+			if($i >= count($grouped) - 1 && $this->oocFlag){
 				$parsed[] = "))";
 			}
 		}

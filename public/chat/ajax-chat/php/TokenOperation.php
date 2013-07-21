@@ -5,6 +5,7 @@ class TokenOperation{
 	private $oocFlag = false;
 	
 	function __construct( &$string, &$messages ){
+		$string = html_entity_decode($string);
 		$raw = explode(" ", $string);
 		$grouped = array(); // grouped will group tokens together that are separated by " or ' delimiters
 		$tempToken = "";
@@ -28,12 +29,12 @@ class TokenOperation{
 			if(( $word[strlen($word)-1] == '\'' && $findingApostrophe ) || // if I find a closing
 				( $word[strlen($word)-1] == '"' && $findingQuote )){
 				$findingApostrophe = $findingQuote = false; // stop searching
-				$grouped[] = substr($tempToken,1,strlen($tempToken)-2); // add the new grouped token to the grouped array
+				$grouped[] = $tempToken; // add the new grouped token to the grouped array
 				$tempToken = ""; // reset the tempToken
 			}
 				
 			if( $i+1 == count($raw) && !empty($tempToken)){ //if I've gotten to the end with leftovers,
-				$grouped[] = substr($tempToken,1); // just add the temp Token to the grouped array
+				$grouped[] = $tempToken; // just add the temp Token to the grouped array
 			}
 		}
 		$parsed = array();
@@ -47,7 +48,16 @@ class TokenOperation{
 			if( $test === false ){// failure
 				throw new Exception("An error occurred parsing the string.");
 			}elseif( $test === 0 ){// no match, move along.
-				$parsed[] = $word;
+				
+					// : (/me)
+				if($word == ":" && $i == 0){
+					$parsed[] = "/me";
+				}elseif($word[0] == ":" && $i == 0){
+					$parsed[] = "/me " . substr($word,1);
+				}else{
+					$parsed[] = $word;
+				}
+				
 			}else{ // token found.
 				$operator = $matches[1];// save the operation name
 				$args = array();
@@ -60,15 +70,16 @@ class TokenOperation{
 					$parsed[] = "/" . $operator . $matches[2];
 					continue;
 				}
+								
 					// //
 				if($operator == "/" && $i == 0){
 					$this->oocFlag = true;
-					$parsed[] = "(( ";
+					$parsed[] = "(( ".$matches[2];
 					if(count($grouped) == 1) $parsed[] = "))";
 					continue;
 				}elseif($operator[0] == "/" && $i == 0){
 					$this->oocFlag = true;
-					$parsed[] = "(( " . str_replace("/", "", $operator);
+					$parsed[] = "(( " . substr($operator,1).$matches[2];
 					if(count($grouped) == 1) $parsed[] = "))";
 					continue;
 				}

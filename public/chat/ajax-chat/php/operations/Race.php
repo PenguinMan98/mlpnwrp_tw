@@ -30,7 +30,8 @@ class Operation_Race extends OperationBase{
 		}
 		// ok. we have permission to proceed.
 		$characterName = $this->data[0];
-		$newRace = $this->data[1];
+		$newRace = str_replace('"', '', $this->data[1]);
+		
 		
 		$crProvider = new Model_Data_CharacterRaceProvider(); // A class for character race related methods
 		try{

@@ -11,6 +11,7 @@ class Model_Structure_ChatRoomBase
     protected $m_permission_level;
     protected $m_chat_room_type_id;
     protected $m_is_active;
+    protected $m_display_order;
     protected $m_chat_room_id_Orig;
 
     public function __construct($arrData = null)
@@ -90,6 +91,16 @@ class Model_Structure_ChatRoomBase
         return;
     }
 
+    public function getDisplayOrder()
+    {
+        return $this->m_display_order;
+    }
+    public function setDisplayOrder($value)
+    {
+        $this->m_display_order = $value;
+        return;
+    }
+
     public function getOrigChatRoomId()
     {
         return $this->m_chat_room_id_Orig;
@@ -109,6 +120,7 @@ class Model_Structure_ChatRoomBase
         $this->setPermissionLevel($arrValues['permission_level']);
         $this->setChatRoomTypeId($arrValues['chat_room_type_id']);
         $this->setIsActive($arrValues['is_active']);
+        $this->setDisplayOrder($arrValues['display_order']);
         return;
     }
 
@@ -134,6 +146,9 @@ class Model_Structure_ChatRoomBase
                 case 'is_active':
                     $this->setIsActive($val);
                     break;
+                case 'display_order':
+                    $this->setDisplayOrder($val);
+                    break;
                 default:
                     break;
             }
@@ -150,6 +165,7 @@ class Model_Structure_ChatRoomBase
         $arrValues['permission_level'] = $this->getPermissionLevel();
         $arrValues['chat_room_type_id'] = $this->getChatRoomTypeId();
         $arrValues['is_active'] = $this->getIsActive();
+        $arrValues['display_order'] = $this->getDisplayOrder();
         return $arrValues;
     }
 

@@ -47,15 +47,17 @@ class Model_Data_ChatRoomProviderBase
             description,
             permission_level,
             chat_room_type_id,
-            is_active
-        ) VALUES  (?, ?, ?, ?, ?, ?)';
+            is_active,
+            display_order
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getRoomName(),
             $objRecord->getDescription(),
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
-            $objRecord->getIsActive()
+            $objRecord->getIsActive(),
+            $objRecord->getDisplayOrder()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -73,15 +75,17 @@ class Model_Data_ChatRoomProviderBase
             description,
             permission_level,
             chat_room_type_id,
-            is_active
-        ) VALUES  (?, ?, ?, ?, ?, ?)';
+            is_active,
+            display_order
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getRoomName(),
             $objRecord->getDescription(),
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
-            $objRecord->getIsActive()
+            $objRecord->getIsActive(),
+            $objRecord->getDisplayOrder()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -99,7 +103,8 @@ class Model_Data_ChatRoomProviderBase
             description=?,
             permission_level=?,
             chat_room_type_id=?,
-            is_active=?
+            is_active=?,
+            display_order=?
         WHERE chat_room_id=?';
         $arrSetParams = array(
             $objRecord->getChatRoomId(),
@@ -107,7 +112,8 @@ class Model_Data_ChatRoomProviderBase
             $objRecord->getDescription(),
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
-            $objRecord->getIsActive()
+            $objRecord->getIsActive(),
+            $objRecord->getDisplayOrder()
         );
         $arrKeyParams = array($objRecord->getOrigChatRoomId());
         $params = array_merge($arrSetParams, $arrKeyParams);

@@ -32,7 +32,7 @@ class Model_Data_ChatLogProvider extends Model_Data_ChatLogProviderBase
 		}*/
 		if(!is_null($character) && $character != ""){
 			$whereArr[] = 'handle like ?';
-			$params[] = '%' . $character . '%';
+			$params[] = '%' . $character . '';
 		}
 		
 		if(!is_null($player)){

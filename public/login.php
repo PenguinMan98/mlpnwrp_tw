@@ -3,11 +3,6 @@
 require_once '../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
-/*echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";*/
-
-
 ?><!DOCTYPE HTML>
 <html>
 
@@ -89,7 +84,6 @@ input[type="button"]{
 	</div>
 	<script>
 $(function() {
-	/*window.location = "http://www.mlpnwrp.org/chat";*/
 	
 	$('#login').tabs();
 
@@ -153,6 +147,9 @@ function logMeIn(){
 				$('#character_selection').show();
 				var select = $('#chat_character');
 				for(var i = 0; i < response.characterList.length; i++){ 
+					if(i == 0){ // for the first character, set the default 'handle'
+						$('#handle').val(response.characterList[i].name);
+					}
 					select.append('<option value="'+response.characterList[i].character_id+'">'+response.characterList[i].name+'</option>');
 				}
 				$('#character_selection').append('<label></label><a href="<?=SITE_ROOT?>/chat/character/create.php">Create a new character!</a>');
@@ -160,7 +157,7 @@ function logMeIn(){
 				$('#login_form_error').hide();
 				$('#character_selection').html('<label>Character: </label><a href="<?=SITE_ROOT?>/chat/character/create.php">Make a character!</a>');
 				$('#character_selection').show();
-			}else{
+			}else{ // there was an error
 				$('#login_form_error').show();
 				$('#login_form_error').html('**' + response.error + '<br>');
 			}

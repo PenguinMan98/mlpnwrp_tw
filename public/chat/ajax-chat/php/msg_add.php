@@ -40,7 +40,7 @@ $response->rand = $rand;
 $priv = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['priv']), ENT_QUOTES);
 $chat_name_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_name_color']), ENT_QUOTES);
 $chat_text_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_text_color']), ENT_QUOTES);
-$data = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['data']), ENT_QUOTES, 'utf-8');
+$data = htmlentities(preg_replace("/\\s+/iX", " ", strip_tags($_GET['data'])), ENT_QUOTES, 'utf-8');
 $addr = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['addr']), ENT_QUOTES);
 $guid = $handle.$rand.$handle; 
   

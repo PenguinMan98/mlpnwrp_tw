@@ -8,18 +8,42 @@
 require_once '../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
-/*echo "<pre>";
-print_r($_REQUEST);
-print_r($user->data);
-echo "</pre>";
-die();*/
 if (empty($_POST['handle'])) // if no username, 
 {
+	//$_SESSION['SYSTEM_MESSAGE'] = "Error, Not Logged in"; // don't bother with an error message.  It's redundant
 	header("Location: ../login.php");// send them to login.php.
+	die();
 } 
 if(!preg_match("/^[\w_-]*$/", $_POST['handle'])){ 
+	$_SESSION['SYSTEM_MESSAGE'] = "Error, invalid username";
 	header("Location: ../login.php");// reject a bad username.
+	die();
 }
+if( ( !userId || empty($userId) ) && $_POST['loggedIn'] ){// if I'm not logged in, but the login form thought I was,
+	$_SESSION['SYSTEM_MESSAGE'] = "Your session expired. Please log in again.";
+	header("Location: ../login.php");// stale login page.  Send them back.
+	die();
+}
+
+if(!empty($userId)){
+	$ucProvider = new Model_Data_UserChastisementProvider();
+	if($ucProvider->is_banned($userId)){
+		session_destroy(); // log them ALL the way out
+		session_start();
+		$_SESSION['SYSTEM_MESSAGE'] = "Your player account has been banned.";
+		header("Location: ../login.php");
+		die();
+	}
+	$duration = $ucProvider->is_kicked($userId);
+	if($duration){
+		session_destroy(); // log them ALL the way out
+		session_start();
+		$_SESSION['SYSTEM_MESSAGE'] = "Your player account has been kicked for $duration minutes.";
+		header("Location: ../login.php");
+		die();
+	}
+}
+
 $handle = $_POST['handle'];
 $characterId = isset($_POST['character_id'])? $_POST['character_id'] : null;
 
@@ -28,7 +52,7 @@ include_once PUBLIC_ROOT . '/chat/ajax-chat/php/init.php'; /*the main php includ
 // add the guest character to the database
 // or log in the registered character
 $arrErrors = array();
-if(!$userId) {
+if(!$userId || empty($userId)) {
 	//echo "Logged in as guest: " . $_POST['handle'] . "<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
@@ -88,9 +112,11 @@ var handle 		 = '<?=$handle?>';
 <?php if(is_object($character)): ?>
 var chat_name_color = '<?=$character->getChatNameColor()?>';
 var chat_text_color = '<?=$character->getChatTextColor()?>';
+var character_id = <?=$characterId?>;
 <?php else: ?>
 var chat_name_color = 'white';
 var chat_text_color = 'white';
+var character_id = 'G';
 <?php endif; ?>
 var guest_char   = <?=is_object($guestUser) ? 'true' : 'false'?>;
 var forum_login  = <?=($user->data['user_id'] == 'ANONYMOUS') ? 'false' : 'true'; ?>;

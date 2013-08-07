@@ -229,26 +229,34 @@ if ($isvalid) {
 		}
 	}
 	
+	$userInfo = $userlib->get_user_info($user);
 	if(empty($_SESSION['u_info']['login'])){
 		// get the user info and set up the session
-		$userInfo = $userlib->get_user_info($user);
 		$_SESSION['u_info']['login'] = $userInfo['login'];
 		$_SESSION['u_info']['id'] = $userInfo['userId'];
 		$_SESSION['u_info']['group'] = $userInfo['default_group'];
-		/*echo "before bootstrap<pre>";
-		print_r($userInfo);
-		print_r($_SESSION);
-		echo "</pre>";*/
 	}
 	// then bootstrap
 	require_once '../application/Core/Bootstrap.php';
 	$_bootstrap = Bootstrap::getInstance();
 	
-	/*echo "after bootstrap<pre>";
-	print_r($userInfo);
-	print_r($_SESSION);
-	echo "</pre>";*/
-	//die("My die");
+	$ucProvider = new Model_Data_UserChastisementProvider();
+	if($ucProvider->is_banned($userInfo['userId'])){
+		session_destroy(); // log them ALL the way out
+		session_start();
+		$response->success = false;
+		$response->error = "Your player account has been banned.";
+		die(json_encode($response));
+	}
+	$duration = $ucProvider->is_kicked($userInfo['userId']);
+	if($duration){
+		session_destroy(); // log them ALL the way out
+		session_start();
+		$response->success = false;
+		$response->error = "Your player account has been kicked for $duration minutes.";
+		die(json_encode($response));
+	}
+
 	
 	// then get the characters
 	$characterHelper = new Model_Data_CharacterProvider();

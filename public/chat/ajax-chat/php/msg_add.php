@@ -24,11 +24,21 @@ if((!is_object($character) && !is_object($guestUser)) || // no character match o
 	echo json_encode($response);
 	die();
 }
+
 include("TokenOperation.php");
 
 $response->success = true;
 $response->text = "";
 $errorDetected = false;
+
+// check for a kick/ban/mute
+$ucProvider = new Model_Data_UserChastisementProvider();
+$gold_boot = $ucProvider->is_chastised($userId);
+if($gold_boot){
+	$response->success = false;
+	$response->error = "Error: Insufficient Privilege.";
+	die(json_encode($response));
+}
 
 // declare the variables and grab the input that we need.  First pass validation
 $time = time(); 
@@ -42,9 +52,8 @@ $chat_name_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_name_c
 $chat_text_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_text_color']), ENT_QUOTES);
 $data = htmlentities(preg_replace("/\\s+/iX", " ", strip_tags($_GET['data'])), ENT_QUOTES, 'utf-8');
 $addr = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['addr']), ENT_QUOTES);
-$guid = $handle.$rand.$handle; 
   
-// I don't check for a room because there may not be on in a PM
+// I don't check for a room because there may not be one in a PM
 if ($rand > 0 &&
 	$handle && 
     !empty($chat_name_color) &&

@@ -3,6 +3,12 @@
 require_once '../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
+$systemMessage = "";
+if(isset($_SESSION['SYSTEM_MESSAGE'])){
+	$systemMessage = $_SESSION['SYSTEM_MESSAGE'];
+	unset($_SESSION['SYSTEM_MESSAGE']);
+}
+
 ?><!DOCTYPE HTML>
 <html>
 
@@ -41,9 +47,9 @@ label{
 }
 .form_error{
 	color: red;
-	display: none;
+	display: <?=(!empty($systemMessage))? 'block':'none' ?>;
 }
-input[type="button"]{
+input[type="button"],input[type="submit"]{
 	margin-left: 115px;
 }
 </style>
@@ -58,7 +64,10 @@ input[type="button"]{
 			</ul>
 			<div id="tabs-1">
 				<form id="login_form" action="chat/" method="POST">
-					<div class="form_error" id="login_form_error"></div>
+						<?php // Logged in added as a way to tell if the last time this page was viewed the user was logged in.?>
+						<?php // We'll check that on the chat page. If this is set but their login is expired, bounce them back here.?>
+					<input type="hidden" id="loggedIn" name="loggedIn" value="<?=($loggedIn)?1:0?>">
+					<div class="form_error" id="login_form_error"><?php if(!empty($systemMessage)) echo $systemMessage; ?></div>
 					<div id="login_fields">
 						<label>Username: </label><input type="text" id="forum_username" placeholder="Wiki User" value="<?php if($userName != 'Anonymous') echo $userName;?>" /><br>
 						<label>Password: </label><input type="password" id="forum_password" placeholder="Wiki Password" /><br>
@@ -72,11 +81,14 @@ input[type="button"]{
 				</form>
 			</div>
 			<div id="tabs-2">
-				<form id="guest_login_form" action="chat/" method="post">
+				<form id="guest_login_form" action="chat/" method="post" onSubmit="logGuestIn();">
+						<?php // Logged in added as a way to tell if the last time this page was viewed the user was logged in.?>
+						<?php // We'll check that on the chat page. If this is set but their login is expired, bounce them back here.?>
+					<input type="hidden" id="loggedIn" name="loggedIn" value="<?=($loggedIn)?1:0?>">
 					<div class="form_error" id="guest_login_form_error"></div>
 					<label>Guest Handle: </label><input type="text" id="guest_username" name="handle" placeholder="Handle" /><br>
 					<br>
-					<input type="button" id="guest_login" name="guest_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;" onClick="logGuestIn();">
+					<input type="submit" id="guest_login" name="guest_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;">
 				</form>
 			</div>
 		

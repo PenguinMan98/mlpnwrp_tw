@@ -1,6 +1,4 @@
-<!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-logo.tpl -->
 
-<!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
 
 		<div id="module_2" style="" class="module box-logo clearfix">
 			<div id="mod-logot1" class="clearfix">
@@ -17,5 +15,4 @@
 
 		</div>
 	</div>
-<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
-<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-logo.tpl -->
+

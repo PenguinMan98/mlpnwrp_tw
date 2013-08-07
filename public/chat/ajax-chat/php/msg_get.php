@@ -30,6 +30,15 @@ $response->success = true;
 $response->text = "";
 $response->lines = array();
 
+// check for a kick/ban/mute
+$ucProvider = new Model_Data_UserChastisementProvider();
+$gold_boot = $ucProvider->is_chastised($userId);
+if($gold_boot){
+	$response->success = false;
+	$response->error = "Error: Insufficient Privilege.";
+	die(json_encode($response));
+}
+
 if (isset($_GET['room']) &&
     isset($_GET['user']) &&
     /*isset($_GET['pass']) &&*/

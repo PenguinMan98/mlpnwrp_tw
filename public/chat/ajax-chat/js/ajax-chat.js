@@ -527,6 +527,18 @@ function chat_msgs_get()
 				clearInterval(chat_users_timeout);
 				clearInterval(chat_messages_timeout);
 				window.location = SITE_ROOT + "/login.php";
+			}else if(typeof response.error != 'undefined' && response.error.trim() == "Error: Insufficient Privilege."){ // user was kicked or banned
+				console.log("new code "+encodeURIComponent(chat_user));
+				clearInterval(chat_users_timeout);
+				clearInterval(chat_messages_timeout);
+				if(character_id != 'G'){
+					console.log("Kick a registered user "+character_id);
+					window.location = SITE_ROOT + "/chat/ajax-chat/php/logout.php?handle="+encodeURIComponent(chat_user)+'&character_id='+character_id;
+				}else{
+					console.log("Kick a guest");
+					window.location = SITE_ROOT + "/chat/ajax-chat/php/logout.php?handle="+encodeURIComponent(chat_user);
+				}
+				
 			}
 
 		}

@@ -1,4 +1,3 @@
-<!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-rsslist.tpl --><!-- TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
 
 		<div id="module_5" style="" class="module box-rsslist clearfix">
 			<div id="mod-rsslistb1" class="clearfix">
@@ -9,6 +8,5 @@
 
 		</div>
 	</div>
-<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\module.tpl -->
 
-<!-- /TPL: D:\wamp\www\mlpnwrp_tw\public\templates\modules\mod-rsslist.tpl -->
+

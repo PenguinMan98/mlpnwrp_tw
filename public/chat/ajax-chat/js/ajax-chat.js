@@ -461,6 +461,9 @@ function chat_msgs_get()
 		          message = replaceAndBalanceTag(message, /\[i\]/gi, '<i>', /\[\/i\]/gi,'</i>' );
 		          message = replaceAndBalanceTag(message, /\[b\]/gi, '<b>', /\[\/b\]/gi,'</b>' );
 		          message = replaceAndBalanceTag(message, /\[u\]/gi, '<u>', /\[\/u\]/gi,'</u>' );
+		          message = replaceAndBalanceTag(message, /&lt;i&gt;/gi, '<i>', /&lt;\/i&gt;/gi,'</i>' );
+		          message = replaceAndBalanceTag(message, /&lt;b&gt;/gi, '<b>', /&lt;\/b&gt;/gi,'</b>' );
+		          message = replaceAndBalanceTag(message, /&lt;u&gt;/gi, '<u>', /&lt;\/u&gt;/gi,'</u>' );
 	
 		          // convert url's into hyperlinks
 		          message = replaceURLWithHTMLLinks(message);

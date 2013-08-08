@@ -5,7 +5,7 @@ class TokenOperation{
 	private $oocFlag = false;
 	
 	function __construct( &$string, &$messages ){
-		$string = html_entity_decode($string);
+		//$string = html_entity_decode($string);
 		$raw = explode(" ", $string);
 		$grouped = array(); // grouped will group tokens together that are separated by " or ' delimiters
 		$tempToken = "";

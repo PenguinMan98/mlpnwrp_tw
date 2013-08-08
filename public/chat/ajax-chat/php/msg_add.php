@@ -50,9 +50,13 @@ $response->rand = $rand;
 $priv = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['priv']), ENT_QUOTES);
 $chat_name_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_name_color']), ENT_QUOTES);
 $chat_text_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_text_color']), ENT_QUOTES);
-$data = htmlentities(preg_replace("/\\s+/iX", " ", strip_tags($_GET['data'])), ENT_QUOTES, 'utf-8');
 $addr = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['addr']), ENT_QUOTES);
-  
+
+//and finally, the post data
+$data = $_GET['data'];
+$data = preg_replace("/\\s+/iX", " ",$data); // reduce all extra spaces to one
+
+
 // I don't check for a room because there may not be one in a PM
 if ($rand > 0 &&
 	$handle && 
@@ -74,7 +78,7 @@ if ($rand > 0 &&
   $logProvider->insertOne($log, $arrErrors);*/
   
   // Joe added a word filter
-  $badWords = array("/fuck\S*/i",
+	$badWords = array("/fuck\S*/i",
   					"/bitch\S*/i",
 			  		"/shit\S*/i",
 			  		"/\bcunt\S*/i",
@@ -82,68 +86,28 @@ if ($rand > 0 &&
 			  		"/pussy\S*/i",
 			  		"/\bdick\S*/i",
 			  		"/vagina\S*/i");
-  foreach($badWords as $regex){
-  	$data = preg_replace($regex, '****', $data);
-  }
+	foreach($badWords as $regex){
+  		$data = preg_replace($regex, '****', $data);
+	}
 
   	// this strips all {} characters out of the chat.  It's to prevent cheating on the dice rolls.
-  $data = str_replace("{", "[", $data);
-  $data = str_replace("}", "]", $data);
+	$data = str_replace("{", "[", $data);
+	$data = str_replace("}", "]", $data);
+	  
+	  // Joe added Operations
+	$input = $data; // save the original input
+	try{
+	  	$messages = array();
+	  	new TokenOperation($data, $messages);// data goes in and gets changed by reference, messages come out.
+	  	$response->messages = $messages;
+	}catch(Exception $e){
+	  	$response->text = $e->getMessage(); // if the parser fails, 
+	  	$data = $input; // just store the original input
+	  	$errorDetected = true;
+	}
   
-  // Joe added Operations
-  $input = $data; // save the original input
-  try{
-  	$messages = array();
-  	new TokenOperation($data, $messages);// data goes in and gets changed by reference, messages come out.
-  	$response->messages = $messages;
-  }catch(Exception $e){
-  	$response->text = $e->getMessage(); // if the parser fails, 
-  	$data = $input; // just store the original input
-  	$errorDetected = true;
-  }
+	$data = htmlentities( $data, ENT_QUOTES, 'utf-8'); // encode the rest in utf-8
   
-	// The following commented code is the remains of the old kick/ban system. I left it here because I may borrow
-	// ideas from it for my own kick/mute system later.
-  /*if ($chat_data['mute'][$handle] || $chat_data['mute'][$_SERVER['REMOTE_ADDR']] || // if this character is muted or their ip is muted
-      $chat_data['kick'][$handle] || $chat_data['kick'][$_SERVER['REMOTE_ADDR']])// if this character is kicked or their ip is kicked
-  {
-    $response->text = $chat_err_mute; // throw an error
-    $response->success = false;
-    die;
-  }*/
-
-  /*if (isset($chat_data['room'][$handle]) &&// verifies that a username and password are stored and the char is in a room
-      isset($chat_data['user'][$handle]) &&
-      isset($chat_data['pass'][$handle]) &&
-           ($chat_data['pass'][$handle]) == $_GET['pass'])
-  {*/
-    //$modified = true; // set modified to true because we're adding a post. unused
-    //$chat_data['time'][$handle] = $time;  // set the time into the chat data
-
-    /*if ($chat_data['away'][$handle]) // if I'm away,
-    	$chat_data['data'][] = "s\r\n$handle\r\n+";// put an s notice into the data stream to make me active again
-    $chat_data['away'][$handle] = false; // set my away status to false in the chat data*/
-
-    /*if(in_array($_GET['user'], $chat_admins) && // if the user is an admin, 
-            preg_match("/^\\s*\\/(kick|mute)\\s*([0-9a-zA-Z_]+)\\s*([0-9]+)\\s*$/", $_GET['data'], $matches)) // and it's a mute or kick command
-    {
-      $cmd_type = $matches[1]; // kick or mute
-      $cmd_user = $matches[2]; // username
-      $cmd_time = $matches[3]; // time interval
-      if ($cmd_type == 'kick') $chat_data['kick'][$cmd_user] = time()+$cmd_time*24*3600; // set the interval when the kick will expire
-      if ($cmd_type == 'mute') $chat_data['mute'][$cmd_user] = time()+$cmd_time*24*3600; // set the interval when the ban will expire
-      if ($cmd_type == 'kick') $response->text = "User <b>" . htmlentities($cmd_user) . "</b> is kicked for " . $cmd_time . " day(s)";
-      if ($cmd_type == 'mute') $response->text = "User <b>" . htmlentities($cmd_user) . "</b> is  muted for " . $cmd_time . " day(s)";
-      $response->success = false; // why not true?
-    }
-    elseif (in_array($_GET['user'], $chat_admins) && // if the user is an admin
-            preg_match("/^\\s*\\/(list)\\s*(kick|mute)\\s*$/", $_GET['data'], $matches)) // and they are asking for a list of kicked or banned users,
-    {
-      if ($matches[2] == 'kick') $response->text = count($chat_data['kick']) . " user(s) kicked: " . implode(', ', array_keys($chat_data['kick']));
-      if ($matches[2] == 'mute') $response->text = count($chat_data['mute']) . " user(s)  muted: " . implode(', ', array_keys($chat_data['mute']));
-      $response->success = false; // why not true?
-    }
-    else*/
     {
     	$duplicate = false; 
     	$flood = false;

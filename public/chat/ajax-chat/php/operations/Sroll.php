@@ -69,7 +69,7 @@ class Operation_Sroll extends OperationBase{
 				$sum = max($sum - $modifier, 1);
 			}
 			
-			$result .= " = <u>_{$sum}_</u> }} ". $matches[6];
+			$result .= " = {$sum} }} ". $matches[6];
 		}
 		
 		$this->messages[] = $result;

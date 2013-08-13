@@ -64,7 +64,7 @@ class Operation_Zaroll extends OperationBase{
 			if($silly)
 				$result .= "Don't be silly. }} ". $matches[2];
 			else
-				$result .= " = [u]_{$successCount}_[/u] Successes }} ". $matches[2]; // then add the rest
+				$result .= " = {$successCount} Successes }} ". $matches[2]; // then add the rest
 		}
 		
 		return $result;

@@ -69,7 +69,7 @@ class Operation_Roll extends OperationBase{
 				$sum = max($sum - $modifier, 1);
 			}
 			
-			$result .= " = &nbsp;&nbsp;&nbsp;&nbsp;{$sum}&nbsp;&nbsp;&nbsp;&nbsp; }} ". $matches[6];
+			$result .= " = {$sum} }} ". $matches[6];
 		}
 
 		return $result;

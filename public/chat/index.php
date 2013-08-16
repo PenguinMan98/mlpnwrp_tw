@@ -135,8 +135,8 @@ var chatColorOverrideColor = '#ddd';
 </head>
 <body>
 	<audio id="audio_ding" style="display: none;" controls>
-	  <source src="<?=SITE_ROOT?>/media/12844__schluppipuppie__kling-01.wav" type="audio/wav"></source>
-	  <source src="<?=SITE_ROOT?>/media/12844__schluppipuppie__kling-01.mp3" type="audio/mpeg"></source>
+	  <source src="<?=SITE_ROOT?>/media/ding.wav" type="audio/wav"></source>
+	  <source src="<?=SITE_ROOT?>/media/ding.mp3" type="audio/mpeg"></source>
 	</audio>
 	<div id="page-wrap">
 

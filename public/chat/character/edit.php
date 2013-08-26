@@ -32,6 +32,11 @@ foreach($raceList as $rl){
 		$basic_race = true;
 	}
 }
+
+$profilePic = getImage('profile_pic', $character['character_id']);
+$cutieMark = getImage('cutie_mark', $character['character_id']);
+$chatIcon = getImage('chat_icon', $character['character_id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +67,16 @@ foreach($raceList as $rl){
         </div>
         <div id="contentContainer">
         	<h1>Edit <?=$character['name']?></h1>
+        	<div id="system_messages">
+        		<?PHP 
+        			if(!empty($_SESSION['system_messages'])){
+						foreach($_SESSION['system_messages'] as $msg){
+							echo '<p class="error">'.$msg.'</p>';
+						}
+						unset($_SESSION['system_messages']);
+					}
+				?>
+        	</div>
 			<div id="tabs">
 				<ul>
 					<li><a href="#basics">The Basics</a></li>
@@ -137,6 +152,21 @@ foreach($raceList as $rl){
 					
 						<label>Player Private Notes</label>
 						<textarea id="player_private_notes" name="player_private_notes" rows="5" cols="80" title="Private player notes was designed for players to enter any details about their character that they don't want made public." placeholder="Private Character Notes"><?=$character['player_private_notes']?></textarea><br>
+						<br>
+						<input type="submit" name="edit" value="Update">
+					</div>
+					<div id="images">
+						<label>Profile Image</label> (Max Filesize = 100Kb)<br>
+						<?=($profilePic) ? '<img src="../../img/' . $character['character_id'] . '/' . $profilePic . '" /><br>' : '' ?>
+						<input type="file" name="profile_image"><br>
+						<hr>
+						<label>Cutie Mark</label> (Pixel Dimensions: 15px X 15px)<br>
+						<?=($cutieMark) ? '<img src="../../img/' . $character['character_id'] . '/' . $cutieMark . '" /><br>' : '' ?>
+						<input type="file" name="cutie_mark"><br>
+						<hr>
+						<label>Chat Icon</label> (Pixel Dimensions: 50px X 25px)<br>
+						<?=($chatIcon) ? '<img src="../../img/' . $character['character_id'] . '/' . $chatIcon . '" /><br>' : '' ?>
+						<input type="file" name="chat_icon"><br>
 						<br>
 						<input type="submit" name="edit" value="Update">
 					</div>

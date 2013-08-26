@@ -164,9 +164,10 @@ if ($handle = opendir($dir))
 
 </div>-->
 
-<!-- ***** Character_Info ********************************************************** -->
+<!-- ***** Character_Info (Player HUD) ********************************************************** -->
 
 <div id="character_info_base">
+	<!-- <div id="character_info_image"></div> -->
 	<div id="character_info_inner">
 		<p class="character_info" id="hud_character_name">Character Name</p>
 		<p class="character_info" id="hud_player_name">Player Name</p>

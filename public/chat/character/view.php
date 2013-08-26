@@ -9,6 +9,7 @@ if(empty($character)) {
 	// redirect to the character search page
 	die("I don't know anypony named $charName!  Sorry! Maybe one will fall from the sky tomorrow?");
 }
+$profilePic = getImage('profile_pic', $character['character_id']);
 
 ?>
 <!DOCTYPE html>
@@ -26,8 +27,8 @@ if(empty($character)) {
         </div>
         <div id="contentContainer" style="width: 100%;">
         	<div id="char_name" style="font-size: 40px; font-weight: bold; width 100%; text-align: center; zindex: 1;"><?=$character['name']?></div>
-        	<?php if($character['image']): ?>
-        	<div id="char_img"><img src="<?=SITE_ROOT . $character['image']?>" /></div>
+        	<?php if($profilePic): ?>
+        	<div id="char_img"><img src="../../img/<?=$character['character_id']?>/<?=$profilePic?>" /></div>
         	<?php endif; ?>
         	<p>Race: <?=$character['race']?> <?php if($character['character_race_note']) echo "( ". $character['character_race_note'] ." )";?><br>
         	Gender: <?=($character['born_female']? "Female" : "Male")?> <?php if($character['born_female'] != $character['currently_female']) echo "( Currently " . ($character['currently_female']? "Female" : "Male") . " )" ; ?><br>

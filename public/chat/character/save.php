@@ -41,6 +41,83 @@ try{
 		$character = new Model_Structure_Character();
 	}
 	
+	if(!empty($_FILES)){
+		$MAX_PROFILE_FILESIZE = 81920;
+		$MAX_CMARK_HEIGHT = 15;
+		$MAX_CMARK_WIDTH = 15;
+		$MAX_PICON_HEIGHT = 25;
+		$MAX_PICON_WIDTH = 50;
+		$imageDir = PUBLIC_ROOT . "/img/" . $character->getCharacterId() . "/";
+		/*echo "<pre>";
+		print_r($_POST);
+		print_r($_FILES);
+		print_r($character);
+		echo "</pre>";
+		
+		echo "image root ". $imageDir . "<br>";*/
+		
+		if(!is_dir($imageDir)){
+			mkdir($imageDir);
+		}
+		
+		// only accept jpg gif or png
+		function validateType($type){
+			switch($type){
+				case "image/png":
+					return ".png";
+				case "image/gif":
+					return ".gif";
+				case "image/jpeg":
+					return ".jpg";
+				default: return false;
+			}
+		}
+		if(!empty($_FILES['profile_image']['name'])){
+			if($_FILES['profile_image']['size'] > $MAX_PROFILE_FILESIZE){
+				throw new Exception("Error with Profile Image: Too big! ({$_FILES['profile_image']['size']}) > ($MAX_PROFILE_FILESIZE)");
+			}
+			$extension = validateType($_FILES['profile_image']['type']);
+			if(!$extension){
+				throw new Exception("Error with Profile Image: unsupported image format. Please use .jpg .gif or .png");
+			}
+			$tmp_name = $_FILES["profile_image"]["tmp_name"];
+			$old_image = getImage('profile_pic', $character->getCharacterId()); 
+			if($old_image) unlink($imageDir.$old_image);
+			move_uploaded_file($tmp_name, $imageDir."profile_pic".$extension);
+			$character->setImage('profile_pic'.$extension);
+		}
+		if(!empty($_FILES['cutie_mark']['name'])){
+			$extension = validateType($_FILES['cutie_mark']['type']);
+			if(!$extension){
+				throw new Exception("Error with Cutie Mark: unsupported image format. Please use .jpg .gif or .png");
+			}
+			$tmp_name = $_FILES["cutie_mark"]["tmp_name"];
+			$imgSizeData = getimagesize($tmp_name);
+			if($imgSizeData && ($imgSizeData[0] > $MAX_CMARK_WIDTH || $imgSizeData[1] > $MAX_CMARK_HEIGHT)){
+				throw new Exception("Error with Cutie Mark: Image is too large.  Must be {$MAX_CMARK_WIDTH}px wide X {$MAX_CMARK_HEIGHT}px tall or less.");
+			}
+			$old_image = getImage('cutie_mark', $character->getCharacterId());
+			if($old_image) unlink($imageDir.$old_image);
+			move_uploaded_file($tmp_name, $imageDir."cutie_mark".$extension);
+			$character->setCutieMark('cutie_mark'.$extension);
+		}
+		if(!empty($_FILES['chat_icon']['name'])){
+			$extension = validateType($_FILES['chat_icon']['type']);
+			if(!$extension){
+				throw new Exception("Error with Chat Icon: unsupported image format. Please use .jpg .gif or .png");
+			}
+			$tmp_name = $_FILES["chat_icon"]["tmp_name"];
+			$imgSizeData = getimagesize($tmp_name);
+			if($imgSizeData && ($imgSizeData[0] > $MAX_PICON_WIDTH || $imgSizeData[1] > $MAX_PICON_HEIGHT)){
+				throw new Exception("Error with Chat Icon: Image is too large.  Must be {$MAX_PICON_WIDTH}px wide X {$MAX_PICON_HEIGHT}px tall or less.");
+			}
+			$old_image = getImage('chat_icon', $character->getCharacterId());
+			if($old_image) unlink($imageDir.$old_image);
+			move_uploaded_file($tmp_name, $imageDir."chat_icon".$extension);
+			$character->setIcon('chat_icon'.$extension);
+		}
+		//die();
+	}
 		
 	$character->setName($character_name);
 	$character->setChatNameFormatted($character_name);
@@ -92,7 +169,9 @@ try{
 	Dao::commit();
 }catch(Exception $e){
 	Dao::rollback();
-	$this->errors[] = $e->getMessage();
+	$_SESSION['system_messages'][] = $e->getMessage();
+	$message = $e->getMessage();
+	$errors[] = $message;
 }
 if($editing){
 	header('Location: ' . SITE_ROOT . '/chat/character/edit.php?c=' . $character_name);

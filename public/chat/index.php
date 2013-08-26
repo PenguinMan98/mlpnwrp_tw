@@ -19,7 +19,7 @@ if(!preg_match("/^[\w_-]*$/", $_POST['handle'])){
 	header("Location: ../login.php");// reject a bad username.
 	die();
 }
-if( ( !userId || empty($userId) ) && $_POST['loggedIn'] ){// if I'm not logged in, but the login form thought I was,
+if( ( !$userId || empty($userId) ) && $_POST['loggedIn'] ){// if I'm not logged in, but the login form thought I was,
 	$_SESSION['SYSTEM_MESSAGE'] = "Your session expired. Please log in again.";
 	header("Location: ../login.php");// stale login page.  Send them back.
 	die();
@@ -87,13 +87,24 @@ if(!empty($arrErrors)){
 	die(implode('|',$arrErrors));
 }
 
+$profilePic = false;
+$cutieMark = false;
+$chatIcon = false;
+if($characterId){
+	$profilePic = getImage('profile_pic', $characterId);
+	$cutieMark = getImage('cutie_mark', $characterId);
+	$chatIcon = getImage('chat_icon', $characterId);
+}
+if($profilePic){
+	
+}
 //$chat_logs = array('add' => false, 'get' => false, 'log' => false);// probably won't need this
 //$chat_show = array('login' => true, 'guest' => true); // or this
 //$chat_path = 'ajax-chat/'; // make everything relative to site_root
 ?><html>
 <head>
 
-<title>My Little Pony: New Worlds Roleplay Chat!</title>
+<title><?=$handle?> - My Little Pony: New Worlds Roleplay Chat!</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="" />
@@ -102,6 +113,20 @@ if(!empty($arrErrors)){
 <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" type="text/css" href="<?=SITE_ROOT?>/chat/ajax-chat/style/style.css" />
+
+<style>
+	<?php if($profilePic): ?>
+	#character_info_image{
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background:transparent url(../img/<?=$characterId?>/<?=$profilePic?>) no-repeat scroll top left;
+		background-size: 200px;
+		opacity: 0.1; 
+		filter: alpha(opacity=10);
+	}
+	<?php endif; ?>
+</style>
 
 <script type="text/javascript" src="<?=SITE_ROOT?>/js/jquery.js" > </script>
 <script type="text/javascript" src="<?=SITE_ROOT?>/chat/ajax-chat/js/cookies.js"></script>
@@ -129,6 +154,9 @@ var SITE_ROOT	 = "<?=SITE_ROOT?>";
 var chat_path	 = "<?=SITE_ROOT?>/chat/ajax-chat/";
 var chatColorOverride = true;
 var chatColorOverrideColor = '#ddd';
+var profilePic = '<?=$profilePic?>';
+var cutieMark = '<?=$cutieMark?>';
+var chatIcon = '<?=$chatIcon?>';
 
 </script>
 
@@ -184,8 +212,8 @@ $chatRoomList = $chatRoomHelper->getChatList();
 
         <div id="form">
         	<form class="send" action="POST" onsubmit="chat_msgs_add(); return false;">
-	        	<span id="character_name"><?=$handle?></span>:
-	        	<input id="send" type="text" size="100" autocomplete="off" />
+	        	<span id="character_name" style="color: <?=$character->getChatNameColor()?>"><?=$handle?></span>:
+	        	<input style="color: <?=$character->getChatTextColor()?>" id="send" type="text" size="100" autocomplete="off" />
 	    		<input id="submit_send" class="submit" type="submit" value="Send" />
 	    	</form>
     	</div>
@@ -271,10 +299,8 @@ $chatRoomList = $chatRoomHelper->getChatList();
 				
 				$('#hud_player_name').html(response.characterInfo.username);
 
-				if(		typeof chat_usrs == 'undefined' || 
-						typeof chat_usrs[response.characterInfo.name] == 'undefined' || 
-						typeof chat_usrs[response.characterInfo.name][3] == 'undefined' || 
-						!chat_usrs[response.characterInfo.name][3]){ 
+					// a holdout from the old system.  This must be fixed for the away/Active feature to work properly
+				if(	false ){ 
 					$('#hud_activity_status').html('Away'); 
 				}else{
 					$('#hud_activity_status').html('Active'); 

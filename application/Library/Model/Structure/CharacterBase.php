@@ -27,6 +27,7 @@ class Model_Structure_CharacterBase
     protected $m_created_date;
     protected $m_chat_room_id;
     protected $m_last_activity;
+    protected $m_cutie_mark;
     protected $m_character_id_Orig;
 
     public function __construct($arrData = null)
@@ -269,6 +270,16 @@ class Model_Structure_CharacterBase
         return;
     }
 
+    public function getCutieMark()
+    {
+        return $this->m_cutie_mark;
+    }
+    public function setCutieMark($value)
+    {
+        $this->m_cutie_mark = $value;
+        return;
+    }
+
     public function getOrigCharacterId()
     {
         return $this->m_character_id_Orig;
@@ -304,6 +315,7 @@ class Model_Structure_CharacterBase
         $this->setCreatedDate($arrValues['created_date']);
         $this->setChatRoomId($arrValues['chat_room_id']);
         $this->setLastActivity($arrValues['last_activity']);
+        $this->setCutieMark($arrValues['cutie_mark']);
         return;
     }
 
@@ -377,6 +389,9 @@ class Model_Structure_CharacterBase
                 case 'last_activity':
                     $this->setLastActivity($val);
                     break;
+                case 'cutie_mark':
+                    $this->setCutieMark($val);
+                    break;
                 default:
                     break;
             }
@@ -409,6 +424,7 @@ class Model_Structure_CharacterBase
         $arrValues['created_date'] = $this->getCreatedDate();
         $arrValues['chat_room_id'] = $this->getChatRoomId();
         $arrValues['last_activity'] = $this->getLastActivity();
+        $arrValues['cutie_mark'] = $this->getCutieMark();
         return $arrValues;
     }
 

@@ -576,9 +576,33 @@ function room_change(room, registered, handle){
 function chat_msgs_usr(handle, color, sidebar)
 {
   sidebar = (typeof sidebar == 'undefined') ? false : sidebar ; // first, are we on the sidebar?,
+	
+  var thisChar = null;
+  for (var i in chat_usrs){// for each char
+    if ( chat_usrs[i].name == handle){ // find a match with the character I'm working with
+      thisChar = chat_usrs[i]; // put it here for now
+      break;
+    }
+  }
   // then build a return string
   var retString = "";
-  if(sidebar){ retString += '<img style="cursor: pointer;" src="'+SITE_ROOT+'/img/twilight_sparkle_cutie_mark2_15_tall.png" onClick="showHUD(this, \''+handle+'\'); return false;" />&nbsp;';}
+  
+  	// logged in with no cutie mark, use Twi's
+  if(sidebar){ retString += '<span style="height: 100%; width: 15px;">'; }
+  if(sidebar && thisChar && !thisChar.cutie_mark && thisChar.registered){ 
+	  retString += '<img style="cursor: pointer;" src="'+SITE_ROOT+'/img/twilight_sparkle_cutie_mark2_15_tall.png" onClick="showHUD(this, \''+handle+'\'); return false;" />&nbsp;';
+  }	// guest
+  else if(sidebar && thisChar && !thisChar.cutie_mark){ 
+	  retString += 'G&nbsp;';
+  }	// you have a cutie mark!
+  else if(sidebar && thisChar){ 
+	  retString += '<img style="cursor: pointer;" src="'+SITE_ROOT+'/img/'+thisChar.character_id+'/'+thisChar.cutie_mark+'" onClick="showHUD(this, \''+handle+'\'); return false;" />&nbsp;';
+  }
+  if(sidebar){ retString += '</span>'; }
+    // not a sidebar, an icon is present, and it's me, add a chat icon
+  /*if(!sidebar && thisChar && thisChar.chat_icon){ 
+	  retString += '<img src="'+SITE_ROOT+'/img/'+thisChar.character_id+'/'+thisChar.chat_icon+'" />&nbsp;';
+  }*/
   // if there is a status, then add the icon
   /*if(typeof chat_usrs[user] != 'undefined' && typeof chat_usrs[user][2] != 'undefined' && chat_usrs[user][2] != 'none'){
 	  retString += '<img src="'+chat_path+'style/status/'+chat_usrs[user][2]+'.png" alt="" style="margin-right: 0px;" />';

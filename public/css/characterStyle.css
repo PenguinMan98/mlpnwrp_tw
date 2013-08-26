@@ -31,3 +31,8 @@ body{
 	height: auto;
 	padding: 5px 10px;
 }
+
+#char_img{
+	float: left;
+	margin: 20px 10px 0 0;
+}

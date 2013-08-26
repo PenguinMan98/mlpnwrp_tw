@@ -31,18 +31,26 @@ foreach($registeredCharsLoggedIn as $char){
 			'chat_name_color'=>$char->getChatNameColor(),
 			'chat_text_color'=>$char->getChatTextColor(),
 			'last_activity'=>$char->getLastActivity(),
-			'chat_room_id'=>$char->getChatRoomId()
+			'chat_room_id'=>$char->getChatRoomId(),
+			'cutie_mark'=>($char->getCutieMark()? $char->getCutieMark() : false ),
+			'chat_icon'=>($char->getIcon()? $char->getIcon() : false),
+			'registered'=>true
 		);
 }
 
 foreach($guestUsersLoggedIn as $char){
 	$response->characters[] = array(
+			'character_id'=>false,
 			'name'=>$char->getHandle(),
+			'chat_name_formatted'=>false,
 			'status'=>$char->getChatStatusId(),
 			'chat_name_color'=>$char->getChatNameColor(),
 			'chat_text_color'=>$char->getChatTextColor(),
 			'last_activity'=>$char->getLastActivity(),
-			'chat_room_id'=>$char->getChatRoomId()
+			'chat_room_id'=>$char->getChatRoomId(),
+			'cutie_mark'=>false,
+			'chat_icon'=>false,
+			'registered'=>false
 		);
 }
 

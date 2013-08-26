@@ -11,6 +11,10 @@ class Model_Structure_UserChastisementBase
     protected $m_creation_date;
     protected $m_reason;
     protected $m_userId_Orig;
+    protected $m_type_Orig;
+    protected $m_duration_Orig;
+    protected $m_creation_date_Orig;
+    protected $m_reason_Orig;
 
     public function __construct($arrData = null)
     {
@@ -46,6 +50,7 @@ class Model_Structure_UserChastisementBase
     public function setType($value)
     {
         $this->m_type = $value;
+        $this->setOrigType($value);
         return;
     }
 
@@ -56,6 +61,7 @@ class Model_Structure_UserChastisementBase
     public function setDuration($value)
     {
         $this->m_duration = $value;
+        $this->setOrigDuration($value);
         return;
     }
 
@@ -66,6 +72,7 @@ class Model_Structure_UserChastisementBase
     public function setCreationDate($value)
     {
         $this->m_creation_date = $value;
+        $this->setOrigCreationDate($value);
         return;
     }
 
@@ -76,6 +83,7 @@ class Model_Structure_UserChastisementBase
     public function setReason($value)
     {
         $this->m_reason = $value;
+        $this->setOrigReason($value);
         return;
     }
 
@@ -87,6 +95,50 @@ class Model_Structure_UserChastisementBase
     {
         if (isset($this->m_userId_Orig)) { return; }
         $this->m_userId_Orig = $value;
+        return;
+    }
+
+    public function getOrigType()
+    {
+        return $this->m_type_Orig;
+    }
+    public function setOrigType($value)
+    {
+        if (isset($this->m_type_Orig)) { return; }
+        $this->m_type_Orig = $value;
+        return;
+    }
+
+    public function getOrigDuration()
+    {
+        return $this->m_duration_Orig;
+    }
+    public function setOrigDuration($value)
+    {
+        if (isset($this->m_duration_Orig)) { return; }
+        $this->m_duration_Orig = $value;
+        return;
+    }
+
+    public function getOrigCreationDate()
+    {
+        return $this->m_creation_date_Orig;
+    }
+    public function setOrigCreationDate($value)
+    {
+        if (isset($this->m_creation_date_Orig)) { return; }
+        $this->m_creation_date_Orig = $value;
+        return;
+    }
+
+    public function getOrigReason()
+    {
+        return $this->m_reason_Orig;
+    }
+    public function setOrigReason($value)
+    {
+        if (isset($this->m_reason_Orig)) { return; }
+        $this->m_reason_Orig = $value;
         return;
     }
 

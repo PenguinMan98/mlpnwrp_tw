@@ -35,7 +35,7 @@ a:hover, a:active{
 }
 #page-wrap > div {  
 	padding: 4px 10px 16px;
-	margin-bottom: 5px; 
+	margin-bottom: 13px; 
 }
 #top_menu {     
 	background: #000; 
@@ -74,9 +74,17 @@ a:hover, a:active{
     z-index: 5;
 }
 #send{
-	margin-left: 10px;
-	background: black;
-	color: white;
+    margin-left: 10px;
+    background: black;
+    color: white;
+    padding: 3px 5px;
+    font-size: 24px;
+    width: 50%;
+}
+#submit_send{
+    margin-left: 10px;
+    padding: 8px 14px;
+    font-size: 18px;
 }
 /*Debugging.  Hide the UI*/
 #top_menu, #form {     /*#chat, , #room_list*/

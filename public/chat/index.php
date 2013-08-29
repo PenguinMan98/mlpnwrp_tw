@@ -96,8 +96,12 @@ if($characterId){
 	$chatIcon = getImage('chat_icon', $characterId);
 }
 if($profilePic){
-	
+	// unfinished?
 }
+
+$chat_text_color = (is_object($character)) ? $character->getChatTextColor() : "#ffffff";
+$chat_name_color = (is_object($character)) ? $character->getChatNameColor() : "#ffffff";
+
 //$chat_logs = array('add' => false, 'get' => false, 'log' => false);// probably won't need this
 //$chat_show = array('login' => true, 'guest' => true); // or this
 //$chat_path = 'ajax-chat/'; // make everything relative to site_root
@@ -135,8 +139,8 @@ if($profilePic){
 var room 		 = <?=$current_room->getChatRoomId()?>; /* for now default this */
 var handle 		 = '<?=$handle?>';
 <?php if(is_object($character)): ?>
-var chat_name_color = '<?=$character->getChatNameColor()?>';
-var chat_text_color = '<?=$character->getChatTextColor()?>';
+var chat_name_color = '<?=$chat_name_color?>';
+var chat_text_color = '<?=$chat_text_color?>';
 var character_id = <?=$characterId?>;
 <?php else: ?>
 var chat_name_color = 'white';
@@ -212,8 +216,8 @@ $chatRoomList = $chatRoomHelper->getChatList();
 
         <div id="form">
         	<form class="send" action="POST" onsubmit="chat_msgs_add(); return false;">
-	        	<span id="character_name" style="color: <?=$character->getChatNameColor()?>"><?=$handle?></span>:
-	        	<input style="color: <?=$character->getChatTextColor()?>" id="send" type="text" size="100" autocomplete="off" />
+	        	<span id="character_name" style="color: <?=$chat_name_color?>"><?=$handle?></span>:
+	        	<input style="color: <?=$chat_text_color?>" id="send" type="text" autocomplete="on" />
 	    		<input id="submit_send" class="submit" type="submit" value="Send" />
 	    	</form>
     	</div>

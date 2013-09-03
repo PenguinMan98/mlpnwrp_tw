@@ -171,7 +171,9 @@ if ($handle = opendir($dir))
 			<img id="mute" src="">Mute--<img id="highlight" src="">Highlight<!-- <img id="group_color" src=""> --><!--
 		</div> -->
 		<div id="hud_toggle_row">
-			<!-- <div class="hud_setting_icon"><img id="mute" alt="Mute" src=""></div> -->
+			<div class="hud_setting_icon">
+				<img id="mute" alt="Mute" title="Mute this pony" src="../img/mute_off.png" onClick="toggleMute(); return false;">
+			</div>
 			<div class="hud_setting_icon">
 				<img id="stare" alt="Stare" title="Stare at this pony" src="../img/stare_off3.png" onClick="toggleStare(); return false;">
 			</div>

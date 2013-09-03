@@ -445,6 +445,9 @@ function chat_msgs_get()
 					stare = true;
 					playDing = true;
 				  }
+		          if(mute_array.indexOf(line.handle) > -1){// if this user is muted
+		        	  continue;// skip processing the post.
+				  }
 		          
 		          // parse emoticons
 		          //message = message.replace(/%%(\w+)%%/g, '<img src="'+chat_path+'smileys/$1.gif" alt="" />');// unneeded
@@ -722,17 +725,78 @@ function replaceAndBalanceTag( message, openRegex, openTag, closeRegex, closeTag
 
 //***** character HUD **********************************************************
 
+function showHUD(element, charName){
+	var linkRect = element.getBoundingClientRect();
+	if(!linkRect || charName == "") return false;
+	var linkVCenterOffset = (linkRect.bottom - linkRect.top) / 2;
+	$.ajax({
+		url: chat_path+"php/character_info.php",
+		data: {characterName: charName},
+		dataType: "JSON"
+	})
+	.done(function(response) {
+		if(response.success && $('#character_info_base').css('display') == 'none'){
+			// make it visible
+			$('#character_info_base').css('display','block');
+			$('#character_info_base').css('left', linkRect.left-250 );
+
+			// set the character name.  Link to character profile
+			$('#hud_character_name').html('<a href="<?=SITE_ROOT?>/chat/character/view.php?c='+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
+
+			// set the player name. Link to player profile
+			$('#hud_player_name').html(response.characterInfo.username);
+
+				// This must be fixed for the away/Active feature to work properly
+			if(	false ){ 
+				$('#hud_activity_status').html('Away'); 
+			}else{
+				$('#hud_activity_status').html('Active'); 
+			};
+
+			// set the room.  Link to change rooms.
+			$('#hud_room').html(roomList[response.characterInfo.chat_room_id]);
+			$('#hud_room').off('click');
+			$('#hud_room').on('click',function(){room_change(response.characterInfo.chat_room_id, !guest_char, chat_user);});
+			$('#hud_room').css('cursor','pointer');
+
+			// set the status (not implemented yet)
+			$('#hud_chat_status').html('A status');
+
+			// set the stare state
+			if(stare_array.indexOf(response.characterInfo.name) != -1){
+				// stare is on
+				$("#stare").attr("src","../img/stare_on.png");
+				$("#stare").attr("title","Stop staring at this pony");
+			}else{
+				// stare is off
+				$("#stare").attr("src","../img/stare_off3.png");
+				$("#stare").attr("title","Stare at this pony");
+			}
+
+			// set the mute state
+			if(mute_array.indexOf(response.characterInfo.name) != -1){
+				// stare is on
+				$("#mute").attr("src","../img/mute_on.png");
+				$("#mute").attr("title","Un-mute this pony");
+			}else{
+				// stare is off
+				$("#mute").attr("src","../img/mute_off.png");
+				$("#mute").attr("title","Mute this pony");
+			}
+
+							// final display properties
+			var modalRect = $('#character_info_base').get(0).getBoundingClientRect();
+			var modalVCenterOffset = (modalRect.bottom - modalRect.top) / 2;
+			$('#character_info_base').css('top', linkRect.top + linkVCenterOffset - modalVCenterOffset );
+		}else{
+			// hide it
+			$('#character_info_base').css('display','none');
+		}
+	});
+}
+
 function toggleStare(){
-	console.log("toggling Stare");
-	// first where to put the setting.
-	// how about we choose var stare_array = [];
-	// if the name exists in this array, then highlight them. If not, then ignore them.
-	// I want to store this in the session eventually. That will require an ajax call but no databasing. Just sessions.
-	// that brings up a concern where multiple characters using the same session is concerned
-	// to get around that I'll need to store the handle AND the character.  I'll need a nested array then.  No... only in the session.  In the local instance it's not necessary.
-	// so the session will have:  $_SESSION[<handle>] = array(); which can serialize quite easily to JSON.  
 	var stareAtMe = $("#hud_character_name").text();
-	console.log('stareatme',stareAtMe);
 	if(stare_array.indexOf(stareAtMe) != -1){
 		// remove it
 		var temp = stare_array;
@@ -755,13 +819,37 @@ function toggleStare(){
 	saveHUDSettings();
 }
 
+function toggleMute(){
+	var muteMe = $("#hud_character_name").text();
+	if(mute_array.indexOf(muteMe) != -1){
+		// remove it
+		var temp = mute_array;
+		mute_array = [];
+		for(i in temp){
+			if(temp[i] != muteMe){
+				mute_array.push(temp[i]);
+			}
+		}
+		// change the image to off
+		$("#mute").attr("src","../img/mute_off.png");
+		$("#mute").attr("title","Mute this pony");
+	}else{
+		mute_array.push(muteMe);
+		// change the image to off
+		$("#mute").attr("src","../img/mute_on.png");
+		$("#mute").attr("title","Un-mute this pony");
+	}
+	// save state
+	saveHUDSettings();
+}
+
 function saveHUDSettings(){
 	console.log(stare_array);
 	$.ajax({
 		url: chat_path+"php/save_hud_settings.php",
 		data: {
 			handle: handle,
-			mute: false,
+			mute: mute_array,
 			stare: stare_array,
 			group_color: false
 		}

@@ -81,7 +81,7 @@ img.src = <?="'{$chat_path}colors.png'";?>;
 <img src="<?=$chat_path;?>colors.png" alt="" usemap="#colors" />
 <map id="colors" name="colors">
 <?php
-$x = 0;
+/*$x = 0;
 $y = 0;
 for ($r = 0; $r < 6; $r++) for ($g = 0; $g < 6; $g++) for ($b = 0; $b < 6; $b++)
 {
@@ -91,7 +91,7 @@ for ($r = 0; $r < 6; $r++) for ($g = 0; $g < 6; $g++) for ($b = 0; $b < 6; $b++)
   ?><area href="javascript:chat_api_color('#<?=$col;?>');" coords="<?=$x*8+2;?>,<?=$y*8+2;?>,<?=$x*8+8;?>,<?=$y*8+8;?>" alt="" /><?php
   if ($x == 17) $y++;
   if ($x != 17) $x++; else $x = 0;
-}
+}*/
 ?>
 </map>
 </td>
@@ -110,11 +110,6 @@ for ($r = 0; $r < 6; $r++) for ($g = 0; $g < 6; $g++) for ($b = 0; $b < 6; $b++)
 	<?php endforeach; ?>
 </script>
 
-<!-- <script type="text/javascript">chat_api_onload(room, registered, handle)
-if (document.getElementById("room_parent")) dropdown_attach("room_parent", "room_child", "hover", "y", "default");
-</script> -->
-
-
 <!-- ***** Smiley ********************************************************** 
 
 <div>
@@ -131,7 +126,7 @@ if (document.getElementById("room_parent")) dropdown_attach("room_parent", "room
 <td>
 <?php
 
-$dir = dirname(__FILE__) . '/smileys/';
+/*$dir = dirname(__FILE__) . '/smileys/';
 if ($handle = opendir($dir))
 {
   while (false !== ($filename = readdir($handle)))
@@ -149,7 +144,7 @@ if ($handle = opendir($dir))
     }
   }
   closedir($handle);
-}
+}*/
 
 ?>
 </td>
@@ -175,6 +170,12 @@ if ($handle = opendir($dir))
 		<!-- <div>
 			<img id="mute" src="">Mute--<img id="highlight" src="">Highlight<!-- <img id="group_color" src=""> --><!--
 		</div> -->
+		<div id="hud_toggle_row">
+			<!-- <div class="hud_setting_icon"><img id="mute" alt="Mute" src=""></div> -->
+			<div class="hud_setting_icon">
+				<img id="stare" alt="Stare" title="Stare at this pony" src="../img/stare_off3.png" onClick="toggleStare(); return false;">
+			</div>
+		</div>
 		<p class="character_info" id="hud_room">Location</p>
 		<!-- <p class="character_info" id="hud_chat_status">Chat Status</p> -->
 	</div>

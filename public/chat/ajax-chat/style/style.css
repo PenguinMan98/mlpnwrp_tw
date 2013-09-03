@@ -179,14 +179,30 @@ a:hover, a:active{
 }
 
 #character_info_inner div{
-    height: 25px;
     width: 100%;
     margin: 3px;
 }
+
 #character_info_inner div img{
-	float: left;
-	margin: 0px 10px;
-    height: 25px;
+    float: left;
+    margin-left: 15px;
+    display: inline;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+#hud_toggle_row{
+	height: 50px;
+	width: 100%;
+	white-space: nowrap;
+}
+
+.stare{
+	background-color: #222;
+	opacity: .95;
+	filter:alpha(opacity=95);
+	width: 100%;
 }
 
 /*******Preferences********/

@@ -439,9 +439,16 @@ function chat_msgs_get()
 		          chat_usrs[line.handle] = new Array(chat_room, line.gender, line.status, true);// this appears to refresh some information about the user.
 		          message = line.text; // get the text
 		          
+		          var stare = false;
+		          if(stare_array.indexOf(line.handle) > -1){
+					// stare is on
+					stare = true;
+					playDing = true;
+				  }
+		          
 		          // parse emoticons
 		          //message = message.replace(/%%(\w+)%%/g, '<img src="'+chat_path+'smileys/$1.gif" alt="" />');// unneeded
-		          
+
 		          //message = message.replace(/&#039;/g, "'");
 		          // check for operators.  Currently, only /me goes here.
 		          var operatorParsed = message.match(/^\/(\w+)(.*)/); // pull out the operator
@@ -469,13 +476,16 @@ function chat_msgs_get()
 		          message = replaceURLWithHTMLLinks(message);
 		          
 		          if (line.recipient_username == null || line.recipient_username == '.'){ // if this message is public
-		        	  chat_msgs['.'] += '<span id="line_'+line.chat_log_id+'" style="color: #ddd;"><b>['+chat_date(-line.interval)+'] '+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</span><br />';
+		        	  var nameLine = '<div ';
+					  if(stare){nameLine += 'class="stare" '};
+					  nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><b>['+chat_date(-line.interval)+'] '+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
+					  chat_msgs['.'] += nameLine;
 		          }
 		          else // it's a private message
 		          {
 		        	//console.log('I got a PM from', line.handle, 'to',line.recipient_username, message);
 					chat_priv_prepair(line.handle, line.recipient_username); // not entirely sure what this does
-					var nameLine = '<span id="line_'+line.chat_log_id+'" style="color: #ddd;"><b>['+chat_date(-line.interval)+'] '+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</span><br />';
+					var nameLine = '<div id="line_'+line.chat_log_id+'" style="color: #ddd;"><b>['+chat_date(-line.interval)+'] '+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 
 					// if it's from somebody to me, (new system)
 					if(line.recipient_username == chat_user){
@@ -709,6 +719,54 @@ function replaceAndBalanceTag( message, openRegex, openTag, closeRegex, closeTag
 	}
 	return message;
 };
+
+//***** character HUD **********************************************************
+
+function toggleStare(){
+	console.log("toggling Stare");
+	// first where to put the setting.
+	// how about we choose var stare_array = [];
+	// if the name exists in this array, then highlight them. If not, then ignore them.
+	// I want to store this in the session eventually. That will require an ajax call but no databasing. Just sessions.
+	// that brings up a concern where multiple characters using the same session is concerned
+	// to get around that I'll need to store the handle AND the character.  I'll need a nested array then.  No... only in the session.  In the local instance it's not necessary.
+	// so the session will have:  $_SESSION[<handle>] = array(); which can serialize quite easily to JSON.  
+	var stareAtMe = $("#hud_character_name").text();
+	console.log('stareatme',stareAtMe);
+	if(stare_array.indexOf(stareAtMe) != -1){
+		// remove it
+		var temp = stare_array;
+		stare_array = [];
+		for(i in temp){
+			if(temp[i] != stareAtMe){
+				stare_array.push(temp[i]);
+			}
+		}
+		// change the image to off
+		$("#stare").attr("src","../img/stare_off3.png");
+		$("#stare").attr("title","Stare at this pony");
+	}else{
+		stare_array.push(stareAtMe);
+		// change the image to off
+		$("#stare").attr("src","../img/stare_on.png");
+		$("#stare").attr("title","Stop staring at this pony");
+	}
+	// save state
+	saveHUDSettings();
+}
+
+function saveHUDSettings(){
+	console.log(stare_array);
+	$.ajax({
+		url: chat_path+"php/save_hud_settings.php",
+		data: {
+			handle: handle,
+			mute: false,
+			stare: stare_array,
+			group_color: false
+		}
+	});
+}
 
 //***** etc **********************************************************
 

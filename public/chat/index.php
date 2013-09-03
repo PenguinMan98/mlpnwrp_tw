@@ -161,7 +161,11 @@ var chatColorOverrideColor = '#ddd';
 var profilePic = '<?=$profilePic?>';
 var cutieMark = '<?=$cutieMark?>';
 var chatIcon = '<?=$chatIcon?>';
-
+<?php if(!empty($_SESSION[$handle]['stare_array'])): ?>
+var stare_array = <?=json_encode($_SESSION[$handle]['stare_array'])?>;
+<?php else: ?>
+var stare_array = [];
+<?php endif; ?>
 </script>
 
 </head>
@@ -294,33 +298,50 @@ $chatRoomList = $chatRoomHelper->getChatList();
 			dataType: "JSON"
 		})
 		.done(function(response) {
-			console.log(response);
 			if(response.success && $('#character_info_base').css('display') == 'none'){
+				// make it visible
 				$('#character_info_base').css('display','block');
 				$('#character_info_base').css('left', linkRect.left-250 );
 
+				// set the character name.  Link to character profile
 				$('#hud_character_name').html('<a href="<?=SITE_ROOT?>/chat/character/view.php?c='+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
-				
+
+				// set the player name. Link to player profile
 				$('#hud_player_name').html(response.characterInfo.username);
 
-					// a holdout from the old system.  This must be fixed for the away/Active feature to work properly
+					// This must be fixed for the away/Active feature to work properly
 				if(	false ){ 
 					$('#hud_activity_status').html('Away'); 
 				}else{
 					$('#hud_activity_status').html('Active'); 
 				};
-				
+
+				// set the room.  Link to change rooms.
 				$('#hud_room').html(roomList[response.characterInfo.chat_room_id]);
 				$('#hud_room').off('click');
 				$('#hud_room').on('click',function(){room_change(response.characterInfo.chat_room_id, !guest_char, chat_user);});
 				$('#hud_room').css('cursor','pointer');
 
+				// set the status (not implemented yet)
 				$('#hud_chat_status').html('A status');
-				
+
+				// set the stare state
+				if(stare_array.indexOf(response.characterInfo.name) != -1){
+					// stare is on
+					$("#stare").attr("src","../img/stare_on.png");
+					$("#stare").attr("title","Stop staring at this pony");
+				}else{
+					// stare is off
+					$("#stare").attr("src","../img/stare_off3.png");
+					$("#stare").attr("title","Stare at this pony");
+				}
+
+				// final display properties
 				var modalRect = $('#character_info_base').get(0).getBoundingClientRect();
 				var modalVCenterOffset = (modalRect.bottom - modalRect.top) / 2;
 				$('#character_info_base').css('top', linkRect.top + linkVCenterOffset - modalVCenterOffset );
 			}else{
+				// hide it
 				$('#character_info_base').css('display','none');
 			}
 		});

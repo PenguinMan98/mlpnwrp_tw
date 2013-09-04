@@ -741,7 +741,7 @@ function showHUD(element, charName){
 			$('#character_info_base').css('left', linkRect.left-250 );
 
 			// set the character name.  Link to character profile
-			$('#hud_character_name').html('<a href="<?=SITE_ROOT?>/chat/character/view.php?c='+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
+			$('#hud_character_name').html('<a href="'+SITE_ROOT+'/chat/character/view.php?c='+response.characterInfo.name+'" target="_blank">' + response.characterInfo.name + '</a>');
 
 			// set the player name. Link to player profile
 			$('#hud_player_name').html(response.characterInfo.username);

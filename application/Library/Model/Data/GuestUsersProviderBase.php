@@ -50,8 +50,9 @@ class Model_Data_GuestUsersProviderBase
             chat_name_color,
             chat_text_color,
             chat_status_id,
-            last_activity
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            last_activity,
+            last_status_request
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array($objRecord->getHandle(),
             $objRecord->getChatRoomId(),
             $objRecord->getUserId(),
@@ -60,7 +61,8 @@ class Model_Data_GuestUsersProviderBase
             $objRecord->getChatNameColor(),
             $objRecord->getChatTextColor(),
             $objRecord->getChatStatusId(),
-            $objRecord->getLastActivity()
+            $objRecord->getLastActivity(),
+            $objRecord->getLastStatusRequest()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -78,8 +80,9 @@ class Model_Data_GuestUsersProviderBase
             chat_name_color,
             chat_text_color,
             chat_status_id,
-            last_activity
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            last_activity,
+            last_status_request
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array($objRecord->getHandle(),
             $objRecord->getChatRoomId(),
             $objRecord->getUserId(),
@@ -88,7 +91,8 @@ class Model_Data_GuestUsersProviderBase
             $objRecord->getChatNameColor(),
             $objRecord->getChatTextColor(),
             $objRecord->getChatStatusId(),
-            $objRecord->getLastActivity()
+            $objRecord->getLastActivity(),
+            $objRecord->getLastStatusRequest()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -106,7 +110,8 @@ class Model_Data_GuestUsersProviderBase
             chat_name_color=?,
             chat_text_color=?,
             chat_status_id=?,
-            last_activity=?
+            last_activity=?,
+            last_status_request=?
         WHERE handle=?';
         $arrSetParams = array(
             $objRecord->getHandle(),
@@ -117,7 +122,8 @@ class Model_Data_GuestUsersProviderBase
             $objRecord->getChatNameColor(),
             $objRecord->getChatTextColor(),
             $objRecord->getChatStatusId(),
-            $objRecord->getLastActivity()
+            $objRecord->getLastActivity(),
+            $objRecord->getLastStatusRequest()
         );
         $arrKeyParams = array($objRecord->getOrigHandle());
         $params = array_merge($arrSetParams, $arrKeyParams);

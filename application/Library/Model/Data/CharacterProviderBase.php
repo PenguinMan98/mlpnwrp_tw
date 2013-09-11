@@ -64,8 +64,10 @@ class Model_Data_CharacterProviderBase
             created_date,
             chat_room_id,
             last_activity,
-            cutie_mark
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            cutie_mark,
+            gender,
+            last_status_request
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getCreatorUserId(),
@@ -89,7 +91,9 @@ class Model_Data_CharacterProviderBase
             $objRecord->getCreatedDate(),
             $objRecord->getChatRoomId(),
             $objRecord->getLastActivity(),
-            $objRecord->getCutieMark()
+            $objRecord->getCutieMark(),
+            $objRecord->getGender(),
+            $objRecord->getLastStatusRequest()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -124,8 +128,10 @@ class Model_Data_CharacterProviderBase
             created_date,
             chat_room_id,
             last_activity,
-            cutie_mark
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            cutie_mark,
+            gender,
+            last_status_request
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getCreatorUserId(),
@@ -149,7 +155,9 @@ class Model_Data_CharacterProviderBase
             $objRecord->getCreatedDate(),
             $objRecord->getChatRoomId(),
             $objRecord->getLastActivity(),
-            $objRecord->getCutieMark()
+            $objRecord->getCutieMark(),
+            $objRecord->getGender(),
+            $objRecord->getLastStatusRequest()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -184,7 +192,9 @@ class Model_Data_CharacterProviderBase
             created_date=?,
             chat_room_id=?,
             last_activity=?,
-            cutie_mark=?
+            cutie_mark=?,
+            gender=?,
+            last_status_request=?
         WHERE character_id=?';
         $arrSetParams = array(
             $objRecord->getCharacterId(),
@@ -209,7 +219,9 @@ class Model_Data_CharacterProviderBase
             $objRecord->getCreatedDate(),
             $objRecord->getChatRoomId(),
             $objRecord->getLastActivity(),
-            $objRecord->getCutieMark()
+            $objRecord->getCutieMark(),
+            $objRecord->getGender(),
+            $objRecord->getLastStatusRequest()
         );
         $arrKeyParams = array($objRecord->getOrigCharacterId());
         $params = array_merge($arrSetParams, $arrKeyParams);

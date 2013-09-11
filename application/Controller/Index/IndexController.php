@@ -22,12 +22,6 @@ class Index_IndexController extends Index_BaseController{
 		
 		echo "<br>Letsa go!<br><pre>";
 		
-		$chatRoomProvider = new Model_Data_ChatRoomProvider();
-		$chatRoom = $chatRoomProvider->getOneByPk(9);
-		
-		$chatLogProvider = new Model_Data_ChatLogProvider();
-		print_r($chatLogProvider->search("2013-03-17", "2013-03-19", "test", $chatRoom));
-		
 		echo "</pre><br>End!<br>";
 	}
 	
@@ -48,7 +42,7 @@ class Index_IndexController extends Index_BaseController{
 		$rooms = $chatRoomProvider->getChatList();
 		$this->vars->roomList = array();
 		foreach($rooms as $room){
-			$this->vars->roomList[$room->getChatRoomId()] = $room->getRoomName();
+			$this->vars->roomList[$room['chat_room_id']] = $room['room_name'];
 		}
 		if(isset($roomId)){
 			$room = $chatRoomProvider->getOneByPk($roomId);

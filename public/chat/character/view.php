@@ -31,7 +31,7 @@ $profilePic = getImage('profile_pic', $character['character_id']);
         	<div id="char_img"><img src="../../img/<?=$character['character_id']?>/<?=$profilePic?>" /></div>
         	<?php endif; ?>
         	<p>Race: <?=$character['race']?> <?php if($character['character_race_note']) echo "( ". $character['character_race_note'] ." )";?><br>
-        	Gender: <?=($character['born_female']? "Female" : "Male")?> <?php if($character['born_female'] != $character['currently_female']) echo "( Currently " . ($character['currently_female']? "Female" : "Male") . " )" ; ?><br>
+        	Gender: <?=$character['gender']?><br>
         	Age: <?=$character['age']?></p>
         	<p>Status: <?=$character['status']?></p>
         	<p>Biography: <?=$character['bio']?></p>

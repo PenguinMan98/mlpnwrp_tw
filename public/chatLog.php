@@ -24,7 +24,7 @@ $chatRoomProvider = new Model_Data_ChatRoomProvider();
 $rooms = $chatRoomProvider->getChatList();
 $roomList = array();
 foreach($rooms as $room){
-	$roomList[$room->getChatRoomId()] = $room->getRoomName();
+	$roomList[$room['chat_room_id']] = $room['room_name'];
 }
 $smarty->assign_by_ref('roomList',$roomList);
 

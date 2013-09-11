@@ -6,6 +6,7 @@ require_once '../../../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
 $response = new stdClass();
+$response->errors = array();
 
 // verify login
 $handle = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['user']), ENT_QUOTES);
@@ -17,6 +18,13 @@ if($userId) { // logged in + registered char
 if(!$userId || !is_object($character)){ // guest
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = $guestUserHelper->getOneByPk($handle);
+}
+if(is_object($character)){
+	$character->setLastStatusRequest(time());
+	$characterHelper->updateOne($character, $response->errors);
+}else{
+	$guestUser->setLastStatusRequest(time());
+	$guestUserHelper->updateOne($guestUser, $response->errors);
 }
 if((!is_object($character) && !is_object($guestUser)) || // no character match or
 		(is_object($character) && !$character->getLoggedIn()) ){ // registered character isn't logged in

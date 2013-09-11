@@ -59,10 +59,7 @@ echo "</pre>";*/
 						<input type="text" name="character_formatted_name" id="character_formatted_name" required><br> -->
 						
 						<label>Gender:</label>
-						<select name="birth_gender">
-							<option value="female">Female</option>
-							<option value="male">Male</option>
-						</select><br>
+						<input type="text" name="gender" id="gender"><br>
 						
 						<label>Race</label>
 						<select name="race">

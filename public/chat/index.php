@@ -56,7 +56,7 @@ if(!$userId || empty($userId)) {
 	//echo "Logged in as guest: " . $_POST['handle'] . "<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
-	$guestUser->setChatRoomId($current_room->getChatRoomId());
+	$guestUser->setChatRoomId($current_room['chat_room_id']);
 	$guestUser->setHandle($handle);
 	$guestUser->setGuestIp($_SERVER['REMOTE_ADDR']);
 	$guestUser->setLastActivity(time());
@@ -66,7 +66,7 @@ if(!$userId || empty($userId)) {
 	//echo "Logged in as user: " . $userName . " with guest character: ".$_POST['handle']."<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
-	$guestUser->setChatRoomId($current_room->getChatRoomId());
+	$guestUser->setChatRoomId($current_room['chat_room_id']);
 	$guestUser->setHandle($handle);
 	$guestUser->setUserId($userName);
 	$guestUser->setGuestIp($_SERVER['REMOTE_ADDR']);
@@ -79,7 +79,7 @@ if(!$userId || empty($userId)) {
 	$character = $characterHelper->getOneByCharacterName($handle);
 	$character->setLoggedIn(true);
 	$character->setLastActivity(time());
-	$character->setChatRoomId($current_room->getChatRoomId());
+	$character->setChatRoomId($current_room['chat_room_id']);
 	$characterHelper->updateOne($character, $arrErrors);
 	// tell the database this character is logged in
 }
@@ -136,7 +136,7 @@ $chat_name_color = (is_object($character)) ? $character->getChatNameColor() : "#
 <script type="text/javascript" src="<?=SITE_ROOT?>/chat/ajax-chat/js/cookies.js"></script>
 
 <script type="text/javascript">
-var room 		 = <?=$current_room->getChatRoomId()?>; /* for now default this */
+var room 		 = <?=$current_room['chat_room_id']?>; /* for now default this */
 var handle 		 = '<?=$handle?>';
 <?php if(is_object($character)): ?>
 var chat_name_color = '<?=$chat_name_color?>';
@@ -199,18 +199,38 @@ var mute_array = [];
 				<input type="button" onClick="chat_priv_switch('.',true);" value="X">
 			</div>
 		    <div id="rooms">
+				<div class="room" id="room_child">
 <?php 
 $chatRoomHelper = new Model_Data_ChatRoomProvider();
 $chatRoomList = $chatRoomHelper->getChatList();
-?>
-				<div class="room" id="room_child">
-<?php foreach ($chatRoomList as $chatRoom) { ?>
-					<a class="main" href="javascript:room_change(<?=$chatRoom->getChatRoomId();?>, <?=is_object($character)? 'true':'false'?>, '<?=$handle?>');"><?=$chatRoom->getRoomName();?></a><br>
-<?php } ?>
+
+$roomTypeId = 0;
+$roomType = "";
+foreach ($chatRoomList as $chatRoom) { 
+	if($roomTypeId != $chatRoom['chat_room_type_id']){
+		if($roomTypeId != 0){
+			echo "</select><br>";
+		}
+		$roomTypeId = $chatRoom['chat_room_type_id'];
+		$roomType = $chatRoom['type'];
+		echo "<label>$roomType</label><br><select onChange=\"room_change( this.value,".(is_object($character)? 'true':'false').", '$handle'); $(this).prop('selectedIndex',0);\">
+				<option value=\"\">$roomType</option>";
+	}
+	//if($chatRoom['chat_room_id'] != $current_room['chat_room_id'])
+		echo "<option value=\"".$chatRoom['chat_room_id']."\">".$chatRoom['room_name']."</option>";
+	
+} ?>
+					</select>
 				</div>
 		    
 		    </div>
-			<div id="header_messages"><img src="../img/room1.png"></div>
+			<div id="header_messages">
+				<?php if(file_exists("../img/room1.png")): ?>
+				<img src="../img/room1.png">
+				<?php else : 
+					echo $currentRoom['room_name'];
+				endif;?>
+			</div>
         	<div id="messages"></div>
             <!-- <div id="header_users">Users</div> -->
 		    <div id="users">

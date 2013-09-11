@@ -10,6 +10,7 @@ include "init.php";
 $response = new stdClass();
 $response->success = true;
 $response->characters = array();
+$response->users_get_id = $_REQUEST['users_get_id'];
 
 // get registered characters who are logged in
 $characterHelper = new Model_Data_CharacterProvider();

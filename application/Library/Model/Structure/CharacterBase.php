@@ -28,6 +28,8 @@ class Model_Structure_CharacterBase
     protected $m_chat_room_id;
     protected $m_last_activity;
     protected $m_cutie_mark;
+    protected $m_gender;
+    protected $m_last_status_request;
     protected $m_character_id_Orig;
 
     public function __construct($arrData = null)
@@ -280,6 +282,26 @@ class Model_Structure_CharacterBase
         return;
     }
 
+    public function getGender()
+    {
+        return $this->m_gender;
+    }
+    public function setGender($value)
+    {
+        $this->m_gender = $value;
+        return;
+    }
+
+    public function getLastStatusRequest()
+    {
+        return $this->m_last_status_request;
+    }
+    public function setLastStatusRequest($value)
+    {
+        $this->m_last_status_request = $value;
+        return;
+    }
+
     public function getOrigCharacterId()
     {
         return $this->m_character_id_Orig;
@@ -316,6 +338,8 @@ class Model_Structure_CharacterBase
         $this->setChatRoomId($arrValues['chat_room_id']);
         $this->setLastActivity($arrValues['last_activity']);
         $this->setCutieMark($arrValues['cutie_mark']);
+        $this->setGender($arrValues['gender']);
+        $this->setLastStatusRequest($arrValues['last_status_request']);
         return;
     }
 
@@ -392,6 +416,12 @@ class Model_Structure_CharacterBase
                 case 'cutie_mark':
                     $this->setCutieMark($val);
                     break;
+                case 'gender':
+                    $this->setGender($val);
+                    break;
+                case 'last_status_request':
+                    $this->setLastStatusRequest($val);
+                    break;
                 default:
                     break;
             }
@@ -425,6 +455,8 @@ class Model_Structure_CharacterBase
         $arrValues['chat_room_id'] = $this->getChatRoomId();
         $arrValues['last_activity'] = $this->getLastActivity();
         $arrValues['cutie_mark'] = $this->getCutieMark();
+        $arrValues['gender'] = $this->getGender();
+        $arrValues['last_status_request'] = $this->getLastStatusRequest();
         return $arrValues;
     }
 

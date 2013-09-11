@@ -6,9 +6,20 @@ class Model_Data_ChatRoomProvider extends Model_Data_ChatRoomProviderBase
 	public function getChatList(){
 		$retArray = array();
 		if(empty($this->chatRoomList)){
-			$strSql = 'SELECT * FROM `chat_room` cr WHERE cr.`is_active` = 1 ORDER BY `display_order` ASC';
+			$strSql = '
+SELECT 
+	crt.name as `type`,
+	cr.* 
+FROM `chat_room` cr 
+JOIN `chat_room_type` crt
+	ON cr.chat_room_type_id = crt.chat_room_type_id
+WHERE cr.`is_active` = 1 
+ORDER BY `chat_room_type_id` ASC, `display_order` ASC';
 			$params = array();
-			$this->chatRoomList = parent::getArrayFromQuery($strSql, $params);
+			$arrResults = array();
+			$arrErrors = array();
+			DAO::getAssoc($strSql, $params, $arrResults, $arrErrors);
+			$this->chatRoomList = $arrResults;
 		}
 		return $this->chatRoomList;
 	}

@@ -92,17 +92,8 @@ $chatIcon = getImage('chat_icon', $character['character_id']);
 						<!-- <label>Formatted Name:</label>
 						<input type="text" name="character_formatted_name" id="character_formatted_name" required><br> -->
 						
-						<label>Birth Gender:</label>
-						<select name="birth_gender">
-							<option value="female" <?=($character['born_female']) ? 'selected' : ''?>>Female</option>
-							<option value="male" <?=($character['born_female']) ? '' : 'selected'?>>Male</option>
-						</select><br>
-						
-						<label>Current Gender:</label>
-						<select name="current_gender">
-							<option value="female" <?=($character['currently_female']) ? 'selected' : ''?>>Female</option>
-							<option value="male" <?=($character['currently_female']) ? '' : 'selected'?>>Male</option>
-						</select><br>
+						<label>Gender:</label>
+						<input type="text" name="gender" id="gender" value="<?=$character['gender']?>"><br>
 												
 						<label>Race</label>
 						<select name="race">

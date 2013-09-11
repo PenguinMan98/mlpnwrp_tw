@@ -3,6 +3,8 @@
 // ***** Var *******************************************************************
 
 var chat_smsg = false;
+var initializeUsers = false;
+var initializePosts = false;
 
 var chat_message_id = -1;
 var chat_rand = -1;
@@ -84,7 +86,13 @@ function chat_api_onload(room, registered, handle)//, focu
 	hideRooms(); // hide the rooms panel
 	$('#character_info_base').css('display','none'); // hide the character hud
 	//$('#header_messages').html(roomList[room]); // change the room name
-	$('#header_messages img').attr('src','../img/room'+room+'.png'); // change the room name
+	
+	if(roomImgList[room]){ // if the image exists
+		$('#header_messages').html('<img src=\'../img/room'+room+'.png\'>'); // change the room name
+	}else{
+		$('#header_messages').html(roomList[room]); // change the room name
+	}
+	
 
 	document.getElementById('send').focus(); // decide if you are going to focus the cursor in the text field or not
 	
@@ -254,6 +262,8 @@ function hidePreferences(){
 function chat_reset(room, registered, handle)
 {
   chat_message_id  = -1;
+  initializeUsers = true;
+  initializePosts = true;
 
   chat_room = room; // set globals
   chat_user = handle;
@@ -284,16 +294,21 @@ function chat_reset(room, registered, handle)
 
 function chat_setup(){
 	chat_users_get(); // get the users. AJAX. Output is done when the response is received.
-	chat_msgs_get(); // get the messages. AJAX. Output is done when the response is received.
+	
+	// moved to inside the response handler for the users_get.
+	//chat_msgs_get(); // get the messages. AJAX. Output is done when the response is received.
 }
 
 //***** chat_users *********************************************************
 // Calls a script that updates the user list and returns the current version
 
+var users_get_id = 0;
+
 function chat_users_get(){
 	$.ajax({
 		url: chat_path+"php/users_get.php",
-		dataType: "JSON"
+		dataType: "JSON",
+		data: {users_get_id: users_get_id++}
 	})
 	.done(function(response) {
 		response.characters.sort(handleSort);
@@ -308,6 +323,12 @@ function chat_users_get(){
 		}
 		
 		chat_out_usrs(); // output the users
+		
+			// if this is an initialization run, then do a msgs_get here after the users have been received.
+		if(initializeUsers){
+			chat_msgs_get(); // get the messages. AJAX. Output is done when the response is received.
+			initializeUsers = false;
+		}
 	});
 }
 
@@ -483,6 +504,9 @@ function chat_msgs_get()
 					  if(stare){nameLine += 'class="stare" '};
 					  nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><b>['+chat_date(-line.interval)+'] '+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 					  chat_msgs['.'] += nameLine;
+					  if(!initializePosts){
+						  chat_out_msg(nameLine);
+					  }
 		          }
 		          else // it's a private message
 		          {
@@ -530,8 +554,11 @@ function chat_msgs_get()
 	      
 	      if (response.lines.length > 0)
 	      {
-	        chat_out_msgs();
-	        show_pm();
+	    	  if(initializePosts){
+	    		  chat_out_msgs();
+	    	  }
+	        
+	          show_pm();
 	      }
 		}else{
 			if(response.error.trim() != ""){
@@ -563,7 +590,9 @@ function chat_msgs_get()
 }
 
 function room_change(room, registered, handle){
-	
+	if(!room){
+		return false;
+	}
 	$.ajax({
 		url: chat_path+"php/room_change.php",
 		dataType: "JSON",
@@ -639,16 +668,24 @@ function chat_msgs_usr(handle, color, sidebar)
 
 function chat_out_msgs()
 {
+	// the switch between displaying the PM's and the public
+    document.getElementById('chat').innerHTML = (chat_priv == '.') ? chat_msgs[chat_priv] : chat_msgs[chat_user][chat_priv];
+    
+    if($('#autofocus').attr('checked')){ /*Disable autofocus!*/
+	    //$("#chat").animate({ scrollTop: $('#chat')[0].scrollHeight }, "slow");
+	    $("#chat").scrollTop( $('#chat')[0].scrollHeight );//+ $(window).height()
+    }
+}
+
+function chat_out_msg( messageDiv )
+{
   // the switch between displaying the PM's and the public
-  document.getElementById('chat').innerHTML = (chat_priv == '.') ? chat_msgs[chat_priv] : chat_msgs[chat_user][chat_priv];
-  if(document.getElementById('autofocus').checked){ /*Disable autofocus!*/
-	  // I have no idea why this is done 5 times
-	  document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight+1024;
-	  document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight+1024;
-	  document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight+1024;
-	  document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight+1024;
-	  document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight+1024;
-  }
+	$('#chat').append(messageDiv);
+	//(chat_priv == '.') ? chat_msgs[chat_priv] : chat_msgs[chat_user][chat_priv];
+	if($('#autofocus').attr('checked') == 'checked'){ /*Disable autofocus!*/
+		//$("#chat").animate({ scrollTop: $('#chat')[0].scrollHeight }, "slow");
+		$("#chat").scrollTop( $('#chat')[0].scrollHeight );
+    }
 }
 
 

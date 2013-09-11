@@ -14,6 +14,7 @@ class Model_Structure_GuestUsersBase
     protected $m_chat_text_color;
     protected $m_chat_status_id;
     protected $m_last_activity;
+    protected $m_last_status_request;
     protected $m_handle_Orig;
 
     public function __construct($arrData = null)
@@ -123,6 +124,16 @@ class Model_Structure_GuestUsersBase
         return;
     }
 
+    public function getLastStatusRequest()
+    {
+        return $this->m_last_status_request;
+    }
+    public function setLastStatusRequest($value)
+    {
+        $this->m_last_status_request = $value;
+        return;
+    }
+
     public function getOrigHandle()
     {
         return $this->m_handle_Orig;
@@ -145,6 +156,7 @@ class Model_Structure_GuestUsersBase
         $this->setChatTextColor($arrValues['chat_text_color']);
         $this->setChatStatusId($arrValues['chat_status_id']);
         $this->setLastActivity($arrValues['last_activity']);
+        $this->setLastStatusRequest($arrValues['last_status_request']);
         return;
     }
 
@@ -179,6 +191,9 @@ class Model_Structure_GuestUsersBase
                 case 'last_activity':
                     $this->setLastActivity($val);
                     break;
+                case 'last_status_request':
+                    $this->setLastStatusRequest($val);
+                    break;
                 default:
                     break;
             }
@@ -198,6 +213,7 @@ class Model_Structure_GuestUsersBase
         $arrValues['chat_text_color'] = $this->getChatTextColor();
         $arrValues['chat_status_id'] = $this->getChatStatusId();
         $arrValues['last_activity'] = $this->getLastActivity();
+        $arrValues['last_status_request'] = $this->getLastStatusRequest();
         return $arrValues;
     }
 

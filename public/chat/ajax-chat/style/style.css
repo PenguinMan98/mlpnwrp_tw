@@ -151,6 +151,10 @@ a:hover, a:active{
     display: none;
 }
 
+#room_child > label, #room_child > select{
+	margin: 5px;
+}
+
 /* ***** Character HUD ***** */
 
 #character_info_base{

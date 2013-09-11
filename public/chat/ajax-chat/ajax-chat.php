@@ -105,8 +105,12 @@ for ($r = 0; $r < 6; $r++) for ($g = 0; $g < 6; $g++) for ($b = 0; $b < 6; $b++)
 <!-- ***** Rooms *********************************************************** -->
 <script>
 	var roomList = {};
+	var roomImgList = {};
 	<?php foreach ($chatRoomList as $chatRoom): ?>
-	roomList[<?=$chatRoom->getChatRoomId()?>] = '<?=$chatRoom->getRoomName()?>';
+roomList[<?=$chatRoom['chat_room_id']?>] = '<?=$chatRoom['room_name']?>';
+	<?php endforeach; ?>
+	<?php foreach ($chatRoomList as $chatRoom): ?>
+roomImgList[<?=$chatRoom['chat_room_id']?>] = <?=file_exists( "../img/room".$chatRoom['chat_room_id'].".png") ? 1 : 0 ?>;
 	<?php endforeach; ?>
 </script>
 

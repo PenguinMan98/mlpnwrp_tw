@@ -195,6 +195,9 @@ function showExitPM(){
 			opacity: '1',
 			right: '220px'
 		},1000,'swing',function(){
+			var width = $('#exit_pm').width() + 15;
+			var height = $('#exit_pm').height();
+			$('#chat').prepend('<div style="float: right; height: '+height+'px; width: '+width+'px; padding: 4px 10px 16px; margin-bottom: 13px;">&nbsp;</div>');
 		});
 }
 function hideExitPM(){
@@ -784,7 +787,14 @@ function showHUD(element, charName){
 			$('#hud_player_name').html(response.characterInfo.username);
 
 				// This must be fixed for the away/Active feature to work properly
-			if(	false ){ 
+			var ts = new Date().getTime()
+			ts = Math.floor(ts/1000);
+			var fifteenMinutes = 60*15;
+			var fiveMinutes = 60*5;
+			
+			if(	ts - response.characterInfo.last_status_request > fiveMinutes ){ 
+				$('#hud_activity_status').html('Disconnected'); 
+			}else if(	ts - response.characterInfo.last_activity > fifteenMinutes ){ 
 				$('#hud_activity_status').html('Away'); 
 			}else{
 				$('#hud_activity_status').html('Active'); 

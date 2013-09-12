@@ -193,13 +193,12 @@ var mute_array = [];
 		
 		</div>
 		
-        <div id="room_list">
-			<div id="exit_pm">
-				<span id="exit_pm_text"></span>
-				<input type="button" onClick="chat_priv_switch('.',true);" value="X">
-			</div>
-		    <div id="rooms">
-				<div class="room" id="room_child">
+		<div id="exit_pm">
+			<span id="exit_pm_text"></span>
+			<input type="button" onClick="chat_priv_switch('.',true);" value="X">
+		</div>
+	    <div id="rooms">
+			<div class="room" id="room_child">
 <?php 
 $chatRoomHelper = new Model_Data_ChatRoomProvider();
 $chatRoomList = $chatRoomHelper->getChatList();
@@ -220,10 +219,11 @@ foreach ($chatRoomList as $chatRoom) {
 		echo "<option value=\"".$chatRoom['chat_room_id']."\">".$chatRoom['room_name']."</option>";
 	
 } ?>
-					</select>
-				</div>
-		    
-		    </div>
+				</select>
+			</div>
+	    
+	    </div>
+        <div id="room_list">
 			<div id="header_messages">
 				<?php if(file_exists("../img/room1.png")): ?>
 				<img src="../img/room1.png">

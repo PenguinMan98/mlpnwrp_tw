@@ -245,3 +245,10 @@ RewriteRule ^tiki-([a-z_]+)         tiki-ajax_services.php?controller=$1		[QSA,L
 RewriteRule ^(.+)$                 tiki-index.php?page=$1                   [QSA,L]
 
 </IfModule>
+
+## USER IP BANNING
+<Limit GET POST>
+ order allow,deny
+ deny from 174.6.75.66
+ allow from all
+</Limit>

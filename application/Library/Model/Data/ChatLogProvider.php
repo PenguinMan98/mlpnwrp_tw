@@ -94,7 +94,7 @@ WHERE	(
 			$params[] = $mptr;
 		}
 		$strSql .= "
-ORDER BY TIMESTAMP DESC
+ORDER BY `timestamp` DESC, chat_log_id DESC
 LIMIT " . intval($post_count);
 		
 		$arrResults = array();
@@ -153,5 +153,28 @@ WHERE `handle` = ?
 		";
 		$params = array($handle, $rand);
 		return $this->getOneFromQuery($strSql, $params);
+	}
+	
+public function getAll(){
+		$strSql = "
+SELECT * FROM `chat_log` WHERE `timestamp` = '2013' ORDER BY `chat_log_id` ASC LIMIT 2000
+		";
+		$arrParams = array();
+		$arrResults = array();
+		$arrErrors = array();
+		DAO::getAssoc($strSql, $arrParams, $arrResults, $arrErrors);
+		if(!empty($arrErrors)) return false;
+		return $arrResults;
+	}
+	
+	public function SetColByPK($col, $val, $pk){
+		$strSql = "
+UPDATE `chat_log` set `$col`= ? WHERE `chat_log_id` = ?
+		";
+		$arrParams = array($val, $pk);
+		$arrErrors = array();
+		DAO::execute($strSql, $arrParams, $arrErrors);
+		if(!empty($arrErrors)) return false;
+		return true;
 	}
 }

@@ -62,6 +62,11 @@ a:hover, a:active{
 #chat > span {
     line-height: 25px;
 }
+#chat div span.post_date{
+	font-family: monospace;
+	font-size: 12px;
+	font-stretch: condensed;
+}
 #form { 
     /*background: #444;*/
 	position:fixed !important;

@@ -122,10 +122,12 @@ if ($rand > 0 &&
     	
     	// flood check
     	$recentPosts = $chatLogHelper->getMyPosts($room, $handle, -1, $FLOODCUTOFFPOSTS, is_object($character));
-    	$floodCheckPost = isset($recentPosts[0]) ? $recentPosts[0] : null; // they come out in reverse order so post 0 is the oldest of the three
-    	if($floodCheckPost){
-    		$timeDiff = time() - floor($floodCheckPost['chat_rand']/10); // must convert chat_rand into seconds
-    		$flood = $timeDiff < $FLOODCUTOFFTIME;
+    	if(count($recentPosts) >= $FLOODCUTOFFPOSTS){
+	    	$floodCheckPost = $recentPosts[0]; // they come out in reverse order so post 0 is the oldest of the bunch
+	    	if($floodCheckPost){
+	    		$timeDiff = time() - $floodCheckPost['timestamp']; // must convert chat_rand into seconds
+	    		$flood = $timeDiff < $FLOODCUTOFFTIME;
+	    	}
     	}
     	 
     	if(!$duplicate && !$flood && !$errorDetected){ // if it's no duplicate, and it's not flood, nor did it fail previously,
@@ -168,7 +170,7 @@ if ($rand > 0 &&
 	      	}
 	      	$chatLog->setRecipientUsername($priv);
 	      }
-	      $chatLog->setTimestamp(null);
+	      $chatLog->setTimestamp($time);
 	      try{
 	      	$chatLogProvider->insertChatLog($chatLog);
 	      	$arrErrors = array();

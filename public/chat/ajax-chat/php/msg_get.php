@@ -85,7 +85,9 @@ if (isset($_GET['room']) &&
 	  $response->lines = $chatLogHelper->getPosts($roomId, $handle, $lastPostId, $chat_histlen, $registered);
 	  
 	  foreach($response->lines as &$line){
-	  	$postDate = new DateTime($line['timestamp']);
+	  	$postDate = new DateTime();
+	  	$postDate->setTimestamp($line['timestamp']);
+	  	$line['formatedDate'] = $postDate->format('H:i:s');
 	  	$line['interval'] = (time()-$postDate->format('U'));
 	  }
   }catch(Exception $e){

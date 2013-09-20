@@ -87,7 +87,17 @@ if (isset($_GET['room']) &&
 	  foreach($response->lines as &$line){
 	  	$postDate = new DateTime();
 	  	$postDate->setTimestamp($line['timestamp']);
-	  	$line['formatedDate'] = $postDate->format('H:i:s');
+	  	$line['formattedDate'] = $postDate->format('H:i:s');
+	  	$twentyThreeHour = (floor($line['timestamp']/3600))%23; // convert timestamp to hours past epoch (floor(x/3600)) , then mod 23 to get the 23-hour hour
+	  	$line['twentyThreeHour'] = (($twentyThreeHour < 10)? '0'.$twentyThreeHour : $twentyThreeHour ) . ":" . $postDate->format('i:s');
+	  	$adjustedHour = mktime(
+	  			date('H',$line['timestamp'])-3,
+	  			date("i",$line['timestamp']),
+	  			date("s",$line['timestamp']),
+	  			date("n",$line['timestamp']),
+	  			date("j",$line['timestamp']),
+	  			date("Y",$line['timestamp']));
+	  	$line['adjustedHour'] = date('H:i:s',$adjustedHour);
 	  	$line['interval'] = (time()-$postDate->format('U'));
 	  }
   }catch(Exception $e){

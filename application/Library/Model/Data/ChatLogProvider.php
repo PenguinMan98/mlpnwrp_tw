@@ -157,7 +157,7 @@ WHERE `handle` = ?
 	
 public function getAll(){
 		$strSql = "
-SELECT * FROM `chat_log` WHERE `timestamp` = '2013' ORDER BY `chat_log_id` ASC LIMIT 2000
+SELECT * FROM `chat_log` ORDER BY `chat_log_id` ASC
 		";
 		$arrParams = array();
 		$arrResults = array();

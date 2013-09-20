@@ -505,7 +505,7 @@ function chat_msgs_get()
 		          if (line.recipient_username == null || line.recipient_username == '.'){ // if this message is public
 		        	  var nameLine = '<div ';
 					  if(stare){nameLine += 'class="stare" '};
-					  nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date">'+line.formatedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
+					  nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' Adj-Hr: '+line.adjustedHour+'">'+line.formattedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 					  chat_msgs['.'] += nameLine;
 					  if(!initializePosts){
 						  chat_out_msg(nameLine);
@@ -515,7 +515,7 @@ function chat_msgs_get()
 		          {
 		        	//console.log('I got a PM from', line.handle, 'to',line.recipient_username, message);
 					chat_priv_prepair(line.handle, line.recipient_username); // not entirely sure what this does
-					var nameLine = '<div id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date">'+line.formatedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
+					var nameLine = '<div id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' Adj-Hr: '+line.adjustedHour+'">'+line.formattedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 
 					// if it's from somebody to me, (new system)
 					if(line.recipient_username == chat_user){

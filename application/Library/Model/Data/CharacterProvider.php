@@ -49,7 +49,8 @@ WHERE c.name=?';
 SELECT * FROM `character` c
 LEFT JOIN `character_user` cu
 	ON c.`character_id` = cu.`character_id`
-WHERE cu.`user_id`=?';
+WHERE cu.`user_id`=?
+ORDER BY c.`name` ASC';
 		$params = array( $userId );
 		return Model_Data_CharacterProvider::getArrayFromQuery($strSql, $params);
 	}

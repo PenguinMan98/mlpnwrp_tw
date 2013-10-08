@@ -280,6 +280,7 @@ foreach ($chatRoomList as $chatRoom) {
 			/* TAB COMPLETION */
 		$('#send').keydown(function( e ){
 			if(e.which == 9){
+				e.preventDefault();
 				var tc_post = $('#send').val();
 				var tc_lastWord = tc_post.match(/\w*$/i);
 				for (var i in chat_usrs){

@@ -1,5 +1,6 @@
 <?php
 // Copyright (C) 2013 Pengy Programming. All rights reserved.
+chdir('D:\\wamp\\www\\mlpnwrp_tw\\public\\chat\\ajax-chat\\php\\');
 // must bootstrap the ajax calls
 require_once '../../../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();

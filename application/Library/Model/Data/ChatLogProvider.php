@@ -5,40 +5,72 @@ class Model_Data_ChatLogProvider extends Model_Data_ChatLogProviderBase
 	// Search by text
 	// search by character
 	// search by player
-	public function search( $startDate, $endDate = null, $text = null, Model_Structure_ChatRoom $room = null, $character = null, Model_Structure_Phpbb_Users $player = null){
-		if(is_null($text) && is_null($character) && is_null($player)){
+	public function search( $startDate, $endDate = null, $text = null, Model_Structure_ChatRoom $room = null, $characters = null, Model_Structure_Phpbb_Users $player = null){
+		if(is_null($text) && is_null($character) && is_null($player) && is_null($startDate)){
 			return array();
 		}
 		$params = array();
 		if(is_null($endDate)){
-			$whereArr[] = 'timestamp LIKE ?';
-			$params[] = $startDate . '%';
+			$whereArr[] = '`timestamp` > ? AND `timestamp` <= ?';
+			$params[] = strtotime($startDate);
+			$params[] = strtotime($startDate) + (60*60*24);// add a day
+			//echo "blah1<br>";
 		}else{
-			$whereArr[] = 'timestamp > ? AND timestamp <= ?';
-			$params[] = $startDate;
-			$params[] = $endDate;
+			$whereArr[] = '`timestamp` > ? AND `timestamp` <= ?';
+			$params[] = strtotime($startDate);
+			$params[] = strtotime($endDate);
+			//echo "blah2<br>";
 		}
 		if(!is_null($text)){
-			$whereArr[] = 'text LIKE ?';
+			$whereArr[] = '`text` LIKE ?';
 			$params[] = '%' . $text . '%';
 		}
 		if(!is_null($room)){
-			$whereArr[] = 'chat_room_id = ?';
+			$whereArr[] = '`chat_room_id` = ?';
 			$params[] = $room->getChatRoomId();
 		}
 		/*if(!is_null($character)){
 			$whereArr[] = 'user_id = ?';
 			$params[] = $character->getCharacterId();
 		}*/
-		if(!is_null($character) && $character != ""){
-			$whereArr[] = 'handle like ?';
-			$params[] = '%' . $character . '';
+		if(!is_null($characters) && $characters != ""){
+			$whereStr = "( ";
+			$initCharArr = explode(',', $characters);
+			$charArr = array();
+			foreach($initCharArr as $charName){
+				$charName = trim($charName);
+				if($charName !== ""){
+					$charArr[] = $charName;
+					$params[] = '' . $charName . '';
+				}
+			}
+			for($i = 0; $i < count($charArr); $i++ ){
+				if($i != 0) $whereStr .= "OR ";
+				$whereStr .= "`handle` LIKE ? ";
+			}
+			
+			$whereStr .= ")";
+			$whereArr[] = $whereStr;
 		}
 		
 		if(!is_null($player)){
 			$whereArr[] = 'user_id = ?';
 			$params[] = $player->getUserId();
 		}
+		$countSql = 'SELECT count(*) FROM `chat_log` 
+WHERE `recipient_user_id` IS NULL AND `recipient_username` IS NULL AND ' . implode(' AND ', $whereArr);
+		$countResults = array();
+		$arrErrors = array();
+		$count = DAO::getAssoc($countSql, $params, $countResults, $arrErrors);
+		if(!empty($arrErrors)){
+			throw new Exception("Error getting result count: " . implode('|', $arrErrors));
+		}
+		$count = $countResults[0]['count(*)'];
+		define('MAX_RESULTS', 10000);
+		if($count > MAX_RESULTS){
+			throw new Exception("That search had too many results ($count). Please narrow it down.");
+		}
+		
 		$strSql = 'SELECT * FROM `chat_log` 
 WHERE recipient_user_id IS NULL AND recipient_username IS NULL AND ' . implode(' AND ', $whereArr);
 		

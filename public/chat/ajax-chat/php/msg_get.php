@@ -97,7 +97,7 @@ if (isset($_GET['room']) &&
 	  			date("n",$line['timestamp']),
 	  			date("j",$line['timestamp']),
 	  			date("Y",$line['timestamp']));
-	  	$line['adjustedHour'] = date('H:i:s',$adjustedHour);
+	  	$line['adjustedHour'] = date('h:i:s A',$adjustedHour);
 	  	$line['interval'] = (time()-$postDate->format('U'));
 	  }
   }catch(Exception $e){

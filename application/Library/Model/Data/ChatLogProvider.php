@@ -16,6 +16,9 @@ class Model_Data_ChatLogProvider extends Model_Data_ChatLogProviderBase
 			$params[] = strtotime($startDate) + (60*60*24);// add a day
 			//echo "blah1<br>";
 		}else{
+			if($endDate < $startDate){
+				throw new Exception("End Date must come AFTER start date.  Silly!");
+			}
 			$whereArr[] = '`timestamp` > ? AND `timestamp` <= ?';
 			$params[] = strtotime($startDate);
 			$params[] = strtotime($endDate);

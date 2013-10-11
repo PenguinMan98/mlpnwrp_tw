@@ -60,7 +60,7 @@ input[type="button"],input[type="submit"]{
 		<div id="login">
 			<ul>
 				<li><a href="#tabs-1">Login</a></li>
-				<!-- <li><a href="#tabs-2">Login as Guest</a></li> -->
+				<li><a href="#tabs-2">Login as Guest</a></li>
 			</ul>
 			<div id="tabs-1">
 				<form id="login_form" action="chat/" method="POST">
@@ -80,7 +80,7 @@ input[type="button"],input[type="submit"]{
 					<input type="button" id="forum_login" name="forum_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;" onClick="logMeIn();">
 				</form>
 			</div>
-			<!-- <div id="tabs-2">
+			<div id="tabs-2">
 				<form id="guest_login_form" action="chat/" method="post" onSubmit="logGuestIn();">
 						<?php // Logged in added as a way to tell if the last time this page was viewed the user was logged in.?>
 						<?php // We'll check that on the chat page. If this is set but their login is expired, bounce them back here.?>
@@ -90,7 +90,7 @@ input[type="button"],input[type="submit"]{
 					<br>
 					<input type="submit" id="guest_login" name="guest_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;">
 				</form>
-			</div> -->
+			</div>
 		
 		</div>
 	</div>

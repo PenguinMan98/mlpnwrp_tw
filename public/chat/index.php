@@ -53,8 +53,9 @@ include_once PUBLIC_ROOT . '/chat/ajax-chat/php/init.php'; /*the main php includ
 // or log in the registered character
 $arrErrors = array();
 if(!$userId || empty($userId)) {
-		$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
-		header("Location: ../login.php");
+	$blockForm = true;
+		//$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
+		//header("Location: ../login.php");
 	//echo "Logged in as guest: " . $_POST['handle'] . "<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
@@ -65,8 +66,8 @@ if(!$userId || empty($userId)) {
 	$guestUserHelper->replaceOne($guestUser, $arrErrors);
 	// add the character handle to the temporary player table
 } elseif(empty($characterId)) {
-		$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
-		header("Location: ../login.php");
+		//$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
+		//header("Location: ../login.php");
 	//echo "Logged in as user: " . $userName . " with guest character: ".$_POST['handle']."<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
@@ -251,7 +252,9 @@ foreach ($chatRoomList as $chatRoom) {
         	<form class="send" action="POST" onsubmit="chat_msgs_add(); return false;">
 	        	<span id="character_name" style="color: <?=$chat_name_color?>"><?=$handle?></span>:
 	        	<input style="color: <?=$chat_text_color?>" id="send" type="text" autocomplete="off" />
+        	<?php if(!$blockForm): ?>
 	    		<input id="submit_send" class="submit" type="submit" value="Send" />
+	    	<?php endif; ?>
 	    	</form>
     	</div>
 	</div>

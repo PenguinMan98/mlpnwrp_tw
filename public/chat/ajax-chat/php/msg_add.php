@@ -14,6 +14,9 @@ if($userId) { // logged in + registered char
 	$character = $characterHelper->getOneByCharacterName($handle);
 }
 if(!$userId || !is_object($character)){ // guest
+	$response->error = "Guests are not allowed to post.";
+	$response->success = false;
+	die( json_encode($response) );
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = $guestUserHelper->getOneByPk($handle);
 }

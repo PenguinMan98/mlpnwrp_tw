@@ -6,26 +6,30 @@ require_once '../../../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
 $response = new stdClass();
+$response->playerId = $userId;
 
 // verify login
 $handle = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['user']), ENT_QUOTES);
-if($userId) { // logged in + registered char
-	$characterHelper = new Model_Data_CharacterProvider();
-	$character = $characterHelper->getOneByCharacterName($handle);
-}
-if(!$userId || !is_object($character)){ // guest
+if(!$userId) { // not logged in, 
 	$response->error = "Guests are not allowed to post.";
 	$response->success = false;
 	die( json_encode($response) );
+}
+
+// search for a registered char
+$characterHelper = new Model_Data_CharacterProvider();
+$character = $characterHelper->getOneByCharacterName($handle);
+
+if(!is_object($character)){ // check for a guest character
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = $guestUserHelper->getOneByPk($handle);
 }
+
 if((!is_object($character) && !is_object($guestUser)) || // no character match or
 		(is_object($character) && !$character->getLoggedIn()) ){ // registered character isn't logged in
 	$response->success = false;
 	$response->text = "Character Not Logged In";
-	echo json_encode($response);
-	die();
+	die( json_encode($response) );
 }
 
 include("TokenOperation.php");

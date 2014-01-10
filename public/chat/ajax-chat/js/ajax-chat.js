@@ -316,6 +316,7 @@ function chat_users_get(){
 	.done(function(response) {
 		response.characters.sort(handleSort);
 		chat_usrs = response.characters;
+		console.log('characters', chat_usrs);
 
 		for(var i in chat_usrs){
 			if(typeof chat_private[chat_usrs[i]['name']] == 'undefined'){ // initialize chat_private for this handle
@@ -504,7 +505,7 @@ function chat_msgs_get()
 		          
 		          if (line.recipient_username == null || line.recipient_username == '.'){ // if this message is public
 		        	  var nameLine = '<div ';
-					  if(stare){nameLine += 'class="stare" '};
+					  if(stare){nameLine += 'class="line stare" '} else { nameLine += 'class="line" ' };
 					  //nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' Adj-Hr: '+line.adjustedHour+'">'+line.formattedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 					  nameLine += 'id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' MDT: '+line.formattedDate+'">'+line.adjustedHour+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 					  chat_msgs['.'] += nameLine;
@@ -517,7 +518,7 @@ function chat_msgs_get()
 		        	//console.log('I got a PM from', line.handle, 'to',line.recipient_username, message);
 					chat_priv_prepair(line.handle, line.recipient_username); // not entirely sure what this does
 					//var nameLine = '<div id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' Adj-Hr: '+line.adjustedHour+'">'+line.formattedDate+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
-					var nameLine = '<div id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' MDT: '+line.formattedDate+'">'+line.adjustedHour+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
+					var nameLine = '<div class="line" id="line_'+line.chat_log_id+'" style="color: #ddd;"><span class="post_date" title="23-Hr: '+line.twentyThreeHour+' MDT: '+line.formattedDate+'">'+line.adjustedHour+'</span> <b>'+chat_msgs_usr(line.handle, line.chat_name_color)+'</b>'+ message +'</div>';
 
 					// if it's from somebody to me, (new system)
 					if(line.recipient_username == chat_user){
@@ -637,7 +638,7 @@ function chat_msgs_usr(handle, color, sidebar)
   	// logged in with no cutie mark, use Twi's
   if(sidebar){ retString += '<span style="height: 100%; width: 15px;">'; }
   if(sidebar && thisChar && !thisChar.cutie_mark && thisChar.registered){ 
-	  retString += '<img style="cursor: pointer;" src="'+SITE_ROOT+'/img/twilight_sparkle_cutie_mark2_15_tall.png" onClick="showHUD(this, \''+handle+'\'); return false;" />&nbsp;';
+	  retString += '<img style="cursor: pointer;" src="'+SITE_ROOT+'/img/VinnyHavoc-CMCHeraldMicroicon.png" onClick="showHUD(this, \''+handle+'\'); return false;" />&nbsp;';
   }	// guest
   else if(sidebar && thisChar && !thisChar.cutie_mark){ 
 	  retString += 'G&nbsp;';
@@ -647,9 +648,9 @@ function chat_msgs_usr(handle, color, sidebar)
   }
   if(sidebar){ retString += '</span>'; }
     // not a sidebar, an icon is present, and it's me, add a chat icon
-  /*if(!sidebar && thisChar && thisChar.chat_icon){ 
+  if(!sidebar && thisChar && thisChar.chat_icon){ 
 	  retString += '<img src="'+SITE_ROOT+'/img/'+thisChar.character_id+'/'+thisChar.chat_icon+'" />&nbsp;';
-  }*/
+  }
   // if there is a status, then add the icon
   /*if(typeof chat_usrs[user] != 'undefined' && typeof chat_usrs[user][2] != 'undefined' && chat_usrs[user][2] != 'none'){
 	  retString += '<img src="'+chat_path+'style/status/'+chat_usrs[user][2]+'.png" alt="" style="margin-right: 0px;" />';

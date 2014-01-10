@@ -67,6 +67,9 @@ a:hover, a:active{
 	font-size: 12px;
 	font-stretch: condensed;
 }
+#chat div.line{
+	line-height: 25px;
+}
 #form { 
     /*background: #444;*/
 	position:fixed !important;

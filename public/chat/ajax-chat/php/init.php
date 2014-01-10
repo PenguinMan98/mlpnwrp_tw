@@ -44,13 +44,21 @@ $FLOODCUTOFFPOSTS = 3; // can't post more than 3 times in a 5 second period.
 $chatRoomProvider = new Model_Data_ChatRoomProvider();
 $chat_list = $chatRoomProvider->getChatList();
 $current_room = false;
-foreach($chat_list as $chatRoom){
-	if(!$current_room){
-		$current_room = $chatRoom;
-		break;
+if(isset($handle)){
+	$current_room = $chatRoomProvider->getOneByCharacter($handle);
+	if(is_object($current_room)){
+		$current_room = $current_room->getAsArray();
 	}
 }
-
+// default if no other room was selected.
+if(empty($current_room)){
+	foreach($chat_list as $chatRoom){
+		if(!$current_room){
+			$current_room = $chatRoom;
+			break;
+		}
+	}
+}
 // ***** Init ******************************************************************
 
 // get character names

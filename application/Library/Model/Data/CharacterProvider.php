@@ -113,4 +113,25 @@ WHERE `logged_in`=1';
 		if(!empty($arrErrors)) throw new Exception("Error logging out registered users: " . implode('|',$arrErrors));
 		return true;
 	}
+	
+	public function getCharactersByPlayerName( $playerName ){
+		$strSql = "
+SELECT c.character_id, c.name, c.status, c.last_status_request, c.logged_in, c.cutie_mark FROM `users_users` u
+JOIN character_user cu
+	ON u.userid = cu.user_id
+JOIN `character` c
+	ON c.character_id = cu.character_id
+WHERE `login` = ?;";
+		$params = array($playerName);
+		return Model_Data_CharacterProvider::getArrayFromQuery($strSql, $params);
+	}
+	
+	public function searchByName( $searchWord ){
+		$strSql = "
+SELECT c.character_id, c.name, c.status, c.last_status_request, c.logged_in, c.cutie_mark 
+FROM `character` c
+WHERE c.name LIKE ?;";
+		$params = array('%'.$searchWord.'%');
+		return Model_Data_CharacterProvider::getArrayFromQuery($strSql, $params);
+	}
 }

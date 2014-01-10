@@ -147,7 +147,7 @@ $chatIcon = getImage('chat_icon', $character['character_id']);
 						<input type="submit" name="edit" value="Update">
 					</div>
 					<div id="images">
-						<label>Profile Image</label> (Max Filesize = 100Kb)<br>
+						<label>Profile Image</label> (Max Filesize = 80Kb)<br>
 						<?=($profilePic) ? '<img src="../../img/' . $character['character_id'] . '/' . $profilePic . '" /><br>' : '' ?>
 						<input type="file" name="profile_image"><br>
 						<hr>

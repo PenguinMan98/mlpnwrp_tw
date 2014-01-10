@@ -35,4 +35,17 @@ ORDER BY `chat_room_type_id` ASC, `display_order` ASC';
 		}
 		return false; // I didn't find it
 	}
+	
+	// get the room the character was last in
+	public function getOneByCharacter($charName){
+		$strSql = "
+SELECT * 
+FROM `chat_room` cr
+JOIN `character` c
+	ON c.chat_room_id = cr.chat_room_id
+WHERE c.name = ? ";
+		$params = array($charName);
+		
+		return Model_Data_ChatRoomProvider::getOneFromQuery($strSql, $params);
+	}
 }

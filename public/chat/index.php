@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Notes to self:
- * 1) Using the session to store anything specific to one instance of the chat is a bad idea because it will 
+ * 1) Using the session to store anything specific to one instance of the chat is a bad idea because it will
  * cause complications later for having multiple windows open.
  * */
 
 require_once '../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
-if (empty($_POST['handle'])) // if no username, 
+if (empty($_POST['handle'])) // if no username,
 {
 	//$_SESSION['SYSTEM_MESSAGE'] = "Error, Not Logged in"; // don't bother with an error message.  It's redundant
 	header("Location: ../login.php");// send them to login.php.
 	die();
-} 
-if(!preg_match("/^[\w_-]*$/", $_POST['handle'])){ 
+}
+if(!preg_match("/^[\w_-]*$/", $_POST['handle'])){
 	$_SESSION['SYSTEM_MESSAGE'] = "Error, invalid username";
 	header("Location: ../login.php");// reject a bad username.
 	die();
@@ -65,6 +65,14 @@ if(!$userId || empty($userId)) {
 	$guestUser->setLastActivity(time());
 	$guestUserHelper->replaceOne($guestUser, $arrErrors);
 	// add the character handle to the temporary player table
+
+	// log the login
+	$characterLoginLogHelper = new Model_Data_CharacterLoginLogProvider();
+	$characterLoginLogEntry = new Model_Structure_CharacterLoginLog();
+	$characterLoginLogEntry->setHandle($handle);
+	$characterLoginLogEntry->setLoginTime(time());
+	$characterLoginLogEntry->setUserIp($_SERVER['REMOTE_ADDR']);
+	$characterLoginLogHelper->insertOne($characterLoginLogEntry, $arrErrors);
 } elseif(empty($characterId)) {
 		//$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
 		//header("Location: ../login.php");
@@ -73,11 +81,20 @@ if(!$userId || empty($userId)) {
 	$guestUser = new Model_Structure_GuestUsers();
 	$guestUser->setChatRoomId($current_room['chat_room_id']);
 	$guestUser->setHandle($handle);
-	$guestUser->setUserId($userName);
+	$guestUser->setUserId($userId);
 	$guestUser->setGuestIp($_SERVER['REMOTE_ADDR']);
 	$guestUser->setLastActivity(time());
 	$guestUserHelper->replaceOne($guestUser, $arrErrors);
 	// add the character handle to the temporary player table
+
+	// log the login
+	$characterLoginLogHelper = new Model_Data_CharacterLoginLogProvider();
+	$characterLoginLogEntry = new Model_Structure_CharacterLoginLog();
+	$characterLoginLogEntry->setHandle($handle);
+	$characterLoginLogEntry->setLoginTime(time());
+	$characterLoginLogEntry->setUserIp($_SERVER['REMOTE_ADDR']);
+	$characterLoginLogEntry->setUserId($userId);
+	$characterLoginLogHelper->insertOne($characterLoginLogEntry, $arrErrors);
 } else {
 	//echo "Logged in as user: " . $userName . " with character: ".$_POST['handle']."<br>";
 	$characterHelper = new Model_Data_CharacterProvider();
@@ -87,6 +104,16 @@ if(!$userId || empty($userId)) {
 	$character->setChatRoomId($current_room['chat_room_id']);
 	$characterHelper->updateOne($character, $arrErrors);
 	// tell the database this character is logged in
+
+	// log the login
+	$characterLoginLogHelper = new Model_Data_CharacterLoginLogProvider();
+	$characterLoginLogEntry = new Model_Structure_CharacterLoginLog();
+	$characterLoginLogEntry->setHandle($handle);
+	$characterLoginLogEntry->setLoginTime(time());
+	$characterLoginLogEntry->setUserIp($_SERVER['REMOTE_ADDR']);
+	$characterLoginLogEntry->setUserId($userId);
+	$characterLoginLogEntry->setCharacterId($character->getCharacterId());
+	$characterLoginLogHelper->insertOne($characterLoginLogEntry, $arrErrors);
 }
 if(!empty($arrErrors)){
 	die(implode('|',$arrErrors));
@@ -131,7 +158,7 @@ $chat_name_color = (is_object($character)) ? $character->getChatNameColor() : "#
 		width: 100%;
 		background:transparent url(../img/<?=$characterId?>/<?=$profilePic?>) no-repeat scroll top left;
 		background-size: 200px;
-		opacity: 0.1; 
+		opacity: 0.1;
 		filter: alpha(opacity=10);
 	}
 	<?php endif; ?>
@@ -187,30 +214,31 @@ var mute_array = [];
 	<div id="page-wrap">
 
 		<div id="top_menu">&nbsp;&nbsp;<a target="_blank" href="/">Home</a>&nbsp;&nbsp;
+			|&nbsp;&nbsp;<a target="_blank" href="/chat">+ Character</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/Site+Rules">Site Rules</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/Chat+Commands">Chat Commands</a>&nbsp;&nbsp;
 			|&nbsp;&nbsp;<a href="#" onClick="togglePreferences(this);">Preferences</a>&nbsp;&nbsp;
 			<?php if(is_object($character)):?>|&nbsp;&nbsp;<a target="_blank" href="<?=SITE_ROOT?>/chat/character/edit.php?c=<?=$handle?>">Profile</a>&nbsp;&nbsp;<?php endif;?>
 			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/chat/ajax-chat/php/logout.php?handle=<?=$handle?><?php if($characterId) echo "&character_id=$characterId"?>">Logout</a>&nbsp;&nbsp;
 		</div>
-		
+
 		<div id="chat">
-		
+
 		</div>
-		
+
 		<div id="exit_pm">
 			<span id="exit_pm_text"></span>
 			<input type="button" onClick="chat_priv_switch('.',true);" value="X">
 		</div>
 	    <div id="rooms">
 			<div class="room" id="room_child">
-<?php 
+<?php
 $chatRoomHelper = new Model_Data_ChatRoomProvider();
 $chatRoomList = $chatRoomHelper->getChatList();
 
 $roomTypeId = 0;
 $roomType = "";
-foreach ($chatRoomList as $chatRoom) { 
+foreach ($chatRoomList as $chatRoom) {
 	if($roomTypeId != $chatRoom['chat_room_type_id']){
 		if($roomTypeId != 0){
 			echo "</select><br>";
@@ -222,20 +250,21 @@ foreach ($chatRoomList as $chatRoom) {
 	}
 	//if($chatRoom['chat_room_id'] != $current_room['chat_room_id'])
 		echo "<option value=\"".$chatRoom['chat_room_id']."\">".$chatRoom['room_name']."</option>";
-	
+
 } ?>
 				</select>
 			</div>
-	    
+
 	    </div>
         <div id="room_list">
 			<div id="header_messages">
 				<?php if(file_exists("../img/room1.png")): ?>
 				<img src="../img/room1.png">
-				<?php else : 
+				<?php else :
 					echo $currentRoom['room_name'];
 				endif;?>
 			</div>
+			<img title="The weather is cold and snowy." src="../img/snow_icon.png" />
         	<div id="messages"></div>
             <!-- <div id="header_users">Users</div> -->
 		    <div id="users">
@@ -267,9 +296,9 @@ foreach ($chatRoomList as $chatRoom) {
 			<label>Ping On New</label><input id="pingOnNew" class="input" type="checkbox" onclick="pingOnNew = this.checked;" />
 		</div>
 	</div>
-			
-	
-	
+
+
+
 <?php include_once PUBLIC_ROOT . '/chat/ajax-chat/ajax-chat.php'; /*the main HTML include file*/?>
 
 </body>
@@ -307,16 +336,16 @@ foreach ($chatRoomList as $chatRoom) {
 		});
 
 		/*$(window).unload( logmeout() );*/
-		
+
 		/*$('#exit_pm').on('click',function(){chat_priv_switch('.',true);});*/
 	});
-	
+
 	function logmeout(){
 		$.ajax({
 			url: chat_path+"php/logout.php",
 			data: {handle: handle
 				<?php if($characterId): ?>, character_id: <?=$characterId?> <?php endif;?>},
-			dataType: "JSON" 
+			dataType: "JSON"
 		});
 	}
 

@@ -5,6 +5,7 @@ $_bootstrap = Bootstrap::getInstance();
 $charName = $_GET['c'];
 $characterProvider = new Model_Data_CharacterProvider();
 $character = $characterProvider->getDetailsByCharacterName($charName);
+
 if(empty($character)) {
 	// redirect to the character search page
 	die("I don't know anypony named $charName!  Sorry! Maybe one will fall from the sky tomorrow?");
@@ -30,7 +31,8 @@ $profilePic = getImage('profile_pic', $character['character_id']);
         	<?php if($profilePic): ?>
         	<div id="char_img"><img src="../../img/<?=$character['character_id']?>/<?=$profilePic?>" /></div>
         	<?php endif; ?>
-        	<p>Race: <?=$character['race']?> <?php if($character['character_race_note']) echo "( ". $character['character_race_note'] ." )";?><br>
+        	<p>Player: <a href="../../chat/player/characters.php?p=<?=$character['username']?>"><?=$character['username']?></a><br>
+        	Race: <?=$character['race']?> <?php if($character['character_race_note']) echo "( ". $character['character_race_note'] ." )";?><br>
         	Gender: <?=$character['gender']?><br>
         	Age: <?=$character['age']?></p>
         	<p>Status: <?=$character['status']?></p>

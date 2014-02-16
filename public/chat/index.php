@@ -8,6 +8,13 @@
 require_once '../../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
 
+// mobile detection
+/*echo "(".(file_exists('mobileDetect/Mobile_Detect.php')).")";*/
+require_once 'mobileDetect/Mobile_Detect.php';
+$_detect = new Mobile_Detect;
+$_deviceType = ($_detect->isMobile() ? ($_detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+
+
 if (empty($_POST['handle'])) // if no username,
 {
 	//$_SESSION['SYSTEM_MESSAGE'] = "Error, Not Logged in"; // don't bother with an error message.  It's redundant
@@ -54,8 +61,8 @@ include_once PUBLIC_ROOT . '/chat/ajax-chat/php/init.php'; /*the main php includ
 $arrErrors = array();
 if(!$userId || empty($userId)) {
 	$blockForm = true;
-		//$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
-		//header("Location: ../login.php");
+		$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
+		header("Location: ../login.php");
 	//echo "Logged in as guest: " . $_POST['handle'] . "<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
@@ -74,8 +81,8 @@ if(!$userId || empty($userId)) {
 	$characterLoginLogEntry->setUserIp($_SERVER['REMOTE_ADDR']);
 	$characterLoginLogHelper->insertOne($characterLoginLogEntry, $arrErrors);
 } elseif(empty($characterId)) {
-		//$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
-		//header("Location: ../login.php");
+		$_SESSION['SYSTEM_MESSAGE'] = "Guest accounts are disabled. Sorry.";
+		header("Location: ../login.php");
 	//echo "Logged in as user: " . $userName . " with guest character: ".$_POST['handle']."<br>";
 	$guestUserHelper = new Model_Data_GuestUsersProvider();
 	$guestUser = new Model_Structure_GuestUsers();
@@ -149,7 +156,6 @@ $chat_name_color = (is_object($character)) ? $character->getChatNameColor() : "#
 <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" type="text/css" href="<?=SITE_ROOT?>/chat/ajax-chat/style/style.css" />
-
 <style>
 	<?php if($profilePic): ?>
 	#character_info_image{
@@ -168,8 +174,10 @@ $chat_name_color = (is_object($character)) ? $character->getChatNameColor() : "#
 <script type="text/javascript" src="<?=SITE_ROOT?>/chat/ajax-chat/js/cookies.js"></script>
 
 <script type="text/javascript">
+var userId 		 = <?=( !$userId || empty($userId) ) ? -1 : $userId ?>;
 var room 		 = <?=$current_room['chat_room_id']?>; /* for now default this */
 var handle 		 = '<?=$handle?>';
+var ip 			 = '<?=$_SERVER['REMOTE_ADDR']?>';
 <?php if(is_object($character)): ?>
 var chat_name_color = '<?=$chat_name_color?>';
 var chat_text_color = '<?=$chat_text_color?>';
@@ -193,6 +201,7 @@ var chatColorOverrideColor = '#ddd';
 var profilePic = '<?=$profilePic?>';
 var cutieMark = '<?=$cutieMark?>';
 var chatIcon = '<?=$chatIcon?>';
+var pingOnNew = false;
 <?php if(!empty($_SESSION[$handle]['stare_array'])): ?>
 var stare_array = <?=json_encode($_SESSION[$handle]['stare_array'])?>;
 <?php else: ?>
@@ -203,10 +212,13 @@ var mute_array = <?=json_encode($_SESSION[$handle]['mute_array'])?>;
 <?php else: ?>
 var mute_array = [];
 <?php endif; ?>
+//variables
+var variables = <?=(is_object($character) && $character->getVariables() != "") ? json_encode(unserialize($character->getVariables())): '{}'?>;
+
 </script>
 
 </head>
-<body>
+<body class="<?=$_deviceType?>">
 	<audio id="audio_ding" style="display: none;" controls>
 	  <source src="<?=SITE_ROOT?>/media/ding.wav" type="audio/wav"></source>
 	  <source src="<?=SITE_ROOT?>/media/ding.mp3" type="audio/mpeg"></source>
@@ -222,9 +234,12 @@ var mute_array = [];
 			|&nbsp;&nbsp;<a href="<?=SITE_ROOT?>/chat/ajax-chat/php/logout.php?handle=<?=$handle?><?php if($characterId) echo "&character_id=$characterId"?>">Logout</a>&nbsp;&nbsp;
 		</div>
 
-		<div id="chat">
-
+		<div id="game_notes">
+			<h1>Game Notes:</h1>
+			<textarea id="game_note_field"></textarea>
 		</div>
+
+		<div id="chat"<?=($current_room['chat_room_id'] == 13 || $current_room['chat_room_id'] == 12 || $current_room['chat_room_id'] == 11) ? ' class="game"' : "";?>></div>
 
 		<div id="exit_pm">
 			<span id="exit_pm_text"></span>
@@ -264,7 +279,9 @@ foreach ($chatRoomList as $chatRoom) {
 					echo $currentRoom['room_name'];
 				endif;?>
 			</div>
-			<img title="The weather is cold and snowy." src="../img/snow_icon.png" />
+			<div id="weather" title="The weather is cold and snowy.">
+				<img id="weather_img" src="../img/snow_icon.png" />
+			</div>
         	<div id="messages"></div>
             <!-- <div id="header_users">Users</div> -->
 		    <div id="users">
@@ -292,7 +309,7 @@ foreach ($chatRoomList as $chatRoom) {
 			<h3><u>Preferences</u></h3>
 			<label>Chat Text Color Override:</label><br>
 			&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="chatColorOverride = this.checked;"/><br>
-			<label>Autofocus</label><input id="autofocus" checked=true class="input" type="checkbox" onclick="autofocus = this.checked;" /><br>
+			<label title="Enables and Disables the code that moves the focus to the bottom of the chat when a new post is received.">Autofocus</label><input id="autofocus" checked=true class="input" type="checkbox" onChange="toggleAutofocus(this.checked);" /><br>
 			<label>Ping On New</label><input id="pingOnNew" class="input" type="checkbox" onclick="pingOnNew = this.checked;" />
 		</div>
 	</div>
@@ -335,10 +352,19 @@ foreach ($chatRoomList as $chatRoom) {
 			}
 		});
 
+		$('#game_note_field').on('keyup', function(){
+			var game_notes = $('#game_note_field').val();
+			/*console.log('game notes', game_notes, 'room', room);*/
+			saveGameNotesSettings(room, game_notes);
+		});
 		/*$(window).unload( logmeout() );*/
 
 		/*$('#exit_pm').on('click',function(){chat_priv_switch('.',true);});*/
 	});
+
+	function toggleAutofocus( state ){
+		autofocus = state;
+	}
 
 	function logmeout(){
 		$.ajax({

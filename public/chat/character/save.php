@@ -8,7 +8,7 @@ if(empty($_SESSION['u_info']) || empty($_POST)){
 	header('Location: ' . SITE_ROOT . '/tiki-login_scr.php');
 }
 
-$allowedTags = '<br><p><img><h1><h2><h3><h4><div><span><u><i><strike><strong><b>';
+$allowedTags = '<br><p><img><h1><h2><h3><h4><div><span><u><i><strike><strong><b><a>';
 
 // are we editing?
 $editing = ($_REQUEST['edit']) ? true : false;
@@ -27,6 +27,9 @@ $status = strip_tags($_REQUEST['status'], $allowedTags);
 $bio = strip_tags($_REQUEST['bio'], $allowedTags);
 $player_notes = strip_tags($_REQUEST['player_notes'], $allowedTags);
 $player_private_notes = strip_tags($_REQUEST['player_private_notes'], $allowedTags);
+$profile_html = $_REQUEST['profile_html'];
+$profile_css = $_REQUEST['profile_css'];
+$html_override = (isset($_REQUEST['html_override']) && $_REQUEST['html_override']) ? 1 : 0;
 
 // set some defaults
 $chat_name_color = ( $chat_name_color != "" ) ? $chat_name_color : "#ffffff" ;
@@ -133,12 +136,15 @@ try{
 	$character->setBio($bio);
 	$character->setPlayerNotes($player_notes);
 	$character->setPlayerPrivateNotes($player_private_notes);
+	$character->setProfileHtml($profile_html);
+	$character->setProfileCss($profile_css);
+	$character->setHtmlOverride($html_override);
 		
 	// this is enough to create the character
 	$arrErrors = array();
 		
 	if($editing){
-		$userProvider = new Model_Data_Phpbb_UsersProvider();
+		$userProvider = new Model_Data_UsersUsersProvider();
 		if(!$userProvider->verifyUserAndCharacterId($userId, $character->getCharacterId())){
 			die("This is not your character.");
 		}

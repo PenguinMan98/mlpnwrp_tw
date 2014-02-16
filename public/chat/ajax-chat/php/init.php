@@ -43,6 +43,7 @@ $FLOODCUTOFFPOSTS = 3; // can't post more than 3 times in a 5 second period.
 // get the first room you find for the $current_room
 $chatRoomProvider = new Model_Data_ChatRoomProvider();
 $chat_list = $chatRoomProvider->getChatList();
+
 $current_room = false;
 if(isset($handle)){
 	$current_room = $chatRoomProvider->getOneByCharacter($handle);
@@ -59,6 +60,7 @@ if(empty($current_room)){
 		}
 	}
 }
+
 // ***** Init ******************************************************************
 
 // get character names

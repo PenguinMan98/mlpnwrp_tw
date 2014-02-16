@@ -24,7 +24,7 @@ class Operation_Race extends OperationBase{
 	private function execute(){
 		GLOBAL $userId;
 		$uugProvider = new Model_Data_UsersUsergroupsProvider(); // my own class for checking tiki permissions
-		if(!$uugProvider->isGuide($userId)){
+		if(!($uugProvider->isGuide($userId) || $userId == 11)){
 			$this->messages[] = "You don't have permission to do that.";
 			return (implode(" ", self::$args));
 		}

@@ -30,6 +30,10 @@ class Model_Structure_CharacterBase
     protected $m_cutie_mark;
     protected $m_gender;
     protected $m_last_status_request;
+    protected $m_profile_html;
+    protected $m_profile_css;
+    protected $m_html_override;
+    protected $m_variables;
     protected $m_character_id_Orig;
 
     public function __construct($arrData = null)
@@ -302,6 +306,46 @@ class Model_Structure_CharacterBase
         return;
     }
 
+    public function getProfileHtml()
+    {
+        return $this->m_profile_html;
+    }
+    public function setProfileHtml($value)
+    {
+        $this->m_profile_html = $value;
+        return;
+    }
+
+    public function getProfileCss()
+    {
+        return $this->m_profile_css;
+    }
+    public function setProfileCss($value)
+    {
+        $this->m_profile_css = $value;
+        return;
+    }
+
+    public function getHtmlOverride()
+    {
+        return $this->m_html_override;
+    }
+    public function setHtmlOverride($value)
+    {
+        $this->m_html_override = $value;
+        return;
+    }
+
+    public function getVariables()
+    {
+        return $this->m_variables;
+    }
+    public function setVariables($value)
+    {
+        $this->m_variables = $value;
+        return;
+    }
+
     public function getOrigCharacterId()
     {
         return $this->m_character_id_Orig;
@@ -340,6 +384,10 @@ class Model_Structure_CharacterBase
         $this->setCutieMark($arrValues['cutie_mark']);
         $this->setGender($arrValues['gender']);
         $this->setLastStatusRequest($arrValues['last_status_request']);
+        $this->setProfileHtml($arrValues['profile_html']);
+        $this->setProfileCss($arrValues['profile_css']);
+        $this->setHtmlOverride($arrValues['html_override']);
+        $this->setVariables($arrValues['variables']);
         return;
     }
 
@@ -422,6 +470,18 @@ class Model_Structure_CharacterBase
                 case 'last_status_request':
                     $this->setLastStatusRequest($val);
                     break;
+                case 'profile_html':
+                    $this->setProfileHtml($val);
+                    break;
+                case 'profile_css':
+                    $this->setProfileCss($val);
+                    break;
+                case 'html_override':
+                    $this->setHtmlOverride($val);
+                    break;
+                case 'variables':
+                    $this->setVariables($val);
+                    break;
                 default:
                     break;
             }
@@ -457,6 +517,10 @@ class Model_Structure_CharacterBase
         $arrValues['cutie_mark'] = $this->getCutieMark();
         $arrValues['gender'] = $this->getGender();
         $arrValues['last_status_request'] = $this->getLastStatusRequest();
+        $arrValues['profile_html'] = $this->getProfileHtml();
+        $arrValues['profile_css'] = $this->getProfileCss();
+        $arrValues['html_override'] = $this->getHtmlOverride();
+        $arrValues['variables'] = $this->getVariables();
         return $arrValues;
     }
 

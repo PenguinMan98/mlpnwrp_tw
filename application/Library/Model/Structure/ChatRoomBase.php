@@ -12,6 +12,9 @@ class Model_Structure_ChatRoomBase
     protected $m_chat_room_type_id;
     protected $m_is_active;
     protected $m_display_order;
+    protected $m_game_notes;
+    protected $m_weather_group;
+    protected $m_weather_state;
     protected $m_chat_room_id_Orig;
 
     public function __construct($arrData = null)
@@ -101,6 +104,36 @@ class Model_Structure_ChatRoomBase
         return;
     }
 
+    public function getGameNotes()
+    {
+        return $this->m_game_notes;
+    }
+    public function setGameNotes($value)
+    {
+        $this->m_game_notes = $value;
+        return;
+    }
+
+    public function getWeatherGroup()
+    {
+        return $this->m_weather_group;
+    }
+    public function setWeatherGroup($value)
+    {
+        $this->m_weather_group = $value;
+        return;
+    }
+
+    public function getWeatherState()
+    {
+        return $this->m_weather_state;
+    }
+    public function setWeatherState($value)
+    {
+        $this->m_weather_state = $value;
+        return;
+    }
+
     public function getOrigChatRoomId()
     {
         return $this->m_chat_room_id_Orig;
@@ -121,6 +154,9 @@ class Model_Structure_ChatRoomBase
         $this->setChatRoomTypeId($arrValues['chat_room_type_id']);
         $this->setIsActive($arrValues['is_active']);
         $this->setDisplayOrder($arrValues['display_order']);
+        $this->setGameNotes($arrValues['game_notes']);
+        $this->setWeatherGroup($arrValues['weather_group']);
+        $this->setWeatherState($arrValues['weather_state']);
         return;
     }
 
@@ -149,6 +185,15 @@ class Model_Structure_ChatRoomBase
                 case 'display_order':
                     $this->setDisplayOrder($val);
                     break;
+                case 'game_notes':
+                    $this->setGameNotes($val);
+                    break;
+                case 'weather_group':
+                    $this->setWeatherGroup($val);
+                    break;
+                case 'weather_state':
+                    $this->setWeatherState($val);
+                    break;
                 default:
                     break;
             }
@@ -166,6 +211,9 @@ class Model_Structure_ChatRoomBase
         $arrValues['chat_room_type_id'] = $this->getChatRoomTypeId();
         $arrValues['is_active'] = $this->getIsActive();
         $arrValues['display_order'] = $this->getDisplayOrder();
+        $arrValues['game_notes'] = $this->getGameNotes();
+        $arrValues['weather_group'] = $this->getWeatherGroup();
+        $arrValues['weather_state'] = $this->getWeatherState();
         return $arrValues;
     }
 

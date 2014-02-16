@@ -17,6 +17,8 @@ class Model_Structure_ChatLogBase
     protected $m_chat_name_color;
     protected $m_chat_rand;
     protected $m_chat_text_color;
+    protected $m_chat_log_type_id;
+    protected $m_viewed;
     protected $m_chat_log_id_Orig;
 
     public function __construct($arrData = null)
@@ -156,6 +158,26 @@ class Model_Structure_ChatLogBase
         return;
     }
 
+    public function getChatLogTypeId()
+    {
+        return $this->m_chat_log_type_id;
+    }
+    public function setChatLogTypeId($value)
+    {
+        $this->m_chat_log_type_id = $value;
+        return;
+    }
+
+    public function getViewed()
+    {
+        return $this->m_viewed;
+    }
+    public function setViewed($value)
+    {
+        $this->m_viewed = $value;
+        return;
+    }
+
     public function getOrigChatLogId()
     {
         return $this->m_chat_log_id_Orig;
@@ -181,6 +203,8 @@ class Model_Structure_ChatLogBase
         $this->setChatNameColor($arrValues['chat_name_color']);
         $this->setChatRand($arrValues['chat_rand']);
         $this->setChatTextColor($arrValues['chat_text_color']);
+        $this->setChatLogTypeId($arrValues['chat_log_type_id']);
+        $this->setViewed($arrValues['viewed']);
         return;
     }
 
@@ -224,6 +248,12 @@ class Model_Structure_ChatLogBase
                 case 'chat_text_color':
                     $this->setChatTextColor($val);
                     break;
+                case 'chat_log_type_id':
+                    $this->setChatLogTypeId($val);
+                    break;
+                case 'viewed':
+                    $this->setViewed($val);
+                    break;
                 default:
                     break;
             }
@@ -246,6 +276,8 @@ class Model_Structure_ChatLogBase
         $arrValues['chat_name_color'] = $this->getChatNameColor();
         $arrValues['chat_rand'] = $this->getChatRand();
         $arrValues['chat_text_color'] = $this->getChatTextColor();
+        $arrValues['chat_log_type_id'] = $this->getChatLogTypeId();
+        $arrValues['viewed'] = $this->getViewed();
         return $arrValues;
     }
 

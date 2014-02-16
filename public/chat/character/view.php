@@ -19,9 +19,20 @@ $profilePic = getImage('profile_pic', $character['character_id']);
     <meta charset="utf-8">
     <title>Profile: <?=$character['name']?></title>
     <link rel="stylesheet" href="<?=SITE_ROOT?>/css/characterStyle.css">
+    <script src="js/jquery.js"></script>
     <!-- <script src="js/script.js"></script> -->
+<?php if(!empty($character['profile_css'])):?>
+    <style>
+    	<?=$character['profile_css']?>
+    </style>
+<?php endif; ?>
   </head>
   <body>
+<?php
+if(!empty($character['profile_html'])):
+	echo $character['profile_html'];
+else:
+?>
     <div id="siteContainer">
       <div id="site">
         <div id="menuContainer">
@@ -43,5 +54,6 @@ $profilePic = getImage('profile_pic', $character['character_id']);
         </div>
       </div>
     </div>
+<?php endif; ?>
   </body>
 </html>

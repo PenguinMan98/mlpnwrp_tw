@@ -3,7 +3,8 @@
     <div id="searchChatLogForm">
         Date: <input type="text" size="11" name="startDate" id="startDate" {if isset($startDate)}value="{$startDate}"{/if} />
         End Date: <input type="text" size="11" name="endDate" id="endDate" {if isset($endDate)}value="{$endDate}"{/if} />
-        Characters: <input type="text" id="character_list" name="character_list" {if isset($character_list)}value="{$character_list}"{/if}/><br>
+        Characters: <input type="text" id="character_list" name="character_list" {if isset($character_list)}value="{$character_list}"{/if}/>
+        {if $loggedIn}Show Private: <input type="checkbox" id="show_private" name="show_private" {if $show_private}checked="checked"{/if}>{/if}<br>
         Room: 
         <select name="room">
             <option value=""></option>
@@ -13,8 +14,8 @@
         &nbsp;&nbsp;<input type="submit" name="searchForm" value="Search!" />
     </div>
     <div id="searchChatLogResults">
-    {foreach $results as $post}
-        <p>[{$post->getTimestamp()|date_format:"%Y-%m-%d %r"}] {$post->getHandle()}: {$post->getText()}</p>
+    {foreach $parsed_results as $post}
+        <p>{$post}</p>
     {foreachelse}
         {if isset($error)}
             {$error}

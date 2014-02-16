@@ -7,6 +7,7 @@ $_bootstrap = Bootstrap::getInstance();
 
 $response = new stdClass();
 $response->playerId = $userId;
+$response->request = $_REQUEST;
 
 // verify login
 $handle = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['user']), ENT_QUOTES);
@@ -58,6 +59,7 @@ $priv = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['priv']), ENT_QUOTES);
 $chat_name_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_name_color']), ENT_QUOTES);
 $chat_text_color = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['chat_text_color']), ENT_QUOTES);
 $addr = htmlentities(preg_replace("/\\s+/iX", " ", $_GET['addr']), ENT_QUOTES);
+$chat_log_type_id = intval($_GET['chat_log_type_id']);
 
 //and finally, the post data
 $data = $_GET['data'];
@@ -110,8 +112,9 @@ if ($rand > 0 &&
 	}catch(Exception $e){
 	  	$response->text = $e->getMessage(); // if the parser fails, 
 	  	$data = $input; // just store the original input
-	  	$errorDetected = true;
+	  	$badOperation = true;
 	}
+	$system = (empty($data)); // if the $data is now empty, then a system message must have been triggered.
   
 	$data = htmlentities( $data, ENT_QUOTES, 'utf-8'); // encode the rest in utf-8
   
@@ -137,17 +140,17 @@ if ($rand > 0 &&
 	    	}
     	}
     	 
-    	if(!$duplicate && !$flood && !$errorDetected){ // if it's no duplicate, and it's not flood, nor did it fail previously,
+    	if(!$duplicate && !$flood && !$badOperation && !$system){ // if it's no duplicate, and it's not flood, nor did an operation fail, and it's not a system message
     		
    		  $response->text = $data;
    		  
 	      //--------------- Store the post in the DB
 	      
 	      $arrErrors = array();
-	       
+	      
 	      // create a chatlog record!
 	      $chatLogProvider = new Model_Data_ChatLogProvider();
-	      $userProvider = new Model_Data_Phpbb_UsersProvider();
+	      $userProvider = new Model_Data_UsersUsersProvider();
 	      $chatLog = new Model_Structure_ChatLog();
 	       
 	      //get the chat room id
@@ -169,7 +172,13 @@ if ($rand > 0 &&
 	      $chatLog->setChatNameColor($chat_name_color);
 	      $chatLog->setText($data);
 	      $chatLog->setChatRand($rand);
-	       
+	      $chatLog->setChatLogTypeId($chat_log_type_id);
+	      
+	      // check for special post types
+	      /*if(strpos($data, '/announce ') !== false){
+	      	$chatLog->setChatLogTypeId(3);
+	      }*/
+	      
 	      if(!empty($priv) && $priv != '.'){
 	      	$recipient = $userProvider->getOneByName($priv);
 	      	if(is_object($recipient)){ // this is a registered user
@@ -197,6 +206,8 @@ if ($rand > 0 &&
         }elseif($flood){
         	$response->text = "Your post \"$data\" was not registered due to flood protection.";
         	$response->success = false;
+        }elseif($system || $badOperation){
+        	$response->success = true;
         }else{ // duplicate
         	$response->success = false;
         }

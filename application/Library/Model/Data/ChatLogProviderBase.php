@@ -53,8 +53,10 @@ class Model_Data_ChatLogProviderBase
             timestamp,
             chat_name_color,
             chat_rand,
-            chat_text_color
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            chat_text_color,
+        	chat_log_type_id,
+        	viewed
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getChatRoomId(),
@@ -67,7 +69,9 @@ class Model_Data_ChatLogProviderBase
             $objRecord->getTimestamp(),
             $objRecord->getChatNameColor(),
             $objRecord->getChatRand(),
-            $objRecord->getChatTextColor()
+            $objRecord->getChatTextColor(),
+        	$objRecord->getChatLogTypeId(),
+        	$objRecord->getViewed()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -91,8 +95,10 @@ class Model_Data_ChatLogProviderBase
             timestamp,
             chat_name_color,
             chat_rand,
-            chat_text_color
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            chat_text_color,
+        	chat_log_type_id,
+        	viewed
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getChatRoomId(),
@@ -105,7 +111,9 @@ class Model_Data_ChatLogProviderBase
             $objRecord->getTimestamp(),
             $objRecord->getChatNameColor(),
             $objRecord->getChatRand(),
-            $objRecord->getChatTextColor()
+            $objRecord->getChatTextColor(),
+        	$objRecord->getChatLogTypeId(),
+        	$objRecord->getViewed()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -129,7 +137,9 @@ class Model_Data_ChatLogProviderBase
             timestamp=?,
             chat_name_color=?,
             chat_rand=?,
-            chat_text_color=?
+            chat_text_color=?,
+        	chat_log_type_id=?,
+        	viewed=?
         WHERE chat_log_id=?';
         $arrSetParams = array(
             $objRecord->getChatLogId(),
@@ -143,7 +153,9 @@ class Model_Data_ChatLogProviderBase
             $objRecord->getTimestamp(),
             $objRecord->getChatNameColor(),
             $objRecord->getChatRand(),
-            $objRecord->getChatTextColor()
+            $objRecord->getChatTextColor(),
+        	$objRecord->getChatLogTypeId(),
+        	$objRecord->getViewed()
         );
         $arrKeyParams = array($objRecord->getOrigChatLogId());
         $params = array_merge($arrSetParams, $arrKeyParams);

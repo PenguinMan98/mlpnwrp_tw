@@ -22,9 +22,14 @@ $guestUserHelper = new Model_Data_GuestUsersProvider();
 $guestUserHelper->logoutGuestUsers($chat_guest_logout);
 $guestUsersLoggedIn = $guestUserHelper->getAll();
 
+$handleArr = array();
+$charactersArr = array();
+$thisCharacter = array();
+$index = 0;
+
 foreach($registeredCharsLoggedIn as $char){
 	
-	$response->characters[] = array(
+	$thisCharacter = array(
 			'character_id'=>$char->getCharacterId(),
 			'name'=>$char->getName(),
 			'chat_name_formatted'=>$char->getChatNameFormatted(),
@@ -37,10 +42,13 @@ foreach($registeredCharsLoggedIn as $char){
 			'chat_icon'=>($char->getIcon()? $char->getIcon() : false),
 			'registered'=>true
 		);
+	$charactersArr[$index] = $thisCharacter;
+	$handleArr[$index] = $char->getName();
+	$index++;
 }
 
 foreach($guestUsersLoggedIn as $char){
-	$response->characters[] = array(
+	$thisCharacter = array(
 			'character_id'=>false,
 			'name'=>$char->getHandle(),
 			'chat_name_formatted'=>false,
@@ -53,6 +61,14 @@ foreach($guestUsersLoggedIn as $char){
 			'chat_icon'=>false,
 			'registered'=>false
 		);
+	$charactersArr[$index] = $thisCharacter;
+	$handleArr[$index] = $char->getHandle();
+	$index++;
+}
+
+asort($handleArr);
+foreach($handleArr as $key=>$charname){
+	$response->characters[] = $charactersArr[$key];
 }
 
 echo json_encode($response);

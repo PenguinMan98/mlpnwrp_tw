@@ -26,6 +26,41 @@ a:hover, a:active{
 	color: #ddd;
 }
 
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+	/*body{
+		width: 900px;
+	}*/
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	body{
+		width: 800px;
+	}
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+	body{
+		width: 600px;
+	}
+}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	body{
+		width: 600px;
+	}
+}
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+	body{
+		width: 450px;
+	}
+}
+
 /* main layout */
 #page-wrap { 
 	width: 100%; 
@@ -43,14 +78,32 @@ a:hover, a:active{
     top: 2px;
     right: 2px;
     left: 2px;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     vertical-align: bottom;
     border-bottom: 1px solid #999;
     z-index: 5;
 }
-#chat {
-	/*background: #222;*/
+
+#game_notes{
     position:fixed !important;
+    position: absolute;
+    top: 47px; 
+    bottom: 36px;
+    left: 2px;
+    width: 280px;
+    overflow: auto;
+    z-index: 1;
+	display: none;
+}
+
+#game_note_field{
+	width: 95%;
+	height: 90%;
+	resize: none;
+}
+
+#chat {
+    /*position:fixed !important;*/
     position: absolute;
     top: 47px; 
     bottom: 36px;
@@ -58,7 +111,14 @@ a:hover, a:active{
     right: 200px;
     overflow: auto;
     z-index: 1;
+    -webkit-overflow-scrolling: touch;
 }
+
+#chat.game{
+	left: 302px;
+	border-left: 1px solid #999;
+}
+
 #chat > span {
     line-height: 25px;
 }
@@ -111,6 +171,14 @@ a:hover, a:active{
     border-left: 1px solid #999;
     z-index: 5;
     overflow-y: auto;
+}
+#weather{
+    width: 180px;	
+}
+#weather_img{
+	/*width: 25%;*/
+	display: block;
+	margin: 0px auto;
 }
 /*#header_messages{
 	font-weight: bold;

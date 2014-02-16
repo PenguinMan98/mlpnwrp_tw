@@ -15,7 +15,7 @@ if(empty($character)) {
 	die("I don't know anypony named $charName!  Sorry! Maybe one will fall from the sky tomorrow?");
 }
 
-$userProvider = new Model_Data_Phpbb_UsersProvider();
+$userProvider = new Model_Data_UsersUsersProvider();
 //$userId = $character['user_id'];
 if(!$userProvider->verifyUserAndCharacterId($userId, $character['character_id'])){
 	die("This is not your character.");
@@ -82,7 +82,8 @@ $chatIcon = getImage('chat_icon', $character['character_id']);
 					<li><a href="#basics">The Basics</a></li>
 					<li><a href="#texts">Texts</a></li>
 					<li><a href="#images">Images</a></li>
-									</ul>
+					<li><a href="#html">HTML</a></li>
+				</ul>
 				<form id="characterForm" enctype='multipart/form-data' method="POST" action="<?=SITE_ROOT?>/chat/character/save.php">
 					<div id="basics">
 						<label>Character Name:</label>
@@ -158,6 +159,15 @@ $chatIcon = getImage('chat_icon', $character['character_id']);
 						<label>Chat Icon</label> (Pixel Dimensions: 50px X 25px)<br>
 						<?=($chatIcon) ? '<img src="../../img/' . $character['character_id'] . '/' . $chatIcon . '" /><br>' : '' ?>
 						<input type="file" name="chat_icon"><br>
+						<br>
+						<input type="submit" name="edit" value="Update">
+					</div>
+					<div id="html">
+						<label>Profile HTML</label> (This is used instead of the default layout if you fill it in)<br>
+						<textarea id="profile_html" name="profile_html" rows="8" cols="40" title=""><?=$character['profile_html']?></textarea><br>
+						
+						<label>Profile CSS</label> <br>
+						<textarea id="profile_css" name="profile_css" rows="8" cols="40" title=""><?=$character['profile_css']?></textarea><br>
 						<br>
 						<input type="submit" name="edit" value="Update">
 					</div>

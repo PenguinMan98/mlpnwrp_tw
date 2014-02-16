@@ -66,8 +66,12 @@ class Model_Data_CharacterProviderBase
             last_activity,
             cutie_mark,
             gender,
-            last_status_request
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            last_status_request,
+        	profile_html,
+        	profile_css,
+        	html_override,
+        	variables
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getCreatorUserId(),
@@ -93,7 +97,11 @@ class Model_Data_CharacterProviderBase
             $objRecord->getLastActivity(),
             $objRecord->getCutieMark(),
             $objRecord->getGender(),
-            $objRecord->getLastStatusRequest()
+            $objRecord->getLastStatusRequest(),
+        	$objRecord->getProfileHtml(),
+        	$objRecord->getProfileCss(),
+        	$objRecord->getHtmlOverride(),
+        	$objRecord->getVariables()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -130,8 +138,12 @@ class Model_Data_CharacterProviderBase
             last_activity,
             cutie_mark,
             gender,
-            last_status_request
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            last_status_request,
+        	profile_html,
+        	profile_css,
+        	html_override,
+        	variables
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getCreatorUserId(),
@@ -157,7 +169,11 @@ class Model_Data_CharacterProviderBase
             $objRecord->getLastActivity(),
             $objRecord->getCutieMark(),
             $objRecord->getGender(),
-            $objRecord->getLastStatusRequest()
+            $objRecord->getLastStatusRequest(),
+        	$objRecord->getProfileHtml(),
+        	$objRecord->getProfileCss(),
+        	$objRecord->getHtmlOverride(),
+        	$objRecord->getVariables()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -194,7 +210,11 @@ class Model_Data_CharacterProviderBase
             last_activity=?,
             cutie_mark=?,
             gender=?,
-            last_status_request=?
+            last_status_request=?,
+        	profile_html=?,
+        	profile_css=?,
+        	html_override=?,
+        	variables=?
         WHERE character_id=?';
         $arrSetParams = array(
             $objRecord->getCharacterId(),
@@ -221,7 +241,11 @@ class Model_Data_CharacterProviderBase
             $objRecord->getLastActivity(),
             $objRecord->getCutieMark(),
             $objRecord->getGender(),
-            $objRecord->getLastStatusRequest()
+            $objRecord->getLastStatusRequest(),
+        	$objRecord->getProfileHtml(),
+        	$objRecord->getProfileCss(),
+        	$objRecord->getHtmlOverride(),
+        	$objRecord->getVariables()
         );
         $arrKeyParams = array($objRecord->getOrigCharacterId());
         $params = array_merge($arrSetParams, $arrKeyParams);

@@ -39,8 +39,18 @@ WHERE c.name=?';
 		$arrErrors = array();
 		$arrResults = array();
 		dao::getAssoc($strSql, $arrParams, $arrResults, $arrErrors);
-		if(!empty($arrResults))
-			return $arrResults[0];
+		if(!empty($arrResults)){
+			if(count($arrResults) > 1){ // if there is more than one owner
+				foreach($arrResults as $res){ // go through the results
+					if($res['username'] != admin){ // if it's not admin
+						return $res; // return that one.
+					}
+				}
+				return $arrResults[0]; // all else fails, return the first one.
+			}else{
+				return $arrResults[0]; // if only one, return that.
+			}
+		}
 		return array();
 	}
 	
@@ -133,5 +143,21 @@ FROM `character` c
 WHERE c.name LIKE ?;";
 		$params = array('%'.$searchWord.'%');
 		return Model_Data_CharacterProvider::getArrayFromQuery($strSql, $params);
+	}
+	
+	public function saveNewVariable($characterId, $varName, $varValue){
+		// get the character variables
+		$character = $this->getOneByPk($characterId);
+		if(!is_object($character)){ return false; };
+		$variables = unserialize($character->getVariables());
+		// add or replace the new one
+		$variables[$varName] = $varValue;
+		// put the new variable set into the database
+		$strSql = "UPDATE `character` SET `variables` = ? WHERE `character_id` = ? ";
+		$arrParams = array(serialize($variables), $characterId);
+		$arrErrors = array();
+		dao::execute($strSql, $arrParams, $arrErrors);
+		if(!empty($arrErrors)) throw new Exception("Unable to set the variable: " . implode('|',$arrErrors));
+		return true;
 	}
 }

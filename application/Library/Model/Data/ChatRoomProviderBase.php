@@ -48,8 +48,11 @@ class Model_Data_ChatRoomProviderBase
             permission_level,
             chat_room_type_id,
             is_active,
-            display_order
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?)';
+            display_order,
+        	game_notes,
+        	weather_group,
+        	weather_state
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getRoomName(),
@@ -57,7 +60,10 @@ class Model_Data_ChatRoomProviderBase
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
             $objRecord->getIsActive(),
-            $objRecord->getDisplayOrder()
+            $objRecord->getDisplayOrder(),
+        	$objRecord->getGameNotes(),
+        	$objRecord->getWeatherGroup(),
+        	$objRecord->getWeatherState()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -76,8 +82,11 @@ class Model_Data_ChatRoomProviderBase
             permission_level,
             chat_room_type_id,
             is_active,
-            display_order
-        ) VALUES  (?, ?, ?, ?, ?, ?, ?)';
+            display_order,
+        	game_notes,
+        	weather_group,
+        	weather_state
+        ) VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array(
             0,
             $objRecord->getRoomName(),
@@ -85,7 +94,10 @@ class Model_Data_ChatRoomProviderBase
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
             $objRecord->getIsActive(),
-            $objRecord->getDisplayOrder()
+            $objRecord->getDisplayOrder(),
+        	$objRecord->getGameNotes(),
+        	$objRecord->getWeatherGroup(),
+        	$objRecord->getWeatherState()
         );
         $arrErrors = array();
         $blnResult = DAO::execute($strSql, $params, $arrErrors);
@@ -97,14 +109,17 @@ class Model_Data_ChatRoomProviderBase
 
     public function updateOne($objRecord, &$arrErrors)
     {
-        $strSql = 'UPDATE `chat_room` SET 
+        $strSql = 'UPDATE `chat_room` SET
             chat_room_id=?,
             room_name=?,
             description=?,
             permission_level=?,
             chat_room_type_id=?,
             is_active=?,
-            display_order=?
+            display_order=?,
+        	game_notes=?,
+        	weather_group=?,
+        	weather_state=?
         WHERE chat_room_id=?';
         $arrSetParams = array(
             $objRecord->getChatRoomId(),
@@ -113,7 +128,10 @@ class Model_Data_ChatRoomProviderBase
             $objRecord->getPermissionLevel(),
             $objRecord->getChatRoomTypeId(),
             $objRecord->getIsActive(),
-            $objRecord->getDisplayOrder()
+            $objRecord->getDisplayOrder(),
+        	$objRecord->getGameNotes(),
+        	$objRecord->getWeatherGroup(),
+        	$objRecord->getWeatherState()
         );
         $arrKeyParams = array($objRecord->getOrigChatRoomId());
         $params = array_merge($arrSetParams, $arrKeyParams);

@@ -1,7 +1,11 @@
-<?php 
+<?php
 
 require_once '../application/Core/Bootstrap.php'; // load everything
 $_bootstrap = Bootstrap::getInstance();
+
+require_once 'mobileDetect/Mobile_Detect.php';
+$_detect = new Mobile_Detect;
+$_deviceType = ($_detect->isMobile() ? ($_detect->isTablet() ? 'tablet' : 'phone') : 'computer');
 
 $systemMessage = "";
 if(isset($_SESSION['SYSTEM_MESSAGE'])){
@@ -15,15 +19,15 @@ if(isset($_SESSION['SYSTEM_MESSAGE'])){
 <head>
 
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-	
+
 	<title>Welcome to our Chat!  Please Log in!</title>
-	
+
 	<link rel='stylesheet' type='text/css' href='css/chat/style.css' />
 	<link rel='stylesheet' type='text/css' href='css/le-frog/jquery-ui-1.10.2.custom.css' />
-	
+
     <script src="js/jquery.js"> </script>
     <script src="js/jquery-ui-1.10.2.custom.js"> </script>
-    
+
     <style>
 body{
 	width: 100%;
@@ -31,7 +35,7 @@ body{
 	background-color: black;
 }
 #site_frame{
-	width: 400px;
+	width: 1182px;
 	margin: 0 auto;
 }
 #login{
@@ -52,12 +56,52 @@ label{
 input[type="button"],input[type="submit"]{
 	margin-left: 115px;
 }
+#scroll_top{
+	background: black url(img/scroll-top.png) scroll top center;
+	width: 1182px;
+	height: 75px;
+}
+#scroll_body{
+
+}
+#scroll_left{
+	background: black url(img/scroll-left.png) scroll top center;
+	width: 259px;
+	height: 410px;
+	display: inline-block;
+	float: left;
+}
+#scroll_content{
+	display: inline-block;
+
+}
+#scroll_right{
+	background: black url(img/scroll-right.png) scroll top center;
+	width: 160px;
+	height: 410px;
+	display: inline-block;
+}
+#scroll_bottom{
+	background: black url(img/scroll-bottom.png) scroll top center;
+	width: 1182px;
+	height: 75px;
+}
+
 </style>
 </head>
 
 <body>
 	<div id="site_frame">
 		<div id="login">
+			<div id="scroll_top"></div>
+			<div id="scroll_body">
+				<div id="scroll_left"></div>
+				<div id="scroll_content">
+					Put the content here
+				</div>
+				<div id="scroll_right"></div>
+			</div>
+			<div id="scroll_bottom"></div>
 			<ul>
 				<li><a href="#tabs-1">Login</a></li>
 				<li><a href="#tabs-2">Login as Guest</a></li>
@@ -67,6 +111,7 @@ input[type="button"],input[type="submit"]{
 						<?php // Logged in added as a way to tell if the last time this page was viewed the user was logged in.?>
 						<?php // We'll check that on the chat page. If this is set but their login is expired, bounce them back here.?>
 					<input type="hidden" id="loggedIn" name="loggedIn" value="<?=($loggedIn)?1:0?>">
+
 					<div class="form_error" id="login_form_error"><?php if(!empty($systemMessage)) echo $systemMessage; ?></div>
 					<div id="login_fields">
 						<label>Username: </label><input type="text" id="forum_username" placeholder="Wiki User" value="<?php if($userName != 'Anonymous') echo $userName;?>" /><br>
@@ -91,14 +136,14 @@ input[type="button"],input[type="submit"]{
 					<input type="submit" id="guest_login" name="guest_login" value="&nbsp;&nbsp;Login&nbsp;&nbsp;">
 				</form>
 			</div>
-		
+
 		</div>
 	</div>
 	<script>
 var loggedIn = <?=($loggedIn)? 'true':'false'; ?>;
 $(function() {
-	
-	$('#login').tabs();
+
+	//$('#login').tabs();
 	$('#login_form').on('submit', function( event ){
 		if(!loggedIn){
 			event.preventDefault();
@@ -120,7 +165,7 @@ $(function() {
 			$('#login_form_error').hide();
 			$('#character_selection').show();
 			var select = $('#chat_character');
-			for(var i = 0; i < response.characterList.length; i++){ 
+			for(var i = 0; i < response.characterList.length; i++){
 				select.append('<option value="'+response.characterList[i].character_id+'">'+response.characterList[i].name+'</option>');
 				if(i==0){ // store the name of the first character in 'handle'
 					$('#handle').val(response.characterList[i].name);
@@ -133,7 +178,7 @@ $(function() {
 			$('#character_selection').show();
 		}
 	});
-	
+
 	<?php endif;?>
 });
 
@@ -165,7 +210,7 @@ function logMeIn(){
 				$('#login_form_error').hide();
 				$('#character_selection').show();
 				var select = $('#chat_character');
-				for(var i = 0; i < response.characterList.length; i++){ 
+				for(var i = 0; i < response.characterList.length; i++){
 					if(i == 0){ // for the first character, set the default 'handle'
 						$('#handle').val(response.characterList[i].name);
 					}
